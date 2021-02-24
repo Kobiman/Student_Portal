@@ -1,0 +1,1 @@
+{"DepartmentId":"6e4bd71d-db9d-450d-a72c-719e1c06a612","Name":"COMPUTER SCIENCE DEPARTMENT","Code":"COMPSCI","CourseMounting":false,"SchoolId":"b2e4626d-b73b-4041-ad8d-801f7599e16d"},

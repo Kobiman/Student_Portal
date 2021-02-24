@@ -1,0 +1,1 @@
+{"InstitutionId":"98210e59-e4b0-424d-b816-170d3e14c50b","Code":"001","Name":"UENR","PostalAddress":"P.O.BOX 235","Email":"uenr@uenr.edu.gh","Country":"GHANA","City":"SUYANI","Telephone":"02125555544","Logo":null,"DateCreated":"2020-06-06T19:11:46.1968097+00:00"},

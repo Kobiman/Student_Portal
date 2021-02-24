@@ -1,0 +1,1 @@
+{"LecturerId":"ecf313a6-1dad-478e-b6b5-8b2f15ba1b55","StaffId":"PS204","Name":"KOBINA OPPONG LAWSON","Telephone":"0254125687","Email":"as@df.gf","Address":"ASD GHH TGRF","DepartmentId":"6e4bd71d-db9d-450d-a72c-719e1c06a612"},
