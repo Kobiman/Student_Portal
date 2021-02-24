@@ -4,4 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SP.Common\SP.Common.csproj" />
+    <ProjectReference Include="..\Sp.Models\Sp.Models.csproj" />
+    <ProjectReference Include="..\SP.Services.Interfaces\SP.Services.Interfaces.csproj" />
+  </ItemGroup>
+
 </Project>

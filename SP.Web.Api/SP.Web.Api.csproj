@@ -8,4 +8,12 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Sp.Commands\Sp.Commands.csproj" />
+    <ProjectReference Include="..\SP.DAL\SP.DAL.csproj" />
+    <ProjectReference Include="..\Sp.Models\Sp.Models.csproj" />
+    <ProjectReference Include="..\SP.Services.Interfaces\SP.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\SP.Services\SP.Services.csproj" />
+  </ItemGroup>
+
 </Project>

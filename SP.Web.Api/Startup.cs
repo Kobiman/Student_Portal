@@ -7,6 +7,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using SP.Commands;
+using SP.DAL;
+using SP.Services;
+using SP.Services.Interfaces;
+using SP.Services.Interfaces.Commands;
+using SP.Services.Interfaces.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +34,24 @@ namespace SP.Web.Api
         {
 
             services.AddControllers();
+            services.AddControllers();
+            services.AddSingleton<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IInstitutionService, InstitutionService>();
+            services.AddScoped<ISchoolService, SchoolService>();
+            services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<IProgramService, ProgramService>();
+            services.AddScoped<ICourseService, CourseService>();
+            services.AddScoped<ILookupService, LookupService>();
+            services.AddScoped<ILecturerService, LecturerService>();
+            services.AddSingleton<ICommandProcessor, CommandProcessor>();
+            services.AddTransient<IAddMountedCourseCommand, AddMountedCourseCommand>();
+            services.AddTransient<IAddRegisteredCoursesCommand, AddRegisteredCoursesCommand>();
+            services.AddTransient<IGetRegisteredCoursesCommand, GetRegisteredCoursesCommand>();
+            services.AddTransient<IGetMountedCoursesCommand, GetMountedCoursesCommand>();
+            services.AddTransient<IGetSchoolByProgramCommand, GetSchoolByProgramCommand>();
+            services.AddTransient<IGetDepartmentsWithCoursesCommand, GetDepartmentsWithCoursesCommand>();
+            services.AddTransient<IGetMountedCoursesForRegistrationCommand, GetMountedCoursesForRegistrationCommand>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SP.Web.Api", Version = "v1" });
@@ -47,6 +71,12 @@ namespace SP.Web.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(
+              builder =>
+              builder.AllowAnyOrigin()
+              .AllowAnyHeader()
+              );
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
