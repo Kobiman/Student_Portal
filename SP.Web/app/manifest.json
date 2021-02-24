@@ -1,0 +1,21 @@
+{
+  "name": "Student Portal",
+  "short_name": "SP",
+  "icons": [
+    {
+      "src": "uenr.png",
+      "sizes": "159x160",
+      "type": "image/png"
+    },
+    {
+      "src": "uenr2.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/app/index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4f4f4",
+  "theme_color": "#f4f4f4"
+}
