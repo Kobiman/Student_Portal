@@ -40,8 +40,8 @@ export class App {
     static navigate(pathName) {
         if (this.currentPath !== pathName) {
             window.history.pushState({}, pathName, window.location.origin + pathName);
-            var p = this.routes[pathName]();
-            this.render(p, "route-outlet");
+            var view = this.routes[pathName]();
+            this.render(view, "route-outlet");
             this.currentPath = pathName;
         }
     }
@@ -80,7 +80,7 @@ export class App {
         }
     }
 }
-App.baseUri = "https://localhost:44359";
+App.baseUri = "https://localhost:44319";
 App.currentPath = "";
 App.commonService = new CommonService();
 App.courseRegistrationService = new CourseRegistrationService();
@@ -107,7 +107,7 @@ App.routes = {
     "/app/#registeredCourses": () => new RegisteredCoursesView(new RegisteredCoursesVm(App.courseRegistrationService)),
     "/app/#registerCourses": () => new RegisterCourseView(new RegisterCourseVm(App.courseRegistrationService)),
 };
-//App.register();
+App.register();
 App.navigate("/app/#frontPage");
 new HeaderView().render("header");
 window.onpopstate = () => {

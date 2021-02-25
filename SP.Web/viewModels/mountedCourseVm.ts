@@ -4,6 +4,7 @@ import { CommonService } from "../services/commonService";
 import { MountedRow } from "../views/mountCourse/mountedCoursesView";
 import { BallLoader } from "../loader/ballLoader";
 import { _ } from "../group";
+import { App } from "../app";
 
 export class MountedCourseVm {
   viewModelHelper: ViewModelHelper;
@@ -39,7 +40,7 @@ export class MountedCourseVm {
         },
       };
       BallLoader.show();
-      await fetch("https://localhost:44359/api/Department/GetMountedCourses", options)
+      await fetch(`${App.baseUri}/api/Department/GetMountedCourses`, options)
         .then((res) => res.json())
         .then((res) => {
           this.courseList = res.value;

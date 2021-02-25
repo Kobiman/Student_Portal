@@ -38,7 +38,7 @@ import { RegisterCourseView } from "./views/registration/registerCourseView";
 import { RegisterCourseVm } from "./viewModels/registerCourseVm";
 
 export class App {
-  static baseUri = "https://localhost:44359";
+  static baseUri = "https://localhost:44319";
   static currentPath = "";
   static commonService = new CommonService();
   static courseRegistrationService = new CourseRegistrationService();
@@ -75,8 +75,8 @@ export class App {
     if (this.currentPath !== pathName) {
       window.history.pushState({}, pathName, window.location.origin + pathName);
 
-      var p = this.routes[pathName]();
-      this.render(p, "route-outlet");
+      var view = this.routes[pathName]();
+      this.render(view, "route-outlet");
       this.currentPath = pathName;
     }
   }
@@ -120,7 +120,7 @@ export class App {
   }
 }
 
-//App.register();
+App.register();
 App.navigate("/app/#frontPage");
 new HeaderView().render("header");
 

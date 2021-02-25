@@ -6,6 +6,7 @@ import { BallLoader } from "../loader/ballLoader";
 import { AppChannel } from "../appChannel";
 import { Constants } from "../constants";
 import { Toast } from "../toast/toast";
+import { App } from "../app";
 
 export class InstitutionVm {
   viewModelHelper: ViewModelHelper;
@@ -49,7 +50,7 @@ export class InstitutionVm {
         },
       };
       BallLoader.show();
-      fetch("https://localhost:44359/api/Institution/AddInstitution", options)
+      fetch(`${App.baseUri}/api/Institution/AddInstitution`, options)
         .then((res) => res.json())
         .then((res) => {
           this.institution = new Institution();
@@ -66,7 +67,7 @@ export class InstitutionVm {
 
   getInstitutions = async () => {
     try {
-      const res = await fetch("https://localhost:44359/api/Institution/GetInstitutions");
+      const res = await fetch(`${App.baseUri}/api/Institution/GetInstitutions`);
       if (!res.ok) {
       }
       const data = await res.json();

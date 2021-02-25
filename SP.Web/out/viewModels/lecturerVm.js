@@ -13,6 +13,7 @@ import { Lecturer } from "../models/lecturer";
 import { BindingList2 } from "../BindingList2";
 import { BallLoader } from "../loader/ballLoader";
 import { Toast } from "../toast/toast";
+import { App } from "../app";
 export class LecturerVm {
     constructor() {
         this.lecturer = new Lecturer();
@@ -20,7 +21,7 @@ export class LecturerVm {
         this.lecturers = [];
         this.getDepartments = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Department/GetDepartments");
+                const res = yield fetch(`${App.baseUri}/api/Department/GetDepartments`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -38,7 +39,7 @@ export class LecturerVm {
         });
         this.getLecturers = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Lecturer/GetLecturers");
+                const res = yield fetch(`${App.baseUri}/api/Lecturer/GetLecturers`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -78,7 +79,7 @@ export class LecturerVm {
                 },
             };
             BallLoader.show();
-            fetch("https://localhost:44359/api/Lecturer/AddLecturer", options)
+            fetch(`${App.baseUri}/api/Lecturer/AddLecturer`, options)
                 .then((res) => res.json())
                 .then((res) => {
                 this.lecturer = new Lecturer();

@@ -12,6 +12,7 @@ import { ViewModelHelper } from "../viewModelHelper";
 import { MountedRow } from "../views/mountCourse/mountedCoursesView";
 import { BallLoader } from "../loader/ballLoader";
 import { _ } from "../group";
+import { App } from "../app";
 export class MountedCourseVm {
     constructor(commonService) {
         this.commonService = commonService;
@@ -34,7 +35,7 @@ export class MountedCourseVm {
                     },
                 };
                 BallLoader.show();
-                yield fetch("https://localhost:44359/api/Department/GetMountedCourses", options)
+                yield fetch(`${App.baseUri}/api/Department/GetMountedCourses`, options)
                     .then((res) => res.json())
                     .then((res) => {
                     this.courseList = res.value;

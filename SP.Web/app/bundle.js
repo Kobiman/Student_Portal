@@ -574,8 +574,8 @@ class App {
     static navigate(pathName) {
         if (this.currentPath !== pathName) {
             window.history.pushState({}, pathName, window.location.origin + pathName);
-            var p = this.routes[pathName]();
-            this.render(p, "route-outlet");
+            var view = this.routes[pathName]();
+            this.render(view, "route-outlet");
             this.currentPath = pathName;
         }
     }
@@ -614,7 +614,7 @@ class App {
         }
     }
 }
-App.baseUri = "https://localhost:44359";
+App.baseUri = "https://localhost:44319";
 App.currentPath = "";
 App.commonService = new _services_commonService__WEBPACK_IMPORTED_MODULE_27__["CommonService"]();
 App.courseRegistrationService = new _services_courseRegistrationService__WEBPACK_IMPORTED_MODULE_31__["CourseRegistrationService"]();
@@ -641,7 +641,7 @@ App.routes = {
     "/app/#registeredCourses": () => new _views_registration_registeredCoursesView__WEBPACK_IMPORTED_MODULE_30__["RegisteredCoursesView"](new _viewModels_registeredCoursesVm__WEBPACK_IMPORTED_MODULE_32__["RegisteredCoursesVm"](App.courseRegistrationService)),
     "/app/#registerCourses": () => new _views_registration_registerCourseView__WEBPACK_IMPORTED_MODULE_33__["RegisterCourseView"](new _viewModels_registerCourseVm__WEBPACK_IMPORTED_MODULE_34__["RegisterCourseVm"](App.courseRegistrationService)),
 };
-//App.register();
+App.register();
 App.navigate("/app/#frontPage");
 new _views_header__WEBPACK_IMPORTED_MODULE_8__["HeaderView"]().render("header");
 window.onpopstate = () => {
@@ -1349,20 +1349,21 @@ class Toast {
 /*!**************************!*\
   !*** ./out/validator.js ***!
   \**************************/
-/*! exports provided: Validator, Rules, Error, ValidationResult, Required, MinLength, Email, Number, Phone */
+/*! exports provided: Validator, Error, Rules, ValidationResult, Required, MinLength, Email, Number, Phone, Nameformat */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Validator", function() { return Validator; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Rules", function() { return Rules; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Error", function() { return Error; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Rules", function() { return Rules; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ValidationResult", function() { return ValidationResult; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Required", function() { return Required; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MinLength", function() { return MinLength; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Email", function() { return Email; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Number", function() { return Number; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Phone", function() { return Phone; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Nameformat", function() { return Nameformat; });
 class Validator {
     constructor() {
         this.rules = [];
@@ -1403,16 +1404,16 @@ class Validator {
         return this.group(errors);
     }
 }
-class Rules {
-    constructor(propertyName, rules) {
-        this.propertyName = propertyName;
-        this.rules = rules;
-    }
-}
 class Error {
     constructor(propertyName, error) {
         this.propertyName = propertyName;
         this.error = error;
+    }
+}
+class Rules {
+    constructor(propertyName, rules) {
+        this.propertyName = propertyName;
+        this.rules = rules;
     }
 }
 class ValidationResult {
@@ -1466,6 +1467,10 @@ class Number {
     }
 }
 class Phone {
+    validate() {
+    }
+}
+class Nameformat {
     validate() {
     }
 }
@@ -1626,7 +1631,6 @@ class AddStudentVm {
             var errors = this.validator.addRules(rules).validate();
             this.viewModelHelper.showErrors(errors);
             if (!this.validator.hasErrors) {
-                //
                 const options = {
                     method: "POST",
                     body: JSON.stringify(this.student),
@@ -1636,7 +1640,7 @@ class AddStudentVm {
                     },
                 };
                 debugger;
-                fetch("https://localhost:44359/api/Student/AddStudent", options)
+                fetch(`${_app__WEBPACK_IMPORTED_MODULE_3__["App"].baseUri}/api/Student/AddStudent`, options)
                     .then((res) => res.json())
                     .then((res) => {
                     debugger;
@@ -1711,6 +1715,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BindingList2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../BindingList2 */ "./out/BindingList2.js");
 /* harmony import */ var _loader_ballLoader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../loader/ballLoader */ "./out/loader/ballLoader.js");
 /* harmony import */ var _toast_toast__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../toast/toast */ "./out/toast/toast.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../app */ "./out/app.js");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -1726,13 +1731,14 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 
 
+
 class InstitutionVm {
     constructor() {
         this.institution = new _models_institution__WEBPACK_IMPORTED_MODULE_0__["Institution"]();
         this.institutions = [];
         this.getInstitutions = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Institution/GetInstitutions");
+                const res = yield fetch(`${_app__WEBPACK_IMPORTED_MODULE_6__["App"].baseUri}/api/Institution/GetInstitutions`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -1773,7 +1779,7 @@ class InstitutionVm {
                 },
             };
             _loader_ballLoader__WEBPACK_IMPORTED_MODULE_4__["BallLoader"].show();
-            fetch("https://localhost:44359/api/Institution/AddInstitution", options)
+            fetch(`${_app__WEBPACK_IMPORTED_MODULE_6__["App"].baseUri}/api/Institution/AddInstitution`, options)
                 .then((res) => res.json())
                 .then((res) => {
                 this.institution = new _models_institution__WEBPACK_IMPORTED_MODULE_0__["Institution"]();
@@ -1807,6 +1813,7 @@ class InstitutionVm {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StudentListVm", function() { return StudentListVm; });
 /* harmony import */ var _BindingList2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../BindingList2 */ "./out/BindingList2.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../app */ "./out/app.js");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -1817,12 +1824,13 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
     });
 };
 
+
 class StudentListVm {
     constructor() {
         this.students = [];
         this.getStudents = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch('https://localhost:44359/api/Student/GetStudents');
+                const res = yield fetch(`${_app__WEBPACK_IMPORTED_MODULE_1__["App"].baseUri}/api/Student/GetStudents`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -1855,6 +1863,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _models_Course__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../models/Course */ "./out/models/Course.js");
 /* harmony import */ var _loader_ballLoader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../loader/ballLoader */ "./out/loader/ballLoader.js");
 /* harmony import */ var _toast_toast__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../toast/toast */ "./out/toast/toast.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../app */ "./out/app.js");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -1870,6 +1879,7 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 
 
+
 class CourseVm {
     constructor() {
         this.course = new _models_Course__WEBPACK_IMPORTED_MODULE_3__["Course"]();
@@ -1877,7 +1887,7 @@ class CourseVm {
         this.courses = [];
         this.getDepartments = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Department/GetDepartments");
+                const res = yield fetch(`${_app__WEBPACK_IMPORTED_MODULE_6__["App"].baseUri}/api/Department/GetDepartments`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -1895,7 +1905,7 @@ class CourseVm {
         });
         this.getCourses = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Course/GetCourses");
+                const res = yield fetch(`${_app__WEBPACK_IMPORTED_MODULE_6__["App"].baseUri}/api/Course/GetCourses`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -1933,7 +1943,7 @@ class CourseVm {
                 },
             };
             _loader_ballLoader__WEBPACK_IMPORTED_MODULE_4__["BallLoader"].show();
-            fetch("https://localhost:44359/api/Course/AddCourse", options)
+            fetch(`${_app__WEBPACK_IMPORTED_MODULE_6__["App"].baseUri}/api/Course/AddCourse`, options)
                 .then((res) => res.json())
                 .then((res) => {
                 this.course = new _models_Course__WEBPACK_IMPORTED_MODULE_3__["Course"]();
@@ -1971,6 +1981,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BindingList2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../BindingList2 */ "./out/BindingList2.js");
 /* harmony import */ var _toast_toast__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../toast/toast */ "./out/toast/toast.js");
 /* harmony import */ var _loader_ballLoader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../loader/ballLoader */ "./out/loader/ballLoader.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../app */ "./out/app.js");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -1986,6 +1997,7 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 
 
+
 class DepartmentVm {
     constructor() {
         this.department = new _models_department__WEBPACK_IMPORTED_MODULE_0__["Department"]();
@@ -1993,7 +2005,7 @@ class DepartmentVm {
         this.schools = [];
         this.getDepartments = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Department/GetDepartments");
+                const res = yield fetch(`${_app__WEBPACK_IMPORTED_MODULE_6__["App"].baseUri}/api/Department/GetDepartments`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -2004,7 +2016,7 @@ class DepartmentVm {
         });
         this.getSchools = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/School/GetSchools");
+                const res = yield fetch(`${_app__WEBPACK_IMPORTED_MODULE_6__["App"].baseUri}/api/School/GetSchools`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -2048,7 +2060,7 @@ class DepartmentVm {
                 },
             };
             _loader_ballLoader__WEBPACK_IMPORTED_MODULE_5__["BallLoader"].show();
-            fetch("https://localhost:44359/api/Department/AddDepartment", options)
+            fetch(`${_app__WEBPACK_IMPORTED_MODULE_6__["App"].baseUri}/api/Department/AddDepartment`, options)
                 .then((res) => res.json())
                 .then((res) => {
                 this.department = new _models_department__WEBPACK_IMPORTED_MODULE_0__["Department"]();
@@ -2086,6 +2098,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BindingList2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../BindingList2 */ "./out/BindingList2.js");
 /* harmony import */ var _loader_ballLoader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../loader/ballLoader */ "./out/loader/ballLoader.js");
 /* harmony import */ var _toast_toast__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../toast/toast */ "./out/toast/toast.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../app */ "./out/app.js");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -2101,6 +2114,7 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 
 
+
 class LecturerVm {
     constructor() {
         this.lecturer = new _models_lecturer__WEBPACK_IMPORTED_MODULE_2__["Lecturer"]();
@@ -2108,7 +2122,7 @@ class LecturerVm {
         this.lecturers = [];
         this.getDepartments = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Department/GetDepartments");
+                const res = yield fetch(`${_app__WEBPACK_IMPORTED_MODULE_6__["App"].baseUri}/api/Department/GetDepartments`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -2126,7 +2140,7 @@ class LecturerVm {
         });
         this.getLecturers = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Lecturer/GetLecturers");
+                const res = yield fetch(`${_app__WEBPACK_IMPORTED_MODULE_6__["App"].baseUri}/api/Lecturer/GetLecturers`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -2166,7 +2180,7 @@ class LecturerVm {
                 },
             };
             _loader_ballLoader__WEBPACK_IMPORTED_MODULE_4__["BallLoader"].show();
-            fetch("https://localhost:44359/api/Lecturer/AddLecturer", options)
+            fetch(`${_app__WEBPACK_IMPORTED_MODULE_6__["App"].baseUri}/api/Lecturer/AddLecturer`, options)
                 .then((res) => res.json())
                 .then((res) => {
                 this.lecturer = new _models_lecturer__WEBPACK_IMPORTED_MODULE_2__["Lecturer"]();
@@ -2203,8 +2217,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _models_lookup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../models/lookup */ "./out/models/lookup.js");
 /* harmony import */ var _models_institution__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../models/institution */ "./out/models/institution.js");
 /* harmony import */ var _BindingList2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../BindingList2 */ "./out/BindingList2.js");
-/* harmony import */ var _toast_toast__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../toast/toast */ "./out/toast/toast.js");
-/* harmony import */ var _loader_ballLoader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../loader/ballLoader */ "./out/loader/ballLoader.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../app */ "./out/app.js");
+/* harmony import */ var _toast_toast__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../toast/toast */ "./out/toast/toast.js");
+/* harmony import */ var _loader_ballLoader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../loader/ballLoader */ "./out/loader/ballLoader.js");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -2214,6 +2229,7 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+
 
 
 
@@ -2236,7 +2252,7 @@ class LookupVm {
         ];
         this.getInstitutions = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Institution/GetInstitutions");
+                const res = yield fetch(`${_app__WEBPACK_IMPORTED_MODULE_5__["App"].baseUri}/api/Institution/GetInstitutions`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -2250,7 +2266,7 @@ class LookupVm {
         });
         this.getLookups = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Lookup/GetLookups");
+                const res = yield fetch(`${_app__WEBPACK_IMPORTED_MODULE_5__["App"].baseUri}/api/Lookup/GetLookups`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -2286,15 +2302,15 @@ class LookupVm {
                     Accept: "*/*",
                 },
             };
-            _loader_ballLoader__WEBPACK_IMPORTED_MODULE_6__["BallLoader"].show();
-            fetch("https://localhost:44359/api/Lookup/AddLookup", options)
+            _loader_ballLoader__WEBPACK_IMPORTED_MODULE_7__["BallLoader"].show();
+            fetch(`${_app__WEBPACK_IMPORTED_MODULE_5__["App"].baseUri}/api/Lookup/AddLookup`, options)
                 .then((res) => res.json())
                 .then((res) => {
                 this.lookup = new _models_lookup__WEBPACK_IMPORTED_MODULE_2__["Lookup"]();
                 this.bind();
                 this.getLookups();
-                _toast_toast__WEBPACK_IMPORTED_MODULE_5__["Toast"].success(res.message);
-                _loader_ballLoader__WEBPACK_IMPORTED_MODULE_6__["BallLoader"].hide();
+                _toast_toast__WEBPACK_IMPORTED_MODULE_6__["Toast"].success(res.message);
+                _loader_ballLoader__WEBPACK_IMPORTED_MODULE_7__["BallLoader"].hide();
             });
         }
     }
@@ -2521,6 +2537,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_mountCourse_mountedCoursesView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/mountCourse/mountedCoursesView */ "./out/views/mountCourse/mountedCoursesView.js");
 /* harmony import */ var _loader_ballLoader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../loader/ballLoader */ "./out/loader/ballLoader.js");
 /* harmony import */ var _group__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../group */ "./out/group.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../app */ "./out/app.js");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -2530,6 +2547,7 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+
 
 
 
@@ -2557,7 +2575,7 @@ class MountedCourseVm {
                     },
                 };
                 _loader_ballLoader__WEBPACK_IMPORTED_MODULE_3__["BallLoader"].show();
-                yield fetch("https://localhost:44359/api/Department/GetMountedCourses", options)
+                yield fetch(`${_app__WEBPACK_IMPORTED_MODULE_5__["App"].baseUri}/api/Department/GetMountedCourses`, options)
                     .then((res) => res.json())
                     .then((res) => {
                     this.courseList = res.value;
@@ -2673,6 +2691,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BindingList2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../BindingList2 */ "./out/BindingList2.js");
 /* harmony import */ var _toast_toast__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../toast/toast */ "./out/toast/toast.js");
 /* harmony import */ var _loader_ballLoader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../loader/ballLoader */ "./out/loader/ballLoader.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../app */ "./out/app.js");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -2688,6 +2707,7 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 
 
+
 class ProgramViewModel {
     constructor() {
         this.program = new _models_program__WEBPACK_IMPORTED_MODULE_2__["Program"]();
@@ -2695,7 +2715,7 @@ class ProgramViewModel {
         this.programs = [];
         this.getDepartments = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Department/GetDepartments");
+                const res = yield fetch(`${_app__WEBPACK_IMPORTED_MODULE_6__["App"].baseUri}/api/Department/GetDepartments`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -2713,7 +2733,7 @@ class ProgramViewModel {
         });
         this.getPrograms = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Program/GetPrograms");
+                const res = yield fetch(`${_app__WEBPACK_IMPORTED_MODULE_6__["App"].baseUri}/api/Program/GetPrograms`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -2762,7 +2782,7 @@ class ProgramViewModel {
                 },
             };
             _loader_ballLoader__WEBPACK_IMPORTED_MODULE_5__["BallLoader"].show();
-            fetch("https://localhost:44359/api/Program/AddProgram", options)
+            fetch(`${_app__WEBPACK_IMPORTED_MODULE_6__["App"].baseUri}/api/Program/AddProgram`, options)
                 .then((res) => res.json())
                 .then((res) => {
                 this.program = new _models_program__WEBPACK_IMPORTED_MODULE_2__["Program"]();
@@ -2904,6 +2924,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BindingList2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../BindingList2 */ "./out/BindingList2.js");
 /* harmony import */ var _loader_ballLoader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../loader/ballLoader */ "./out/loader/ballLoader.js");
 /* harmony import */ var _toast_toast__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../toast/toast */ "./out/toast/toast.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../app */ "./out/app.js");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -2913,6 +2934,7 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+
 
 
 
@@ -2931,7 +2953,7 @@ class SchoolVm {
         this.academicYears = [];
         this.getSchools = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/School/GetSchools");
+                const res = yield fetch(`${_app__WEBPACK_IMPORTED_MODULE_6__["App"].baseUri}/api/School/GetSchools`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -2942,7 +2964,7 @@ class SchoolVm {
         });
         this.getInstitutions = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Institution/GetInstitutions");
+                const res = yield fetch(`${_app__WEBPACK_IMPORTED_MODULE_6__["App"].baseUri}/api/Institution/GetInstitutions`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -2987,7 +3009,7 @@ class SchoolVm {
                 },
             };
             _loader_ballLoader__WEBPACK_IMPORTED_MODULE_4__["BallLoader"].show();
-            fetch("https://localhost:44359/api/School/AddSchool", options)
+            fetch(`${_app__WEBPACK_IMPORTED_MODULE_6__["App"].baseUri}/api/School/AddSchool`, options)
                 .then((res) => res.json())
                 .then((res) => {
                 this.school = new _models_school__WEBPACK_IMPORTED_MODULE_0__["School"]();
@@ -5068,7 +5090,7 @@ class Stage1 {
                         Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "left" },
                             Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null,
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", null, "Index Number"),
-                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", { id: "surname", binding: "Student.IndexNumber", type: "text", value: this._vm.student.IndexNumber }),
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", { id: "indexNumber", binding: "Student.IndexNumber", type: "text", value: this._vm.student.IndexNumber }),
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { errors: "IndexNumber" })),
                             Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null,
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", null, "Reference Number"),

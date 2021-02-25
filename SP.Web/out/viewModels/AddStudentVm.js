@@ -12,7 +12,6 @@ export class AddStudentVm {
             var errors = this.validator.addRules(rules).validate();
             this.viewModelHelper.showErrors(errors);
             if (!this.validator.hasErrors) {
-                //
                 const options = {
                     method: "POST",
                     body: JSON.stringify(this.student),
@@ -22,7 +21,7 @@ export class AddStudentVm {
                     },
                 };
                 debugger;
-                fetch("https://localhost:44359/api/Student/AddStudent", options)
+                fetch(`${App.baseUri}/api/Student/AddStudent`, options)
                     .then((res) => res.json())
                     .then((res) => {
                     debugger;

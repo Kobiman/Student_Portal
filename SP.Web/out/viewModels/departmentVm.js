@@ -13,6 +13,7 @@ import { ViewModelHelper } from "../viewModelHelper";
 import { BindingList2 } from "../BindingList2";
 import { Toast } from "../toast/toast";
 import { BallLoader } from "../loader/ballLoader";
+import { App } from "../app";
 export class DepartmentVm {
     constructor() {
         this.department = new Department();
@@ -20,7 +21,7 @@ export class DepartmentVm {
         this.schools = [];
         this.getDepartments = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Department/GetDepartments");
+                const res = yield fetch(`${App.baseUri}/api/Department/GetDepartments`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -31,7 +32,7 @@ export class DepartmentVm {
         });
         this.getSchools = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/School/GetSchools");
+                const res = yield fetch(`${App.baseUri}/api/School/GetSchools`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -75,7 +76,7 @@ export class DepartmentVm {
                 },
             };
             BallLoader.show();
-            fetch("https://localhost:44359/api/Department/AddDepartment", options)
+            fetch(`${App.baseUri}/api/Department/AddDepartment`, options)
                 .then((res) => res.json())
                 .then((res) => {
                 this.department = new Department();

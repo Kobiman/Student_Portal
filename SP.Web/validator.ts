@@ -45,6 +45,15 @@ export class Validator {
   }
 }
 
+export class Error {
+  constructor(propertyName: string, error: string) {
+    this.propertyName = propertyName;
+    this.error = error;
+  }
+  propertyName: string;
+  error: string;
+}
+
 export class Rules {
   constructor(propertyName: string, rules: IValidationRule[]) {
     this.propertyName = propertyName;
@@ -53,15 +62,6 @@ export class Rules {
 
   propertyName: string;
   rules: IValidationRule[];
-}
-
-export class Error {
-  constructor(propertyName: string, error: string) {
-    this.propertyName = propertyName;
-    this.error = error;
-  }
-  propertyName: string;
-  error: string;
 }
 
 export class ValidationResult {
@@ -116,4 +116,12 @@ export class Phone implements IValidationRule {
   validate() {
     
   }
+ 
+}
+
+export class Nameformat implements IValidationRule {
+  validate() {
+    
+  }
+    
 }
