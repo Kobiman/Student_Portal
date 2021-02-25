@@ -97,7 +97,6 @@ export class App {
       let deferredPrompt;
       window.addEventListener("beforeinstallprompt", (e) => {
         e.preventDefault();
-
         deferredPrompt = e;
         //btnAdd.style.display = 'block';
         let btn = <button id="btnAdd">Add</button>;
