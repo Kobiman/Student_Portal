@@ -13,6 +13,7 @@ import { Validator, Rules, Required, MinLength } from "../validator";
 import { Course } from "../models/Course";
 import { BallLoader } from "../loader/ballLoader";
 import { Toast } from "../toast/toast";
+import { App } from "../app";
 export class CourseVm {
     constructor() {
         this.course = new Course();
@@ -20,7 +21,7 @@ export class CourseVm {
         this.courses = [];
         this.getDepartments = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Department/GetDepartments");
+                const res = yield fetch(`${App.baseUri}/api/Department/GetDepartments`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -38,7 +39,7 @@ export class CourseVm {
         });
         this.getCourses = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Course/GetCourses");
+                const res = yield fetch(`${App.baseUri}/api/Course/GetCourses`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -76,7 +77,7 @@ export class CourseVm {
                 },
             };
             BallLoader.show();
-            fetch("https://localhost:44359/api/Course/AddCourse", options)
+            fetch(`${App.baseUri}/api/Course/AddCourse`, options)
                 .then((res) => res.json())
                 .then((res) => {
                 this.course = new Course();

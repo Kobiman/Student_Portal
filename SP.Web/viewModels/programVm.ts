@@ -5,6 +5,7 @@ import { Department } from "../models/department";
 import { BindingList2 } from "../BindingList2";
 import { Toast } from "../toast/toast";
 import { BallLoader } from "../loader/ballLoader";
+import { App } from "../app";
 
 export class ProgramViewModel {
   validator: Validator;
@@ -22,7 +23,7 @@ export class ProgramViewModel {
 
   getDepartments = async () => {
     try {
-      const res = await fetch("https://localhost:44359/api/Department/GetDepartments");
+      const res = await fetch(`${App.baseUri}/api/Department/GetDepartments`);
       if (!res.ok) {
       }
       const data = await res.json();
@@ -40,7 +41,7 @@ export class ProgramViewModel {
 
   getPrograms = async () => {
     try {
-      const res = await fetch("https://localhost:44359/api/Program/GetPrograms");
+      const res = await fetch(`${App.baseUri}/api/Program/GetPrograms`);
       if (!res.ok) {
       }
       const data = await res.json();
@@ -91,7 +92,7 @@ export class ProgramViewModel {
 
       BallLoader.show();
 
-      fetch("https://localhost:44359/api/Program/AddProgram", options)
+      fetch(`${App.baseUri}/api/Program/AddProgram`, options)
         .then((res) => res.json())
         .then((res) => {
           this.program = new Program();

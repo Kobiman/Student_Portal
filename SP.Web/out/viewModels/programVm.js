@@ -13,6 +13,7 @@ import { Program } from "../models/program";
 import { BindingList2 } from "../BindingList2";
 import { Toast } from "../toast/toast";
 import { BallLoader } from "../loader/ballLoader";
+import { App } from "../app";
 export class ProgramViewModel {
     constructor() {
         this.program = new Program();
@@ -20,7 +21,7 @@ export class ProgramViewModel {
         this.programs = [];
         this.getDepartments = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Department/GetDepartments");
+                const res = yield fetch(`${App.baseUri}/api/Department/GetDepartments`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -38,7 +39,7 @@ export class ProgramViewModel {
         });
         this.getPrograms = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Program/GetPrograms");
+                const res = yield fetch(`${App.baseUri}/api/Program/GetPrograms`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -87,7 +88,7 @@ export class ProgramViewModel {
                 },
             };
             BallLoader.show();
-            fetch("https://localhost:44359/api/Program/AddProgram", options)
+            fetch(`${App.baseUri}/api/Program/AddProgram`, options)
                 .then((res) => res.json())
                 .then((res) => {
                 this.program = new Program();

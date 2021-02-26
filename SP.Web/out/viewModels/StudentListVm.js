@@ -8,12 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { BindingList2 } from "../BindingList2";
+import { App } from "../app";
 export class StudentListVm {
     constructor() {
         this.students = [];
         this.getStudents = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch('https://localhost:44359/api/Student/GetStudents');
+                const res = yield fetch(`${App.baseUri}/api/Student/GetStudents`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();

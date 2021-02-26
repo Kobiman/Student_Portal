@@ -22,7 +22,7 @@ export class AddStudentVm {
                     },
                 };
                 debugger;
-                fetch("https://localhost:44359/api/Student/AddStudent", options)
+                fetch(`${App.baseUri}/api/Student/AddStudent`, options)
                     .then((res) => res.json())
                     .then((res) => {
                     debugger;

@@ -12,6 +12,7 @@ import { ViewModelHelper } from "../viewModelHelper";
 import { Lookup } from "../models/lookup";
 import { Institution } from "../models/institution";
 import { BindingList2 } from "../BindingList2";
+import { App } from "../app";
 import { Toast } from "../toast/toast";
 import { BallLoader } from "../loader/ballLoader";
 export class LookupVm {
@@ -29,7 +30,7 @@ export class LookupVm {
         ];
         this.getInstitutions = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Institution/GetInstitutions");
+                const res = yield fetch(`${App.baseUri}/api/Institution/GetInstitutions`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -43,7 +44,7 @@ export class LookupVm {
         });
         this.getLookups = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Lookup/GetLookups");
+                const res = yield fetch(`${App.baseUri}/api/Lookup/GetLookups`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -80,7 +81,7 @@ export class LookupVm {
                 },
             };
             BallLoader.show();
-            fetch("https://localhost:44359/api/Lookup/AddLookup", options)
+            fetch(`${App.baseUri}/api/Lookup/AddLookup`, options)
                 .then((res) => res.json())
                 .then((res) => {
                 this.lookup = new Lookup();

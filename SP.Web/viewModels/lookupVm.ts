@@ -68,7 +68,7 @@ export class LookupVm {
 
   getInstitutions = async () => {
     try {
-      const res = await fetch("https://localhost:44359/api/Institution/GetInstitutions");
+      const res = await fetch(`${App.baseUri}/api/Institution/GetInstitutions`);
       if (!res.ok) {
       }
       const data = await res.json();
@@ -82,7 +82,7 @@ export class LookupVm {
 
   getLookups = async () => {
     try {
-      const res = await fetch("https://localhost:44359/api/Lookup/GetLookups");
+      const res = await fetch(`${App.baseUri}/api/Lookup/GetLookups`);
       if (!res.ok) {
       }
       const data = await res.json();

@@ -7,6 +7,7 @@ import { Lookup } from "../models/lookup";
 import { CommonService } from "../services/commonService";
 import { BallLoader } from "../loader/ballLoader";
 import { Toast } from "../toast/toast";
+import { App } from "../app";
 
 export class SchoolVm {
   validator: Validator;
@@ -53,7 +54,7 @@ export class SchoolVm {
         },
       };
       BallLoader.show();
-      fetch("https://localhost:44359/api/School/AddSchool", options)
+      fetch(`${App.baseUri}/api/School/AddSchool`, options)
         .then((res) => res.json())
         .then((res) => {
           this.school = new School();
@@ -67,7 +68,7 @@ export class SchoolVm {
 
   getSchools = async () => {
     try {
-      const res = await fetch("https://localhost:44359/api/School/GetSchools");
+      const res = await fetch(`${App.baseUri}/api/School/GetSchools`);
       if (!res.ok) {
       }
       const data = await res.json();
@@ -79,7 +80,7 @@ export class SchoolVm {
 
   getInstitutions = async () => {
     try {
-      const res = await fetch("https://localhost:44359/api/Institution/GetInstitutions");
+      const res = await fetch(`${App.baseUri}/api/Institution/GetInstitutions`);
       if (!res.ok) {
       }
       const data = await res.json();

@@ -5,6 +5,7 @@ import { Lecturer } from "../models/lecturer";
 import { BindingList2 } from "../BindingList2";
 import { BallLoader } from "../loader/ballLoader";
 import { Toast } from "../toast/toast";
+import { App } from "../app";
 
 export class LecturerVm {
   validator: Validator;
@@ -22,7 +23,7 @@ export class LecturerVm {
 
   getDepartments = async () => {
     try {
-      const res = await fetch("https://localhost:44359/api/Department/GetDepartments");
+      const res = await fetch(`${App.baseUri}/api/Department/GetDepartments`);
       if (!res.ok) {
       }
       const data = await res.json();
@@ -40,7 +41,7 @@ export class LecturerVm {
 
   getLecturers = async () => {
     try {
-      const res = await fetch("https://localhost:44359/api/Lecturer/GetLecturers");
+      const res = await fetch(`${App.baseUri}/api/Lecturer/GetLecturers`);
       if (!res.ok) {
       }
       const data = await res.json();
@@ -76,7 +77,7 @@ export class LecturerVm {
         },
       };
       BallLoader.show();
-      fetch("https://localhost:44359/api/Lecturer/AddLecturer", options)
+      fetch(`${App.baseUri}/api/Lecturer/AddLecturer`, options)
         .then((res) => res.json())
         .then((res) => {
           this.lecturer = new Lecturer();

@@ -80,7 +80,7 @@ export class App {
         }
     }
 }
-App.baseUri = "https://localhost:44359";
+App.baseUri = "https://localhost:44319";
 App.currentPath = "";
 App.commonService = new CommonService();
 App.courseRegistrationService = new CourseRegistrationService();

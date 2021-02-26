@@ -5,6 +5,7 @@ import { Department } from "../models/department";
 import { Course } from "../models/Course";
 import { BallLoader } from "../loader/ballLoader";
 import { Toast } from "../toast/toast";
+import { App } from "../app";
 
 export class CourseVm {
   validator: Validator;
@@ -46,7 +47,7 @@ export class CourseVm {
       };
 
       BallLoader.show();
-      fetch("https://localhost:44359/api/Course/AddCourse", options)
+      fetch(`${App.baseUri}/api/Course/AddCourse`, options)
         .then((res) => res.json())
         .then((res) => {
           this.course = new Course();
@@ -60,7 +61,7 @@ export class CourseVm {
 
   getDepartments = async () => {
     try {
-      const res = await fetch("https://localhost:44359/api/Department/GetDepartments");
+      const res = await fetch(`${App.baseUri}/api/Department/GetDepartments`);
       if (!res.ok) {
       }
       const data = await res.json();
@@ -78,7 +79,7 @@ export class CourseVm {
 
   getCourses = async () => {
     try {
-      const res = await fetch("https://localhost:44359/api/Course/GetCourses");
+      const res = await fetch(`${App.baseUri}/api/Course/GetCourses`);
       if (!res.ok) {
       }
       const data = await res.json();

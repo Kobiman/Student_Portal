@@ -38,7 +38,7 @@ import { RegisterCourseView } from "./views/registration/registerCourseView";
 import { RegisterCourseVm } from "./viewModels/registerCourseVm";
 
 export class App {
-  static baseUri = "https://localhost:44359";
+  static baseUri = "https://localhost:44319";
   static currentPath = "";
   static commonService = new CommonService();
   static courseRegistrationService = new CourseRegistrationService();

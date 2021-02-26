@@ -34,7 +34,7 @@ export class MountCourseViewModel {
         });
         this.getLookups = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Lookup/GetLookups");
+                const res = yield fetch(`${App.baseUri}/api/Lookup/GetLookups");
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -50,7 +50,7 @@ export class MountCourseViewModel {
         });
         this.getLecturers = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Lecturer/GetLecturers");
+                const res = yield fetch(`${App.baseUri}/api/Lecturer/GetLecturers");
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -61,7 +61,7 @@ export class MountCourseViewModel {
         });
         this.getPrograms = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Program/GetPrograms");
+                const res = yield fetch(`${App.baseUri}/api/Program/GetPrograms");
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -71,7 +71,7 @@ export class MountCourseViewModel {
         });
         this.getDepartmentsWithCourses = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Department/GetDepartmentsWithCourses");
+                const res = yield fetch(`${App.baseUri}/api/Department/GetDepartmentsWithCourses");
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -169,7 +169,7 @@ export class MountCourseViewModel {
                     Accept: "*/*",
                 },
             };
-            fetch("https://localhost:44359/api/Department/MountCourse", options)
+            fetch(`${App.baseUri}/api/Department/MountCourse", options)
                 .then((res) => res.json())
                 .then((res) => {
                 console.log(res);

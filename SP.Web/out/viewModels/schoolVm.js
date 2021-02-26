@@ -13,6 +13,7 @@ import { ViewModelHelper } from "../viewModelHelper";
 import { BindingList2 } from "../BindingList2";
 import { BallLoader } from "../loader/ballLoader";
 import { Toast } from "../toast/toast";
+import { App } from "../app";
 export class SchoolVm {
     constructor(commonService) {
         this.commonService = commonService;
@@ -25,7 +26,7 @@ export class SchoolVm {
         this.academicYears = [];
         this.getSchools = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/School/GetSchools");
+                const res = yield fetch(`${App.baseUri}/api/School/GetSchools`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -36,7 +37,7 @@ export class SchoolVm {
         });
         this.getInstitutions = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Institution/GetInstitutions");
+                const res = yield fetch(`${App.baseUri}/api/Institution/GetInstitutions`);
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -81,7 +82,7 @@ export class SchoolVm {
                 },
             };
             BallLoader.show();
-            fetch("https://localhost:44359/api/School/AddSchool", options)
+            fetch(`${App.baseUri}/api/School/AddSchool`, options)
                 .then((res) => res.json())
                 .then((res) => {
                 this.school = new School();

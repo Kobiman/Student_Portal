@@ -5,6 +5,7 @@ import { School } from "../models/school";
 import { BindingList2 } from "../BindingList2";
 import { Toast } from "../toast/toast";
 import { BallLoader } from "../loader/ballLoader";
+import { App } from "../app";
 
 export class DepartmentVm {
   validator: Validator;
@@ -43,7 +44,7 @@ export class DepartmentVm {
         },
       };
       BallLoader.show();
-      fetch("https://localhost:44359/api/Department/AddDepartment", options)
+      fetch(`${App.baseUri}/api/Department/AddDepartment`, options)
         .then((res) => res.json())
         .then((res) => {
           this.department = new Department();
@@ -58,7 +59,7 @@ export class DepartmentVm {
 
   getDepartments = async () => {
     try {
-      const res = await fetch("https://localhost:44359/api/Department/GetDepartments");
+      const res = await fetch(`${App.baseUri}/api/Department/GetDepartments`);
       if (!res.ok) {
       }
       const data = await res.json();
@@ -74,7 +75,7 @@ export class DepartmentVm {
 
   getSchools = async () => {
     try {
-      const res = await fetch("https://localhost:44359/api/School/GetSchools");
+      const res = await fetch(`${App.baseUri}/api/School/GetSchools`);
       if (!res.ok) {
       }
       const data = await res.json();
