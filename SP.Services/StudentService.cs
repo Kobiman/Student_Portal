@@ -90,7 +90,7 @@ namespace SP.Services
         public IResult GetStudents()
         {
             return new Result<IEnumerable<GetStudentsResponse>>(true, 
-                _uow.Students.GetAll().Select(x=>x.Map<GetStudentsResponse, Student>()).ToList(), "");
+                _uow.Students.GetStudents().Select(x=>x.Map<GetStudentsResponse, Student>()).ToList(), "");
         }
     }
 }

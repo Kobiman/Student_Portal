@@ -33,6 +33,7 @@ import { CourseRegistrationService } from "./services/courseRegistrationService"
 import { RegisteredCoursesVm } from "./viewModels/registeredCoursesVm";
 import { RegisterCourseView } from "./views/registration/registerCourseView";
 import { RegisterCourseVm } from "./viewModels/registerCourseVm";
+import { UploadResultView } from "./views/uploadResultView";
 export class App {
     static render(view, domlocation) {
         view.render(domlocation);
@@ -106,6 +107,7 @@ App.routes = {
     //"/app/#courseRegistration": () => new CourseRegistrationView(new CourseRegistrationVm()),
     "/app/#registeredCourses": () => new RegisteredCoursesView(new RegisteredCoursesVm(App.courseRegistrationService)),
     "/app/#registerCourses": () => new RegisterCourseView(new RegisterCourseVm(App.courseRegistrationService)),
+    "/app/#uploadResults": () => new UploadResultView()
 };
 App.register();
 App.navigate("/app/#frontPage");

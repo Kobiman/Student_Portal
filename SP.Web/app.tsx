@@ -74,7 +74,7 @@ export class App {
   public static navigate(pathName: string) {
     if (this.currentPath !== pathName) {
       window.history.pushState({}, pathName, window.location.origin + pathName);
-
+      
       var view = this.routes[pathName]();
       this.render(view, "route-outlet");
       this.currentPath = pathName;

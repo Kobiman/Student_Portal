@@ -60,7 +60,7 @@ export class HeaderView {
                                 createElement("header", null, "USP "),
                                 createElement("ul", null,
                                     createElement("li", null,
-                                        createElement("a", { href: "#" }, "Item 1")),
+                                        createElement("a", { route: "/app/#uploadResults" }, "Item 1")),
                                     createElement("li", null,
                                         createElement("a", { href: "#" }, "Item 2")),
                                     createElement("li", null,

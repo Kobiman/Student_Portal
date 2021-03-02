@@ -532,6 +532,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _viewModels_registeredCoursesVm__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./viewModels/registeredCoursesVm */ "./out/viewModels/registeredCoursesVm.js");
 /* harmony import */ var _views_registration_registerCourseView__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./views/registration/registerCourseView */ "./out/views/registration/registerCourseView.js");
 /* harmony import */ var _viewModels_registerCourseVm__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./viewModels/registerCourseVm */ "./out/viewModels/registerCourseVm.js");
+/* harmony import */ var _views_uploadResultView__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./views/uploadResultView */ "./out/views/uploadResultView.js");
+
 
 
 
@@ -640,6 +642,7 @@ App.routes = {
     //"/app/#courseRegistration": () => new CourseRegistrationView(new CourseRegistrationVm()),
     "/app/#registeredCourses": () => new _views_registration_registeredCoursesView__WEBPACK_IMPORTED_MODULE_30__["RegisteredCoursesView"](new _viewModels_registeredCoursesVm__WEBPACK_IMPORTED_MODULE_32__["RegisteredCoursesVm"](App.courseRegistrationService)),
     "/app/#registerCourses": () => new _views_registration_registerCourseView__WEBPACK_IMPORTED_MODULE_33__["RegisterCourseView"](new _viewModels_registerCourseVm__WEBPACK_IMPORTED_MODULE_34__["RegisterCourseVm"](App.courseRegistrationService)),
+    "/app/#uploadResults": () => new _views_uploadResultView__WEBPACK_IMPORTED_MODULE_35__["UploadResultView"]()
 };
 App.register();
 App.navigate("/app/#frontPage");
@@ -1261,9 +1264,10 @@ class CourseRegistrationService {
             yield fetch(`${_app__WEBPACK_IMPORTED_MODULE_0__["App"].baseUri}/api/Department/GetRegisteredCourses`, options)
                 .then((res) => res.json())
                 .then((res) => {
+                var _a;
                 this.registeredCourses = res.value;
                 //this.registeredCourses.map((x) => new RegisteredCoursesRow().render(x));
-                if (this.registeredCourses.length > 0) {
+                if (((_a = this.registeredCourses) === null || _a === void 0 ? void 0 : _a.length) > 0) {
                     this.hasRegisterd = true;
                     //new RegisteredCoursesView(new RegisteredCoursesVm(this)).render(this.elementId);
                     //new RegisterCourseView(new RegisterCourseVm(this)).render(this.elementId);
@@ -3556,7 +3560,7 @@ class HeaderView {
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("header", null, "USP "),
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("ul", null,
                                     Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", null,
-                                        Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", { href: "#" }, "Item 1")),
+                                        Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", { route: "/app/#uploadResults" }, "Item 1")),
                                     Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", null,
                                         Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", { href: "#" }, "Item 2")),
                                     Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", null,
@@ -5378,6 +5382,32 @@ class StudentListView {
     }
 }
 //# sourceMappingURL=studentList.js.map
+
+/***/ }),
+
+/***/ "./out/views/uploadResultView.js":
+/*!***************************************!*\
+  !*** ./out/views/uploadResultView.js ***!
+  \***************************************/
+/*! exports provided: UploadResultView */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UploadResultView", function() { return UploadResultView; });
+/* harmony import */ var tsx_create_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tsx-create-element */ "./node_modules/tsx-create-element/dist/es6/index.js");
+
+class UploadResultView {
+    constructor() {
+        this.render = (elementId) => {
+            let temp = (Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h1", null, "hello world"));
+            var doc = document.getElementById(elementId);
+            doc.textContent = "";
+            doc.appendChild(temp);
+        };
+    }
+}
+//# sourceMappingURL=uploadResultView.js.map
 
 /***/ })
 

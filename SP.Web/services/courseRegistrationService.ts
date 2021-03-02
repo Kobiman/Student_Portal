@@ -55,7 +55,7 @@ export class CourseRegistrationService {
       .then((res) => {
         this.registeredCourses = res.value;
         //this.registeredCourses.map((x) => new RegisteredCoursesRow().render(x));
-        if (this.registeredCourses.length > 0) {
+        if (this.registeredCourses?.length > 0) {
           this.hasRegisterd = true;
           //new RegisteredCoursesView(new RegisteredCoursesVm(this)).render(this.elementId);
           //new RegisterCourseView(new RegisterCourseVm(this)).render(this.elementId);

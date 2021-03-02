@@ -48,9 +48,10 @@ export class CourseRegistrationService {
             yield fetch(`${App.baseUri}/api/Department/GetRegisteredCourses`, options)
                 .then((res) => res.json())
                 .then((res) => {
+                var _a;
                 this.registeredCourses = res.value;
                 //this.registeredCourses.map((x) => new RegisteredCoursesRow().render(x));
-                if (this.registeredCourses.length > 0) {
+                if (((_a = this.registeredCourses) === null || _a === void 0 ? void 0 : _a.length) > 0) {
                     this.hasRegisterd = true;
                     //new RegisteredCoursesView(new RegisteredCoursesVm(this)).render(this.elementId);
                     //new RegisterCourseView(new RegisterCourseVm(this)).render(this.elementId);

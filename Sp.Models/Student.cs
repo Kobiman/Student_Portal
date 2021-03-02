@@ -49,7 +49,7 @@ namespace SP.Models
         public DateTime DateOfEntry { get; set; }
         public DateTime DateOfCompletion { get; set; }
         public IList<StudentResult> Results { get; set; }
-        public IList<RegisteredCourse> RegisteredCourses { get; }
+        public IList<RegisteredCourse> RegisteredCourses { get; set; }
 
 
 
@@ -61,12 +61,13 @@ namespace SP.Models
 
 
         //Finance
-        public bool Owning { get; set; }
-        public string FeesBalance { get; set; }
+        //public bool Owning { get; set; }
+        //public string FeesBalance { get; set; }
         public string PamentOption { get; set; }
 
 
         public string DepartmentId { get; set; }
+        public int State { get; set; }
 
 
         public void RegisterCourse(RegisteredCourse registeredcourse)

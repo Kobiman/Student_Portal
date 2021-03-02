@@ -1,4 +1,5 @@
-﻿using SP.DAL.Repository;
+﻿using SP.DAL.Models;
+using SP.DAL.Repository;
 using SP.Models;
 using SP.Services.Interfaces;
 using SP.Services.Interfaces.Repository;
@@ -24,63 +25,54 @@ namespace SP.DAL
         private ILecturerRepository _lecturers;
         private IExamResultsRepository _uploadExamResults;
 
-        public IStudentRepository Students => _students ??
-                (_students = new StudentRepository(LoadStudents()));
+        public IStudentRepository Students => _students ??= new StudentRepository(LoadStudents());
 
 
-        public IExamResultsRepository ExamResults => _uploadExamResults ??
-            (_uploadExamResults = new ExamResultsRepository(LoadUploadExamResults()));
+        public IExamResultsRepository ExamResults => _uploadExamResults ??= new ExamResultsRepository(LoadUploadExamResults());
         
         public IMountedCourseRepository MountedCourses => _mountedcourses ??
                 (_mountedcourses = new MountedCourseRepository(LoadMountedCourses()));
 
-        public IMountedCourseRepository MountedCoures => _mountedcourses??
-                (_mountedcourses = new MountedCourseRepository(DataReader
-                 .ReadData<MountedCourse>(nameof(MountedCourse))));
+        public IMountedCourseRepository MountedCoures => _mountedcourses ??= new MountedCourseRepository(DataReader
+                 .ReadData<MountedCourse>(nameof(MountedCourse)));
         //public IRegisteredCourseRepository _RegisteredCourses => _registeredcourses ??
         //        (_registeredcourses = new RegisteredCourseRepository(LoadRegisteredCourses()));
-        public IRegisteredCourseRepository RegisteredCourses => _registeredcourses ??
-                (_registeredcourses = new RegisteredCourseRepository(DataReader
-                 .ReadData<RegisteredCourse>(nameof(RegisteredCourse))));
+        public IRegisteredCourseRepository RegisteredCourses => _registeredcourses ??= new RegisteredCourseRepository(DataReader
+                 .ReadData<RegisteredCourse>(nameof(RegisteredCourse)));
 
-        public IInstitutionRepository Institutions => _institutions ?? 
-               (_institutions = new InstitutionRepository(DataReader
-                .ReadData<Institution>(nameof(Institution))));
+        public IInstitutionRepository Institutions => _institutions ??= new InstitutionRepository(DataReader
+                .ReadData<Institution>(nameof(Institution)));
 
-        public ISchoolRepository Schools => _schools ?? 
-               (_schools = new SchoolRepository(DataReader
-                .ReadData<School>(nameof(School))));
+        public ISchoolRepository Schools => _schools ??= new SchoolRepository(DataReader
+                .ReadData<School>(nameof(School)));
 
-        public IDepartmentRepository Departments => _departments ?? 
-               (_departments = new DepartmentRepository(DataReader
-                .ReadData<Department>(nameof(Department))));
+        public IDepartmentRepository Departments => _departments ??= new DepartmentRepository(DataReader
+                .ReadData<Department>(nameof(Department)));
 
-        public IProgramRepository Programs => _programs ?? 
-            (_programs = new ProgramRepository(LoadPrograms()));
+        public IProgramRepository Programs => _programs ??= new ProgramRepository(LoadPrograms());
 
-        public ICourseRepository Courses => _courses ??
-           (_courses = new CourseRepository(DataReader
-               .ReadData<Course>(nameof(Course))));
+        public ICourseRepository Courses => _courses ??= new CourseRepository(DataReader
+               .ReadData<Course>(nameof(Course)));
 
-        public ILookupRepository Lookups => _lookups ??
-           (_lookups = new LookupRepository(DataReader
-               .ReadData<Lookup>(nameof(Lookup)))); 
+        public ILookupRepository Lookups => _lookups ??= new LookupRepository(DataReader
+               .ReadData<Lookup>(nameof(Lookup))); 
 
-         public ILecturerRepository Lecturers => _lecturers ??
-           (_lecturers = new LecturerRepository(DataReader
-               .ReadData<Lecturer>(nameof(Lecturer))));
+         public ILecturerRepository Lecturers => _lecturers ??= new LecturerRepository(DataReader
+               .ReadData<Lecturer>(nameof(Lecturer)));
 
-        private ConcurrentBag<Student> LoadStudents()
+        private Students LoadStudents()
         {
             var registeredCourses = DataReader
                 .ReadData<RegisteredCourse>(nameof(RegisteredCourse));
 
-            var students = DataReader
-                .ReadData<Student>(nameof(Student));
-
-            foreach (var student in students)
+            var studentsList = DataReader
+                .ReadData<Student>(nameof(Student))
+                .Distinct(x => x.IndexNumber, x => x.State).ToList();
+            var students = new Students(100);
+            foreach (var student in studentsList)
             {
                 student.RegisterCourses(registeredCourses.Where(x => x.StudentId == student.StudentId));
+                students.Add(student);
             }
             return students;
         }
