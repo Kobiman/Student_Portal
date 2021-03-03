@@ -5385,6 +5385,74 @@ class StudentListView {
 
 /***/ }),
 
+/***/ "./out/views/style.js":
+/*!****************************!*\
+  !*** ./out/views/style.js ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const styles = () => ({
+    container: {
+        height: "100%",
+        width: "100%",
+    },
+    inputsContainer: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        width: "100%",
+        padding: 10,
+    },
+    inputGroup: {
+        padding: 5,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    select: {
+        padding: 2,
+    },
+    input: {
+        padding: 2,
+    },
+    tableContainer: {
+        width: "100%",
+    },
+    table: {
+        padding: 2,
+        width: "100%",
+    },
+    thead: {
+        width: "100%",
+    },
+    tr: {
+        width: "100%",
+        padding: 2,
+    },
+    th: {
+        textAlign: "center",
+        fontWeight: "bold",
+        padding: 5,
+    },
+    tbody: {
+        width: "100%",
+        padding: 5,
+    },
+    actionContainer: {
+        width: "100%",
+        padding: 2,
+        display: "flex",
+        justifyContent: "right",
+    },
+});
+/* harmony default export */ __webpack_exports__["default"] = (styles);
+//# sourceMappingURL=style.js.map
+
+/***/ }),
+
 /***/ "./out/views/uploadResultView.js":
 /*!***************************************!*\
   !*** ./out/views/uploadResultView.js ***!
@@ -5396,11 +5464,40 @@ class StudentListView {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UploadResultView", function() { return UploadResultView; });
 /* harmony import */ var tsx_create_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tsx-create-element */ "./node_modules/tsx-create-element/dist/es6/index.js");
+/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style */ "./out/views/style.js");
+
 
 class UploadResultView {
     constructor() {
         this.render = (elementId) => {
-            let temp = (Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h1", null, "hello world"));
+            const classes = Object(_style__WEBPACK_IMPORTED_MODULE_1__["default"])();
+            const headers = ["indexNumbers", "Name", "Level", "courseCode", "classScore", "examScore", "Total"];
+            let temp = (Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "sp-box" },
+                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "mc-row" },
+                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h1", null, "Upload Results"),
+                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "mountcourses-form" },
+                        Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "sp-row-col-4" },
+                            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null,
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("select", { id: "department", name: "department" },
+                                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", null, "Department")),
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { errors: "IndexNumber" })),
+                            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null,
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("select", { id: "coursecode", name: "coursecode" },
+                                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", null, "Course Code")),
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { errors: "IndexNumber" })),
+                            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null,
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", { readOnly: true, value: "2020/2021", id: "academicyear", name: "academicyear" }),
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { errors: "IndexNumber" })),
+                            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null,
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "sp-btn-row" },
+                                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", { class: "sp-btn sp-btn-default btn-small", id: "showFilters" }, "Upload"),
+                                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", { class: "sp-btn sp-btn-primary btn-small", id: "submit" }, "Submit")))),
+                        Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null,
+                            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "horizontal" },
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("table", { class: "table striped stretch" },
+                                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("thead", null,
+                                        Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("tr", null, headers.map(headerItem => (Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("th", null, headerItem))))),
+                                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("tbody", { class: classes.tbody }))))))));
             var doc = document.getElementById(elementId);
             doc.textContent = "";
             doc.appendChild(temp);
