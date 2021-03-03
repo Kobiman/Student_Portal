@@ -180,7 +180,7 @@ namespace SP.DAL.Models
                     var _Results = new StudentResultDM[newLength];;
                     Results.CopyTo(_Results);
                     Results = _Results;
-                    var _RegisteredCourses = new RegisteredCourseDM[newLength]; ;
+                    var _RegisteredCourses = new RegisteredCourseDM[newLength]; 
                     RegisteredCourses.CopyTo(_RegisteredCourses);
                     RegisteredCourses = _RegisteredCourses;
                     var _EmergencyContact = new EmergencyContactDM[newLength];

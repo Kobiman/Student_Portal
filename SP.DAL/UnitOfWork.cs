@@ -64,17 +64,21 @@ namespace SP.DAL
             return students;
         }
 
-        private ConcurrentBag<Program> LoadPrograms()
+        private Programs LoadPrograms()
         {
-            var programs =
+            var _programs =
                  DataReader.ReadData<Program>(nameof(Program));
             var mountedCourses =
                 DataReader.ReadData<MountedCourse>(nameof(MountedCourse));
-            foreach(var program in programs)
+            var specialization =
+                DataReader.ReadData<Specialization>(nameof(Specialization));
+            var programs = new Programs(10);
+            foreach (var program in _programs)
             {
                 program.MountCourses(mountedCourses.Where(x => x.ProgramId == program.ProgramId));
+                program.AddSpecializations(specialization);
+                programs.Add(program);
             }
-
             return programs;
         }
 

@@ -17,7 +17,7 @@ namespace SP.Models
         public string Duration { get; set; }
         public int Limit { get; set; }
         public string DepartmentId { get; set; }
-        public IList<MountedCourse> MountedCourses { get; } = new List<MountedCourse>();
+        public IList<MountedCourse> MountedCourses { get; set; } = new List<MountedCourse>();
         public IList<Specialization> Specializations { get; set; } = new List<Specialization>();
 
         public void MountCourses(IEnumerable<MountedCourse> mountedCoures)
@@ -69,6 +69,14 @@ namespace SP.Models
                                            MountedCoureId = x.MountedCoureId
                                            //MountedCourses = x.MountedCourses
                                        }).ToList();
+        }
+
+        public void AddSpecializations(IEnumerable<Specialization> specializations)
+        {
+            foreach (var specialization in specializations)
+            {
+                Specializations.Add(specialization);
+            };
         }
 
         public MountedCourse GetMountedCourse(string mountedCourseId)

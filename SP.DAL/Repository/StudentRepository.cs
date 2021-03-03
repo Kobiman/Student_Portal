@@ -107,8 +107,7 @@ namespace SP.DAL.Repository
 
         public IEnumerable<Student> GetStudents()
         {
-            var s=  Collection.Next.Select((x, y) => CreateStudent(x, y));
-            return s;
+            return Collection.Next.Select((x, y) => CreateStudent(x, y));
         }
 
         public bool IndexNumberExist(string indexNumber)
