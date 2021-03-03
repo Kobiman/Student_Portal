@@ -39,8 +39,7 @@ namespace SP.Commands
                     .GetStudent(courses.First().StudentId)
                     .RegisterCourses(courses);
 
-                _uow.RegisteredCourses.AddRegisteredCourses(courses);
-                _uow.SaveChanges();
+                _uow.SaveChanges(courses, nameof(RegisteredCourse));
                 return new Result(true, "Course(s) Registered Successfully");
             }
             return new Result(true, "");

@@ -1,5 +1,6 @@
 ﻿using SP.Models.Dtos;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -80,6 +81,22 @@ namespace SP.Models
             foreach (var registeredcourse in registeredcourses)
             {
                 RegisteredCourses.Add(registeredcourse);
+            }
+        }
+
+        public void AddEmergencyContact(IEnumerable<EmergencyContact> emergencyContacts)
+        {
+            foreach (var contact in emergencyContacts)
+            {
+                EmergencyContact.Add(contact);
+            }
+        }
+
+        public void AddResults(IEnumerable<StudentResult> results)
+        {
+            foreach (var result in results)
+            {
+                Results.Add(result);
             }
         }
 

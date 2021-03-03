@@ -8,8 +8,6 @@ namespace SP.Services.Interfaces.Repository
     public interface IUnitOfWork
     {
         IStudentRepository Students { get; }
-        IMountedCourseRepository MountedCourses { get; }
-        IRegisteredCourseRepository RegisteredCourses { get; }
         IInstitutionRepository Institutions { get; }
         ISchoolRepository Schools { get; }
         IDepartmentRepository Departments { get; }
@@ -17,8 +15,8 @@ namespace SP.Services.Interfaces.Repository
         ICourseRepository Courses { get; }
         ILookupRepository Lookups { get; }
         ILecturerRepository Lecturers { get; }
-        IExamResultsRepository ExamResults { get; }
 
         void SaveChanges();
+        void SaveChanges<T>(T data, string table);
     }
 }

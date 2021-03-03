@@ -43,7 +43,6 @@ namespace SP.Commands
                     if (mountedCourse !=null) return 
                             new Result(false,
                             Message.AlreadyExist($"{mountedCourse.CourseCode}, {mountedCourse.CourseName},{mountedCourse.Level}"));
-
                 }
 
                 var courses = mountedcourse
@@ -55,8 +54,7 @@ namespace SP.Commands
                     .GetProgram(courses.First().ProgramId)
                     .MountCourses(courses);
 
-                _uow.MountedCourses.AddMountedCourses(courses);
-                _uow.SaveChanges();
+                _uow.SaveChanges(courses,nameof(MountedCourse));
                 return new Result(true,Message.OperationCompletedSuccesfully);
             }
             return new Result(true, "");

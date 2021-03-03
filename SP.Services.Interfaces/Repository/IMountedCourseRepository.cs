@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SP.Services.Interfaces.Repository
 {
-    public interface IMountedCourseRepository: IRepository<MountedCourse>
+    public interface IMountedCourseRepository//: IRepository<MountedCourse>
     {
         bool MountCourse(AddMountedCourseRequest request);
         bool AddMountedCourses(IEnumerable<MountedCourse> mountedcourses);

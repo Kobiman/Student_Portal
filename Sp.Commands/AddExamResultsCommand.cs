@@ -30,8 +30,8 @@ namespace SP.Commands
                     if (!student.Validate(out results)) return new Result(false, results.First().ErrorMessage);
                 }
 
-               _uow.ExamResults.UploadExamResults(examResultsRequest);
-               _uow.SaveChanges();
+                var examresult = examResultsRequest.Map<StudentResult, GetExamResultsRequest>();
+                _uow.SaveChanges(examresult,nameof(StudentResult));
                 return new Result(true, Message.OperationCompletedSuccesfully);
             }
             return new Result(true, "");

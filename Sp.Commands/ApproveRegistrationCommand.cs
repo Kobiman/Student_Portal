@@ -29,7 +29,8 @@ namespace SP.Commands
                         student.RegisteredCourses.FirstOrDefault(x => x.RegisteredCourseId == course.RegisteredCourseId).Approved = course.Approved;
                     }
                 }
-                _uow.RegisteredCourses.UpdateRegisteredCourse(approveRegisteredCoursesRequest);
+
+                _uow.SaveChanges(approveRegisteredCoursesRequest.ApproveRegisteredCourses,nameof(RegisteredCourse));
             }
 
             return new Result(false, Message.OperationFailed);

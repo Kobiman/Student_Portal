@@ -18,7 +18,7 @@ namespace Sp.Generators
             StringBuilder sb = new StringBuilder();
             foreach (var t in types)
             {
-                if (t.Name == "RegisteredCourse")
+                if (t.Name == "MountedCourse")
                 {
                     sb.Append($@"
                    using System;
@@ -77,13 +77,7 @@ namespace Sp.Generators
                           }}");
                     for (var m = 0; m < _members.Count; m++)
                     {
-                        if (_members[m].Name.Equals("Count"))
-                        {
-                            sb.Append($@"{_members[m].Name}++;");
-                            sb.Append(Environment.NewLine);
-                        }
-
-                        else if (_members[m].Name.Equals("State"))
+                        if (_members[m].Name.Equals("State"))
                         {
                             sb.Append($@"{_members[m].Name}.Span[Count]++;");
                             sb.Append(Environment.NewLine);
@@ -94,6 +88,9 @@ namespace Sp.Generators
                             sb.Append(Environment.NewLine);
                         }
                     }
+                    
+                    sb.Append($@"Count++;");
+                    sb.Append(Environment.NewLine);
                     sb.Append($@"}}
                         }}");
                     sb.Append($@"
