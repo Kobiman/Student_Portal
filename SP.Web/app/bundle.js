@@ -2345,6 +2345,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _validator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../validator */ "./out/validator.js");
 /* harmony import */ var _group__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../group */ "./out/group.js");
 /* harmony import */ var _toast_toast__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../toast/toast */ "./out/toast/toast.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../app */ "./out/app.js");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -2354,6 +2355,7 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+
 
 
 
@@ -2492,7 +2494,7 @@ class MountCourseViewModel {
                     Accept: "*/*",
                 },
             };
-            fetch("https://localhost:44359/api/Department/MountCourse", options)
+            fetch(`${_app__WEBPACK_IMPORTED_MODULE_6__["App"].baseUri}/api/Department/MountCourse`, options)
                 .then((res) => res.json())
                 .then((res) => {
                 this.selectedCourses = [];

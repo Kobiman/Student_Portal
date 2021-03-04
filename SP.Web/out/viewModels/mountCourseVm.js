@@ -13,6 +13,7 @@ import { BindingList2 } from "../BindingList2";
 import { Rules, Required, Validator } from "../validator";
 import { _ } from "../group";
 import { Toast } from "../toast/toast";
+import { App } from "../app";
 export class MountCourseViewModel {
     constructor(commonService) {
         this.commonService = commonService;
@@ -145,7 +146,7 @@ export class MountCourseViewModel {
                     Accept: "*/*",
                 },
             };
-            fetch("https://localhost:44359/api/Department/MountCourse", options)
+            fetch(`${App.baseUri}/api/Department/MountCourse`, options)
                 .then((res) => res.json())
                 .then((res) => {
                 this.selectedCourses = [];

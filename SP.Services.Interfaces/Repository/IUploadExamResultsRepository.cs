@@ -10,5 +10,6 @@ namespace SP.Services.Interfaces.Repository
     public interface IExamResultsRepository : IRepository<StudentResult>
     {
         bool UploadExamResults(GetExamResultsRequest request);
+        IList<StudentResult> GetByStudent(string studentId);
     }
 }

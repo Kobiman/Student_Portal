@@ -19,6 +19,11 @@ namespace SP.DAL
             
         }
 
+        public IList<StudentResult> GetByStudent(string studentId)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool UploadExamResults(GetExamResultsRequest request)
         {
             var examresult = request.Map<StudentResult, GetExamResultsRequest>();
