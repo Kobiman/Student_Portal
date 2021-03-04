@@ -54,7 +54,7 @@ namespace SP.Web.Api.Controllers
         [Route("GetStudentResults/{indexNumber}")]
         public IActionResult GetStudentsResults(string indexNumber)
         {
-            var result = _processor.Execute(new CheckStudentResultRequest(indexNumber));
+            var result = _processor.Execute(new CheckResultRequest(indexNumber));
             if (result.IsSucessful) return Ok(result);
             return BadRequest(result);
         }
