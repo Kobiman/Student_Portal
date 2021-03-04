@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using SP.Services.Interfaces.Commands;
 
-namespace Sp.Commands
+namespace SP.Services.Interfaces.Commands
 {
-    internal interface ICheckResultCommand : ICommand
+    public interface ICheckResultCommand : ICommand
     {
     }
 }

@@ -52,6 +52,7 @@ namespace SP.Web.Api
             services.AddTransient<IGetSchoolByProgramCommand, GetSchoolByProgramCommand>();
             services.AddTransient<IGetDepartmentsWithCoursesCommand, GetDepartmentsWithCoursesCommand>();
             services.AddTransient<IGetMountedCoursesForRegistrationCommand, GetMountedCoursesForRegistrationCommand>();
+            services.AddTransient<ICheckResultCommand, CheckResultCommand>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SP.Web.Api", Version = "v1" });

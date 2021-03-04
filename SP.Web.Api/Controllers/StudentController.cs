@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SP.Commands;
 using SP.Models.Dtos;
 using SP.Models.Dtos.Request;
 using SP.Services.Interfaces;
@@ -15,9 +16,11 @@ namespace SP.Web.Api.Controllers
     public class StudentController : ControllerBase
     {
         private readonly IStudentService _studentService;
-        public StudentController(IStudentService studentService)
+        private readonly ICommandProcessor _processor;
+        public StudentController(IStudentService studentService, ICommandProcessor processor)
         {
             _studentService = studentService;
+            _processor = processor;
         }
 
         [HttpPost]
@@ -43,6 +46,15 @@ namespace SP.Web.Api.Controllers
         public IActionResult GetStudents(string indexNumber)
         {
             var result = _studentService.GetStudent(indexNumber);
+            if (result.IsSucessful) return Ok(result);
+            return BadRequest(result);
+        }
+
+        [HttpGet]
+        [Route("GetStudentResults/{indexNumber}")]
+        public IActionResult GetStudentsResults(string indexNumber)
+        {
+            var result = _processor.Execute(new CheckStudentResultRequest(indexNumber));
             if (result.IsSucessful) return Ok(result);
             return BadRequest(result);
         }

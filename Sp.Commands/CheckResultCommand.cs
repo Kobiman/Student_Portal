@@ -10,11 +10,12 @@ using System.Text;
 using KMapper;
 using SP.Services.Interfaces;
 using System.Security.Cryptography.X509Certificates;
-using Sp.Commands;
+using SP.Commands;
+using SP.Services.Interfaces.Commands;
 
-namespace Sp.Commands
+namespace SP.Commands
 {
-    class CheckResultCommand : ICheckResultCommand
+    public class CheckResultCommand : ICheckResultCommand
     {
         private readonly IUnitOfWork _uow;
         public CheckResultCommand(IUnitOfWork uow)
@@ -23,7 +24,7 @@ namespace Sp.Commands
         }
         public IResult Execute(IRequest request)
         {
-            if (request is AddStudentRequest getStudentRequest) 
+            if (request is CheckStudentResultRequest getStudentRequest) 
             {
             ICollection<ValidationResult> validationResults = new List<ValidationResult>();
             if (!getStudentRequest.Validate(out validationResults)) return new Result(false, validationResults.First().ErrorMessage);
