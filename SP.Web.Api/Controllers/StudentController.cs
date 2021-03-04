@@ -51,8 +51,8 @@ namespace SP.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("GetStudentResults/{indexNumber}")]
-        public IActionResult GetStudentsResults(string indexNumber)
+        [Route("CheckResults/{indexNumber}")]
+        public IActionResult CheckResults(string indexNumber)
         {
             var result = _processor.Execute(new CheckResultRequest(indexNumber));
             if (result.IsSucessful) return Ok(result);
