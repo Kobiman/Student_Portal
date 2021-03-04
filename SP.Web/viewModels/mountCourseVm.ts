@@ -7,6 +7,7 @@ import { Lookup } from "../models/lookup";
 import { _ } from "../group";
 import { CommonService } from "../services/commonService";
 import { Toast } from "../toast/toast";
+import { App } from "../app";
 
 export class MountCourseViewModel {
   validator: Validator;
@@ -163,7 +164,7 @@ export class MountCourseViewModel {
         },
       };
 
-      fetch("https://localhost:44359/api/Department/MountCourse", options)
+      fetch(`${App.baseUri}/api/Department/MountCourse`, options)
         .then((res) => res.json())
         .then((res) => {
           this.selectedCourses = [];

@@ -18,7 +18,7 @@ export class ProgramViewModel {
         this.programs = [];
         this.getDepartments = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Department/GetDepartments");
+                const res = yield fetch(`${App.baseUri}/api/Department/GetDepartments");
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -29,7 +29,7 @@ export class ProgramViewModel {
         });
         this.getPrograms = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield fetch("https://localhost:44359/api/Program/GetPrograms");
+                const res = yield fetch(`${App.baseUri}/api/Program/GetPrograms");
                 if (!res.ok) {
                 }
                 const data = yield res.json();
@@ -78,7 +78,7 @@ export class ProgramViewModel {
                     Accept: "*/*",
                 },
             };
-            fetch("https://localhost:44359/api/Program/AddProgram", options)
+            fetch(`${App.baseUri}/api/Program/AddProgram", options)
                 .then((res) => res.json())
                 .then((res) => {
                 this.program = new Program();
