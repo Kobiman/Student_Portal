@@ -18,7 +18,7 @@ namespace Sp.Generators
             StringBuilder sb = new StringBuilder();
             foreach (var t in types)
             {
-                if (t.Name == "Course")
+                if (t.Name == "Lecturer")
                 {
                     sb.Append($@"
                    using System;

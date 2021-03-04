@@ -36,7 +36,7 @@ namespace SP.DAL
 
         public ILookupRepository Lookups => _lookups ??= new LookupRepository(DataReader.ReadData<Lookup>(nameof(Lookup))); 
 
-         public ILecturerRepository Lecturers => _lecturers ??= new LecturerRepository(DataReader.ReadData<Lecturer>(nameof(Lecturer)));
+         public ILecturerRepository Lecturers => _lecturers ??= new LecturerRepository(LoadLectures());
 
         private Students LoadStudents()
         {
@@ -92,6 +92,18 @@ namespace SP.DAL
                 courses.Add(c);
             }
             return courses;
+        }
+
+        private Lecturers LoadLectures()
+        {
+            var _lecturers = DataReader.ReadData<Lecturer>(nameof(Lecturer))
+               .Distinct(x => x.LecturerId, x => x.State).ToList();
+            var lecturers = new Lecturers(5);
+            foreach (var c in _lecturers)
+            {
+                lecturers.Add(c);
+            }
+            return lecturers;
         }
 
         public void SaveChanges<T>(T data, string table)

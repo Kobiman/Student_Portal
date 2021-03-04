@@ -37,9 +37,9 @@ namespace SP.Services
         public IResult GetLecturerByStaffId(string staffId)
         {
             if (string.IsNullOrWhiteSpace(staffId)) return new Result(false, Message.CannotBeNull(staffId));
-            var lecturer = _uow.Lecturers.GetAll().FirstOrDefault(x => x.StaffId == staffId);
+            var lecturer = _uow.Lecturers.GetLecturer(staffId);
             if (lecturer == null) return new Result(false, Message.NotFound(nameof(Lecturer)));
-            return new Result<Lecturer>(true, lecturer, "");
+            return new Result<Lecturer>(true, lecturer, Message.OperationFailed);
         }
 
         public IResult GetLecturers()

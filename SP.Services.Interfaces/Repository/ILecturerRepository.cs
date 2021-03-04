@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SP.Services.Interfaces.Repository
 {
-    public interface ILecturerRepository : IRepository<Lecturer>
+    public interface ILecturerRepository
     {
         bool AddLecturer(Lecturer lecturer);
         Lecturer GetLecturer(string lecturerId);
