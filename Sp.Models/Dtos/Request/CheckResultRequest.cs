@@ -9,6 +9,6 @@ namespace SP.Models.Dtos
             IndexNumber = indexNumber;
         }
 
-        public string IndexNumber { get; set; }
+        public string IndexNumber { get; }
     }
 }
