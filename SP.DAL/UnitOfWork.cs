@@ -28,7 +28,7 @@ namespace SP.DAL
 
         public ISchoolRepository Schools => _schools ??= new SchoolRepository(DataReader.ReadData<School>(nameof(School)));
 
-        public IDepartmentRepository Departments => _departments ??= new DepartmentRepository(DataReader.ReadData<Department>(nameof(Department)));
+        public IDepartmentRepository Departments => _departments ??= new DepartmentRepository(LoadDepartments());
 
         public IProgramRepository Programs => _programs ??= new ProgramRepository(LoadPrograms());
 
@@ -104,6 +104,18 @@ namespace SP.DAL
                 lecturers.Add(c);
             }
             return lecturers;
+        }
+
+        private Departments LoadDepartments()
+        {
+            var _departments = DataReader.ReadData<Department>(nameof(Department))
+               .Distinct(x => x.DepartmentId, x => x.State).ToList();
+            var departments = new Departments(5);
+            foreach (var c in _departments)
+            {
+                departments.Add(c);
+            }
+            return departments;
         }
 
         public void SaveChanges<T>(T data, string table)

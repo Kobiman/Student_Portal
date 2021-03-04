@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SP.Services.Interfaces
 {
-    public interface IDepartmentRepository : IRepository<Department>
+    public interface IDepartmentRepository
     {
         bool AddDepartment(AddDepartmentRequest request);
         Department GetDepartment(string departmentId);

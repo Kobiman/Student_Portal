@@ -48,7 +48,7 @@ namespace SP.Services
         public IResult GetDepartments()
         {
             return new Result<IEnumerable<GetDepartmentsResponse>>(true,
-                _uow.Departments.GetAll().Select(x => x.Map<GetDepartmentsResponse, Department>()).ToList(), "");
+                _uow.Departments.GetDepartments().Select(x => x.Map<GetDepartmentsResponse, Department>()).ToList(), "");
         }
 
         public IResult UpdateDepartment(UpdateDepartmentRequest request)

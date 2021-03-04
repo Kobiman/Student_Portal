@@ -15,7 +15,7 @@ namespace SP.Models
         public string Name { get; set; }
         public string Code { get; set; }
         public bool CourseMounting { get; set; }
-
+        public int State { get; set; }
         public string SchoolId { get; set; }
        
       
