@@ -21,15 +21,17 @@ namespace Sp.Commands
         {
             _uow = uow;
         }
-        public IResult Execute(IRequest student)
+        public IResult Execute(IRequest request)
         {
-            if (student is AddStudentRequest getStudentRequest) 
+            if (request is AddStudentRequest getStudentRequest) 
             {
             ICollection<ValidationResult> validationResults = new List<ValidationResult>();
-            if (!student.Validate(out validationResults)) return new Result(false, validationResults.First().ErrorMessage);
-            var studResult = _uow.ExamResults.GetByStudent(getStudentRequest.IndexNumber);
-            if (studResult == null) return new Result(false, "Student Not Found");
-            return new Result<IList<StudentResult>>(true, studResult, "");
+            if (!getStudentRequest.Validate(out validationResults)) return new Result(false, validationResults.First().ErrorMessage);
+            var studentResults = _uow.Students.GetStudent(getStudentRequest.IndexNumber).Results;
+
+
+            if (studentResults == null) return new Result(false, "Sorry, No Record Found");
+            return new Result<IList<StudentResult>>(true, studentResults, "");
         }
              return new Result(true, "");
     }
