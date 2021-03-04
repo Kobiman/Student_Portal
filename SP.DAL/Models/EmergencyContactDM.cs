@@ -10,7 +10,7 @@ namespace SP.DAL.Models
         public EmergencyContactDM(int length)
         {
             this.length = length;
-            ParentId = new string[length];
+            Id = new string[length];
             Name = new string[length];
             Occupation = new string[length];
             Address = new string[length];
@@ -25,12 +25,12 @@ namespace SP.DAL.Models
 
             lock (type)
             {
-                if (Count == ParentId.Length)
+                if (Count == Id.Length)
                 {
-                    var newLength = ParentId.Length + 1000;
+                    var newLength = Id.Length + 1000;
                     var _ParentId = new string[newLength];
-                    ParentId.CopyTo(_ParentId);
-                    ParentId = _ParentId;
+                    Id.CopyTo(_ParentId);
+                    Id = _ParentId;
                     var _Name = new string[newLength];
                     Name.CopyTo(_Name);
                     Name = _Name;
@@ -57,7 +57,7 @@ namespace SP.DAL.Models
                     StudentId = _StudentId;
 
                 }
-                ParentId.Span[Count] = type.ParentId;
+                Id.Span[Count] = type.Id;
                 Name.Span[Count] = type.Name;
                 Occupation.Span[Count] = type.Occupation;
                 Address.Span[Count] = type.Address;
@@ -73,7 +73,7 @@ namespace SP.DAL.Models
 
         public int Count;
 
-        public Memory<string> ParentId;
+        public Memory<string> Id;
         public Memory<string> Name;
         public Memory<string> Occupation;
         public Memory<string> Address;

@@ -136,6 +136,7 @@ namespace SP.DAL.Repository
         {
             return new Student
             {
+                StudentId = Value.StudentId.Span[Index],
                 Address1 = Value.Address1.Span[Index],
                 Address2 = Value.Address2.Span[Index],
                 Contact1 = Value.Contact1.Span[Index],
@@ -146,7 +147,6 @@ namespace SP.DAL.Repository
                 DateOfEntry = Value.DateOfEntry.Span[Index],
                 DepartmentId = Value.DepartmentId.Span[Index],
                 Disability = Value.Disability.Span[Index],
-                //EmergencyContact.Span[result.Index] = student.EmergencyContact;
                 EnrollmentOption = Value.EnrollmentOption.Span[Index],
                 Gender = Value.Gender.Span[Index],
                 HomeTown = Value.HomeTown.Span[Index],
@@ -167,7 +167,57 @@ namespace SP.DAL.Repository
                 StudentType = Value.StudentType.Span[Index],
                 Surname = Value.Surname.Span[Index],
                 Title = Value.Title.Span[Index],
-                UniversityEmail = Value.UniversityEmail.Span[Index]
+                UniversityEmail = Value.UniversityEmail.Span[Index],
+                EmergencyContact = Value.EmergencyContact.Span[Index].Select((a, b) =>
+                {
+                    return new EmergencyContact
+                    {
+                        Address = a.Address.Span[b],
+                        StudentId = a.StudentId.Span[b],
+                        Email = a.Email.Span[b],
+                        HomeTown = a.HomeTown.Span[b],
+                        Mobile = a.Mobile.Span[b],
+                        Name = a.Name.Span[b],
+                        Occupation = a.Occupation.Span[b],
+                        Id = a.Id.Span[b],
+                        Region = a.Region.Span[b]
+                    };
+                }).ToList(),
+                RegisteredCourses = Value.RegisteredCourses.Span[Index].Select((a, b) =>
+                {
+                    return new RegisteredCourse
+                    {
+                       Semester = a.Semester.Span[b],
+                       StudentId = a.StudentId.Span[b],
+                       AcademicYear = a.AcademicYear.Span[b],
+                       Approved = a.Approved.Span[b],
+                       MountedCourseId = a.MountedCourseId.Span[b],
+                       RegisteredCourseId = a.RegisteredCourseId.Span[b],
+                       RegistrationDate = a.RegistrationDate.Span[b]
+                    };
+                }).ToList(),
+                Results = Value.Results.Span[Index].Select((a, b) =>
+                {
+                    return new StudentResult
+                    {
+                        Semester = a.Semester.Span[b],
+                        StudentId = a.StudentId.Span[b],
+                        AcademicYear = a.AcademicYear.Span[b],
+                        Date = a.Date.Span[b],
+                        ClassMark = a.ClassMark.Span[b],
+                        Credit = a.Credit.Span[b],
+                        RegisteredCourseId = a.RegisteredCourseId.Span[b],
+                        ExamMark = a.ExamMark.Span[b],
+                        ExamResultId = a.ExamResultId.Span[b],
+                        Grade = a.ExamResultId.Span[b],
+                        GradePoint = a.GradePoint.Span[b],
+                        Scoring = a.Scoring.Span[b],
+                        LecturerId = a.LecturerId.Span[b],
+                        Level = a.Level.Span[b],
+                        ProgramId = a.ProgramId.Span[b],
+                        TotalMark = a.TotalMark.Span[b],
+                    };
+                }).ToList()
             };
         }
 

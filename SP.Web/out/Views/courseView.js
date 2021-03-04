@@ -29,7 +29,7 @@ export class CourseView {
                                     createElement("th", null, "Credit")),
                                 createElement("tbody", { id: "courses", "data-repeat": "courses" },
                                     createElement("tr", null,
-                                        createElement("td", { binding: "name" }),
+                                        createElement("td", { binding: "courseName" }),
                                         createElement("td", { binding: "code" }),
                                         createElement("td", { binding: "credit" }))))))))));
         const doc = document.getElementById(elementId);

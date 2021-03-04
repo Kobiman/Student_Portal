@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SP.Services.Interfaces.Repository
 {
-    public interface ICourseRepository : IRepository<Course>
+    public interface ICourseRepository //: IRepository<Course>
     {
         bool AddCourse(AddCourseRequest request);
         Course GetCourse(string courseId);

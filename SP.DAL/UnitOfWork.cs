@@ -32,7 +32,7 @@ namespace SP.DAL
 
         public IProgramRepository Programs => _programs ??= new ProgramRepository(LoadPrograms());
 
-        public ICourseRepository Courses => _courses ??= new CourseRepository(DataReader.ReadData<Course>(nameof(Course)));
+        public ICourseRepository Courses => _courses ??= new CourseRepository(LoadCourses());
 
         public ILookupRepository Lookups => _lookups ??= new LookupRepository(DataReader.ReadData<Lookup>(nameof(Lookup))); 
 
@@ -51,7 +51,7 @@ namespace SP.DAL
 
             var studentsList = DataReader
                 .ReadData<Student>(nameof(Student))
-                .Distinct(x => x.IndexNumber, x => x.State).ToList();
+                .Distinct(x => x.StudentId, x => x.State).ToList();
 
             var students = new Students(100);
             foreach (var student in studentsList)
@@ -80,6 +80,18 @@ namespace SP.DAL
                 programs.Add(program);
             }
             return programs;
+        }
+
+        private Courses LoadCourses()
+        {
+            var _courses = DataReader.ReadData<Course>(nameof(Course))
+               .Distinct(x => x.CourseId, x => x.State).ToList();
+            var courses = new Courses(5);
+            foreach(var c in _courses)
+            {
+                courses.Add(c);
+            }
+            return courses;
         }
 
         public void SaveChanges<T>(T data, string table)

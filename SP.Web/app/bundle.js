@@ -3295,7 +3295,7 @@ class CourseView {
                                     Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("th", null, "Credit")),
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("tbody", { id: "courses", "data-repeat": "courses" },
                                     Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("tr", null,
-                                        Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("td", { binding: "name" }),
+                                        Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("td", { binding: "courseName" }),
                                         Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("td", { binding: "code" }),
                                         Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("td", { binding: "credit" }))))))))));
         const doc = document.getElementById(elementId);
