@@ -28,8 +28,6 @@ namespace SP.Commands
                 ICollection<ValidationResult> results = new List<ValidationResult>();
                 if (!NewmountedCourse.Validate(out results)) return new Result(false, results.First().ErrorMessage);
 
-                //var UpdatemountedCourse = mountedcourse.
-
                 var program = _uow.Programs.GetProgram(NewmountedCourse.ProgramId);
                 var OldMountedCourse = program.MountedCourses.FirstOrDefault(x => x.MountedCoureId == NewmountedCourse.MountedCourseId);
                 OldMountedCourse.AcademicYear = NewmountedCourse.AcademicYear;
@@ -44,9 +42,8 @@ namespace SP.Commands
                 OldMountedCourse.Level = NewmountedCourse.Level;
                 OldMountedCourse.Scoring = NewmountedCourse.Scoring;
                 OldMountedCourse.Semester = NewmountedCourse.Semester;
-                //OldMountedCourse.
-                _uow.MountedCourses.UpdateMountedCourse(OldMountedCourse);
-                _uow.SaveChanges();
+
+                _uow.SaveChanges(OldMountedCourse, nameof(MountedCourse));
                 return new Result(true, Message.UpdatedSuccessfully(nameof(MountedCourse)));
             }
             return new Result(false, Message.OperationFailed);

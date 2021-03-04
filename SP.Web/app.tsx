@@ -36,6 +36,7 @@ import { CourseRegistrationService } from "./services/courseRegistrationService"
 import { RegisteredCoursesVm } from "./viewModels/registeredCoursesVm";
 import { RegisterCourseView } from "./views/registration/registerCourseView";
 import { RegisterCourseVm } from "./viewModels/registerCourseVm";
+import { UploadResultView } from "./views/uploadResultView";
 
 export class App {
   static baseUri = "https://localhost:44319";
@@ -65,6 +66,7 @@ export class App {
     //"/app/#courseRegistration": () => new CourseRegistrationView(new CourseRegistrationVm()),
     "/app/#registeredCourses": () => new RegisteredCoursesView(new RegisteredCoursesVm(App.courseRegistrationService)),
     "/app/#registerCourses": () => new RegisterCourseView(new RegisterCourseVm(App.courseRegistrationService)),
+    "/app/#uploadResults": () => new UploadResultView()
   };
 
   static render(view: IView, domlocation: string) {
@@ -74,9 +76,9 @@ export class App {
   public static navigate(pathName: string) {
     if (this.currentPath !== pathName) {
       window.history.pushState({}, pathName, window.location.origin + pathName);
-
-      var p = this.routes[pathName]();
-      this.render(p, "route-outlet");
+      
+      var view = this.routes[pathName]();
+      this.render(view, "route-outlet");
       this.currentPath = pathName;
     }
   }
@@ -97,7 +99,6 @@ export class App {
       let deferredPrompt;
       window.addEventListener("beforeinstallprompt", (e) => {
         e.preventDefault();
-
         deferredPrompt = e;
         //btnAdd.style.display = 'block';
         let btn = <button id="btnAdd">Add</button>;
@@ -120,7 +121,7 @@ export class App {
   }
 }
 
-//App.register();
+App.register();
 App.navigate("/app/#frontPage");
 new HeaderView().render("header");
 

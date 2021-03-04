@@ -67,5 +67,6 @@ namespace SP.Models.Dtos
         [MaxLength(10)]
         [MinLength(10)]
         public string Contact2 { get; set; }
+        public DateTime DateOfCompletion { get; set; }
     }
 }

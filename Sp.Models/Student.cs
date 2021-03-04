@@ -1,5 +1,6 @@
 ﻿using SP.Models.Dtos;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -49,7 +50,7 @@ namespace SP.Models
         public DateTime DateOfEntry { get; set; }
         public DateTime DateOfCompletion { get; set; }
         public IList<StudentResult> Results { get; set; }
-        public IList<RegisteredCourse> RegisteredCourses { get; }
+        public IList<RegisteredCourse> RegisteredCourses { get; set; }
 
 
 
@@ -61,12 +62,13 @@ namespace SP.Models
 
 
         //Finance
-        public bool Owning { get; set; }
-        public string FeesBalance { get; set; }
+        //public bool Owning { get; set; }
+        //public string FeesBalance { get; set; }
         public string PamentOption { get; set; }
 
 
         public string DepartmentId { get; set; }
+        public int State { get; set; }
 
 
         public void RegisterCourse(RegisteredCourse registeredcourse)
@@ -79,6 +81,22 @@ namespace SP.Models
             foreach (var registeredcourse in registeredcourses)
             {
                 RegisteredCourses.Add(registeredcourse);
+            }
+        }
+
+        public void AddEmergencyContact(IEnumerable<EmergencyContact> emergencyContacts)
+        {
+            foreach (var contact in emergencyContacts)
+            {
+                EmergencyContact.Add(contact);
+            }
+        }
+
+        public void AddResults(IEnumerable<StudentResult> results)
+        {
+            foreach (var result in results)
+            {
+                Results.Add(result);
             }
         }
 

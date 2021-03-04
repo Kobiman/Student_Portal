@@ -32,7 +32,7 @@ namespace SP.Commands
                 var program = _uow.Programs.GetProgram(mountedcourse.ProgramId);
                 var mountedCousre = program.MountedCourses.FirstOrDefault(x=> x.MountedCoureId == mountedcourse.MountedCourseId);
                 program.MountedCourses.Remove(mountedCousre);
-                _uow.SaveChanges();
+                _uow.SaveChanges(mountedCousre,nameof(MountedCourse));
                 return new Result(true, Message.DeleteOperationCompletedSuccesfully);
             }
             return new Result(true, "");

@@ -21,19 +21,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F12FD103-38A2-45AE-B4AA-4A297C0A87B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sp.Commands", "Sp.Commands\Sp.Commands.csproj", "{E2A994C9-B08C-49F4-8D66-A49B38DBE6DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sp.Commands", "Sp.Commands\Sp.Commands.csproj", "{E2A994C9-B08C-49F4-8D66-A49B38DBE6DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP.Services.Interfaces", "SP.Services.Interfaces\SP.Services.Interfaces.csproj", "{332C9C9C-FCA7-4F2D-81B2-AA4B0E809BF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SP.Services.Interfaces", "SP.Services.Interfaces\SP.Services.Interfaces.csproj", "{332C9C9C-FCA7-4F2D-81B2-AA4B0E809BF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sp.Models", "Sp.Models\Sp.Models.csproj", "{7AD846A5-4B01-4168-9C03-0ADA745007E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sp.Models", "Sp.Models\Sp.Models.csproj", "{7AD846A5-4B01-4168-9C03-0ADA745007E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP.Services", "SP.Services\SP.Services.csproj", "{64103D99-9EC7-4B3C-A47C-05985F1C3BF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SP.Services", "SP.Services\SP.Services.csproj", "{64103D99-9EC7-4B3C-A47C-05985F1C3BF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP.Common", "SP.Common\SP.Common.csproj", "{80517AB2-9386-4F9E-8DA0-8091E9ED20A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SP.Common", "SP.Common\SP.Common.csproj", "{80517AB2-9386-4F9E-8DA0-8091E9ED20A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP.DAL", "SP.DAL\SP.DAL.csproj", "{1272A481-BF96-4ACF-A3B9-4BFD0E05C58E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SP.DAL", "SP.DAL\SP.DAL.csproj", "{1272A481-BF96-4ACF-A3B9-4BFD0E05C58E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP.Web.Api", "SP.Web.Api\SP.Web.Api.csproj", "{4F330B1B-C63C-4768-9CE6-AC47C3D01E9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SP.Web.Api", "SP.Web.Api\SP.Web.Api.csproj", "{4F330B1B-C63C-4768-9CE6-AC47C3D01E9A}"
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SP.Web(1)", "SP.Web\", "{74FF1126-0212-4A7A-8BF3-A02CD2C49D70}"
 	ProjectSection(WebsiteProperties) = preProject
@@ -55,6 +55,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SP.Web(1)", "SP.Web\", "{74
 		VWDPort = "25460"
 		SlnRelativePath = "SP.Web\"
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sp.Generators", "Sp.Generators\Sp.Generators.csproj", "{15BDF3E3-373F-443A-9C56-80346AF0D02A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,6 +96,10 @@ Global
 		{74FF1126-0212-4A7A-8BF3-A02CD2C49D70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74FF1126-0212-4A7A-8BF3-A02CD2C49D70}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{74FF1126-0212-4A7A-8BF3-A02CD2C49D70}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{15BDF3E3-373F-443A-9C56-80346AF0D02A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15BDF3E3-373F-443A-9C56-80346AF0D02A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15BDF3E3-373F-443A-9C56-80346AF0D02A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15BDF3E3-373F-443A-9C56-80346AF0D02A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,6 +117,7 @@ Global
 		{1272A481-BF96-4ACF-A3B9-4BFD0E05C58E} = {07820B94-18D0-44A8-8F41-560E101C89EA}
 		{4F330B1B-C63C-4768-9CE6-AC47C3D01E9A} = {C968BE91-CD54-401F-B182-205FAFA93F7A}
 		{74FF1126-0212-4A7A-8BF3-A02CD2C49D70} = {C968BE91-CD54-401F-B182-205FAFA93F7A}
+		{15BDF3E3-373F-443A-9C56-80346AF0D02A} = {214F0171-F5BC-42C4-8B8C-1F727FF16C2D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C8ED0FE3-85E7-472A-A090-18AA7A3B6A6B}

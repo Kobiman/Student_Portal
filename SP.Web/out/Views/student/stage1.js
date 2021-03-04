@@ -10,7 +10,7 @@ export class Stage1 {
                         createElement("div", { class: "left" },
                             createElement("p", null,
                                 createElement("label", null, "Index Number"),
-                                createElement("input", { id: "surname", binding: "Student.IndexNumber", type: "text", value: this._vm.student.IndexNumber }),
+                                createElement("input", { id: "indexNumber", binding: "Student.IndexNumber", type: "text", value: this._vm.student.IndexNumber }),
                                 createElement("div", { errors: "IndexNumber" })),
                             createElement("p", null,
                                 createElement("label", null, "Reference Number"),

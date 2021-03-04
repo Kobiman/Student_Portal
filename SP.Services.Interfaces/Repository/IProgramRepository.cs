@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SP.Services.Interfaces.Repository
 {
-    public interface IProgramRepository : IRepository<Program>
+    public interface IProgramRepository //: IRepository<Program>
     {
         bool AddProgram(AddProgramRequest request);
         Program GetProgram(string programId);

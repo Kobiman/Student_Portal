@@ -27,10 +27,9 @@ namespace SP.Commands
                 ICollection<ValidationResult> results = new List<ValidationResult>();
                 if (!model.Validate(out results)) return new Result(false, results.First().ErrorMessage);
 
-                var student = model.Map<Student, AddStudentRequest>();
-                _uow.Students.Add(student);
+                _uow.Students.AddStudent(addStudentRequest);
                 _uow.SaveChanges();
-                return new Result<Student>(true, student, "Student Added Successfully");
+                return new Result<Student>(true, null, "Student Added Successfully");
             }
             return new Result(true, "");
         }

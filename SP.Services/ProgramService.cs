@@ -40,7 +40,7 @@ namespace SP.Services
         public IResult GetProgramByName(string name)
         {
             if (string.IsNullOrWhiteSpace(name)) return new Result(false, "Program name cannot be null");
-            var program = _uow.Programs.GetAll().FirstOrDefault(x=>x.Name == name);
+            var program = _uow.Programs.GetPrograms().FirstOrDefault(x=>x.Name == name);
             if (program == null) return new Result(false, "Program name was not found");
             return new Result<Program>(true, program, "");
         }

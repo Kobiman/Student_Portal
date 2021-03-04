@@ -38,16 +38,16 @@ export class Validator {
         return this.group(errors);
     }
 }
-export class Rules {
-    constructor(propertyName, rules) {
-        this.propertyName = propertyName;
-        this.rules = rules;
-    }
-}
 export class Error {
     constructor(propertyName, error) {
         this.propertyName = propertyName;
         this.error = error;
+    }
+}
+export class Rules {
+    constructor(propertyName, rules) {
+        this.propertyName = propertyName;
+        this.rules = rules;
     }
 }
 export class ValidationResult {
@@ -101,6 +101,10 @@ export class Number {
     }
 }
 export class Phone {
+    validate() {
+    }
+}
+export class Nameformat {
     validate() {
     }
 }

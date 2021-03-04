@@ -14,7 +14,7 @@ export class Stage1 implements IView {
             <div class="left">
               <p>
                 <label>Index Number</label>
-                <input id="surname" binding="Student.IndexNumber" type="text" value={this._vm.student.IndexNumber} />
+                <input id="indexNumber" binding="Student.IndexNumber" type="text" value={this._vm.student.IndexNumber} />
                 <div errors="IndexNumber"></div>
               </p>
               <p>

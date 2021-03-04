@@ -532,6 +532,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _viewModels_registeredCoursesVm__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./viewModels/registeredCoursesVm */ "./out/viewModels/registeredCoursesVm.js");
 /* harmony import */ var _views_registration_registerCourseView__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./views/registration/registerCourseView */ "./out/views/registration/registerCourseView.js");
 /* harmony import */ var _viewModels_registerCourseVm__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./viewModels/registerCourseVm */ "./out/viewModels/registerCourseVm.js");
+/* harmony import */ var _views_uploadResultView__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./views/uploadResultView */ "./out/views/uploadResultView.js");
+
 
 
 
@@ -574,8 +576,8 @@ class App {
     static navigate(pathName) {
         if (this.currentPath !== pathName) {
             window.history.pushState({}, pathName, window.location.origin + pathName);
-            var p = this.routes[pathName]();
-            this.render(p, "route-outlet");
+            var view = this.routes[pathName]();
+            this.render(view, "route-outlet");
             this.currentPath = pathName;
         }
     }
@@ -640,8 +642,9 @@ App.routes = {
     //"/app/#courseRegistration": () => new CourseRegistrationView(new CourseRegistrationVm()),
     "/app/#registeredCourses": () => new _views_registration_registeredCoursesView__WEBPACK_IMPORTED_MODULE_30__["RegisteredCoursesView"](new _viewModels_registeredCoursesVm__WEBPACK_IMPORTED_MODULE_32__["RegisteredCoursesVm"](App.courseRegistrationService)),
     "/app/#registerCourses": () => new _views_registration_registerCourseView__WEBPACK_IMPORTED_MODULE_33__["RegisterCourseView"](new _viewModels_registerCourseVm__WEBPACK_IMPORTED_MODULE_34__["RegisterCourseVm"](App.courseRegistrationService)),
+    "/app/#uploadResults": () => new _views_uploadResultView__WEBPACK_IMPORTED_MODULE_35__["UploadResultView"]()
 };
-//App.register();
+App.register();
 App.navigate("/app/#frontPage");
 new _views_header__WEBPACK_IMPORTED_MODULE_8__["HeaderView"]().render("header");
 window.onpopstate = () => {
@@ -1261,9 +1264,10 @@ class CourseRegistrationService {
             yield fetch(`${_app__WEBPACK_IMPORTED_MODULE_0__["App"].baseUri}/api/Department/GetRegisteredCourses`, options)
                 .then((res) => res.json())
                 .then((res) => {
+                var _a;
                 this.registeredCourses = res.value;
                 //this.registeredCourses.map((x) => new RegisteredCoursesRow().render(x));
-                if (this.registeredCourses.length > 0) {
+                if (((_a = this.registeredCourses) === null || _a === void 0 ? void 0 : _a.length) > 0) {
                     this.hasRegisterd = true;
                     //new RegisteredCoursesView(new RegisteredCoursesVm(this)).render(this.elementId);
                     //new RegisterCourseView(new RegisterCourseVm(this)).render(this.elementId);
@@ -1349,20 +1353,21 @@ class Toast {
 /*!**************************!*\
   !*** ./out/validator.js ***!
   \**************************/
-/*! exports provided: Validator, Rules, Error, ValidationResult, Required, MinLength, Email, Number, Phone */
+/*! exports provided: Validator, Error, Rules, ValidationResult, Required, MinLength, Email, Number, Phone, Nameformat */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Validator", function() { return Validator; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Rules", function() { return Rules; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Error", function() { return Error; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Rules", function() { return Rules; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ValidationResult", function() { return ValidationResult; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Required", function() { return Required; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MinLength", function() { return MinLength; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Email", function() { return Email; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Number", function() { return Number; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Phone", function() { return Phone; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Nameformat", function() { return Nameformat; });
 class Validator {
     constructor() {
         this.rules = [];
@@ -1403,16 +1408,16 @@ class Validator {
         return this.group(errors);
     }
 }
-class Rules {
-    constructor(propertyName, rules) {
-        this.propertyName = propertyName;
-        this.rules = rules;
-    }
-}
 class Error {
     constructor(propertyName, error) {
         this.propertyName = propertyName;
         this.error = error;
+    }
+}
+class Rules {
+    constructor(propertyName, rules) {
+        this.propertyName = propertyName;
+        this.rules = rules;
     }
 }
 class ValidationResult {
@@ -1466,6 +1471,10 @@ class Number {
     }
 }
 class Phone {
+    validate() {
+    }
+}
+class Nameformat {
     validate() {
     }
 }
@@ -1626,7 +1635,6 @@ class AddStudentVm {
             var errors = this.validator.addRules(rules).validate();
             this.viewModelHelper.showErrors(errors);
             if (!this.validator.hasErrors) {
-                //
                 const options = {
                     method: "POST",
                     body: JSON.stringify(this.student),
@@ -3554,7 +3562,7 @@ class HeaderView {
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("header", null, "USP "),
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("ul", null,
                                     Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", null,
-                                        Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", { href: "#" }, "Item 1")),
+                                        Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", { route: "/app/#uploadResults" }, "Item 1")),
                                     Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", null,
                                         Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", { href: "#" }, "Item 2")),
                                     Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", null,
@@ -5088,7 +5096,7 @@ class Stage1 {
                         Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "left" },
                             Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null,
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", null, "Index Number"),
-                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", { id: "surname", binding: "Student.IndexNumber", type: "text", value: this._vm.student.IndexNumber }),
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", { id: "indexNumber", binding: "Student.IndexNumber", type: "text", value: this._vm.student.IndexNumber }),
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { errors: "IndexNumber" })),
                             Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null,
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", null, "Reference Number"),
@@ -5376,6 +5384,129 @@ class StudentListView {
     }
 }
 //# sourceMappingURL=studentList.js.map
+
+/***/ }),
+
+/***/ "./out/views/style.js":
+/*!****************************!*\
+  !*** ./out/views/style.js ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const styles = () => ({
+    container: {
+        height: "100%",
+        width: "100%",
+    },
+    inputsContainer: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        width: "100%",
+        padding: 10,
+    },
+    inputGroup: {
+        padding: 5,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    select: {
+        padding: 2,
+    },
+    input: {
+        padding: 2,
+    },
+    tableContainer: {
+        width: "100%",
+    },
+    table: {
+        padding: 2,
+        width: "100%",
+    },
+    thead: {
+        width: "100%",
+    },
+    tr: {
+        width: "100%",
+        padding: 2,
+    },
+    th: {
+        textAlign: "center",
+        fontWeight: "bold",
+        padding: 5,
+    },
+    tbody: {
+        width: "100%",
+        padding: 5,
+    },
+    actionContainer: {
+        width: "100%",
+        padding: 2,
+        display: "flex",
+        justifyContent: "right",
+    },
+});
+/* harmony default export */ __webpack_exports__["default"] = (styles);
+//# sourceMappingURL=style.js.map
+
+/***/ }),
+
+/***/ "./out/views/uploadResultView.js":
+/*!***************************************!*\
+  !*** ./out/views/uploadResultView.js ***!
+  \***************************************/
+/*! exports provided: UploadResultView */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UploadResultView", function() { return UploadResultView; });
+/* harmony import */ var tsx_create_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tsx-create-element */ "./node_modules/tsx-create-element/dist/es6/index.js");
+/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style */ "./out/views/style.js");
+
+
+class UploadResultView {
+    constructor() {
+        this.render = (elementId) => {
+            const classes = Object(_style__WEBPACK_IMPORTED_MODULE_1__["default"])();
+            const headers = ["indexNumbers", "Name", "Level", "courseCode", "classScore", "examScore", "Total"];
+            let temp = (Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "sp-box" },
+                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "mc-row" },
+                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h1", null, "Upload Results"),
+                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "mountcourses-form" },
+                        Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "sp-row-col-4" },
+                            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null,
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("select", { id: "department", name: "department" },
+                                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", null, "Department")),
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { errors: "IndexNumber" })),
+                            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null,
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("select", { id: "coursecode", name: "coursecode" },
+                                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", null, "Course Code")),
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { errors: "IndexNumber" })),
+                            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null,
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", { readOnly: true, value: "2020/2021", id: "academicyear", name: "academicyear" }),
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { errors: "IndexNumber" })),
+                            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null,
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "sp-btn-row" },
+                                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", { class: "sp-btn sp-btn-default btn-small", id: "showFilters" }, "Upload"),
+                                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", { class: "sp-btn sp-btn-primary btn-small", id: "submit" }, "Submit")))),
+                        Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null,
+                            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "horizontal" },
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("table", { class: "table striped stretch" },
+                                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("thead", null,
+                                        Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("tr", null, headers.map(headerItem => (Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("th", null, headerItem))))),
+                                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("tbody", { class: classes.tbody }))))))));
+            var doc = document.getElementById(elementId);
+            doc.textContent = "";
+            doc.appendChild(temp);
+        };
+    }
+}
+//# sourceMappingURL=uploadResultView.js.map
 
 /***/ })
 

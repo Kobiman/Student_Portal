@@ -1,4 +1,5 @@
 ﻿using KMapper;
+using SP.DAL.Models;
 using SP.Models;
 using SP.Models.Dtos;
 using SP.Models.Dtos.Request;
@@ -10,16 +11,14 @@ using System.Text;
 
 namespace SP.DAL.Repository
 {
-    public class MountedCourseRepository : Repository<MountedCourse>, IMountedCourseRepository
+    public class MountedCourseRepository : IMountedCourseRepository
     {
-        public MountedCourseRepository(ConcurrentBag<MountedCourse> collection) : base(collection)
+        public MountedCourseRepository()
         {
         }
         public bool MountCourse (AddMountedCourseRequest request)
         {
-            var mountedCoure = request.Map<MountedCourse, AddMountedCourseRequest>();
-            Collection.Add(mountedCoure);
-            DataWriter.WriterData(mountedCoure, nameof(MountedCourse));
+            DataWriter.WriterData(request, nameof(MountedCourse));
             return true;
         }
 
