@@ -28,10 +28,12 @@ namespace SP.Commands
             {
               if (!getStudentRequest.Validate(out ICollection<ValidationResult>  validationResults)) 
                     return new Result(false, validationResults.First().ErrorMessage);
-              var studentResults = _uow.Students.GetStudent(getStudentRequest.IndexNumber)?.Results;
+              var studentResults = _uow.Students
+                    .GetStudent(getStudentRequest.IndexNumber)
+                    .GetResult();
               
                if (studentResults == null) return new Result(false, "Sorry, No Record Found");
-               return new Result<IList<StudentResult>>(true, studentResults, Message.OperationCompletedSuccesfully);
+               return new Result<IEnumerable<ExamResultsDto>>(true, studentResults, Message.OperationCompletedSuccesfully);
             }
             return new Result(false, "Sorry, No Record Found");
         }

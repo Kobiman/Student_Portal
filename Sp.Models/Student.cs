@@ -32,6 +32,7 @@ namespace SP.Models
         public string Region { get; set; }
         public string HomeTown { get; set; }
         public string Address1 { get; set; }
+
         public string Address2 { get; set; }
         public string Contact1 { get; set; }
         public string Contact2 { get; set; }
@@ -144,6 +145,19 @@ namespace SP.Models
                    studentResults.Where(x => x.Scoring == true).Sum(x=> x.Credit * x.GradePoint),
                    studentResults.Where(x => x.AcademicYear == academicYear && x.Level == level).ToList()
                 );
+        }
+
+        public IEnumerable<ExamResultsDto> GetResult()
+        {
+            return (from r in Results
+                           let course = RegisteredCourses.FirstOrDefault(x => x.RegisteredCourseId == r.RegisteredCourseId)
+                           select new ExamResultsDto
+                           {
+                               AcademicYear = r.AcademicYear,
+                               CourseName = course.MountedCourseId,
+                               CourseCode = course.MountedCourseId,
+                           });
+            
         }
 
         //public IEnumerable<ExamResult> CheckResult()
