@@ -22,7 +22,7 @@ namespace SP.DAL.Repository
         {
             var course = request.Map<Course, AddCourseRequest>();
             Collection.Add(course);
-            DataWriter.WriterData(course, nameof(Course));
+            DataWriter.Add(course, nameof(Course));
             return true;
         }
         public Course GetCourse(string courseId)
@@ -47,7 +47,7 @@ namespace SP.DAL.Repository
             var originalCourse = CreateCourse(result);
             request.Map(originalCourse);
 
-            DataWriter.WriterData(originalCourse, nameof(Course));
+            DataWriter.Add(originalCourse, nameof(Course));
             return true;
         }
 

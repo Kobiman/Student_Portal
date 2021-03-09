@@ -23,7 +23,7 @@ namespace SP.DAL.Repository
         {
             var department = request.Map<Department, AddDepartmentRequest>();
             Collection.Add(department);
-            DataWriter.WriterData(department, nameof(Department));
+            DataWriter.Add(department, nameof(Department));
             return true;
         }
 
@@ -50,7 +50,7 @@ namespace SP.DAL.Repository
             var originalDepartment = CreateDepartment(result);
             request.Map(originalDepartment);
 
-            DataWriter.WriterData(originalDepartment, nameof(Department));
+            DataWriter.Add(originalDepartment, nameof(Department));
             return true;
         }
 

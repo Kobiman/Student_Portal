@@ -77,6 +77,8 @@ namespace SP.Web.Api
               builder.AllowAnyOrigin()
               .AllowAnyHeader()
               );
+
+            WebRoot.WWWRoot = env.WebRootPath;
             app.UseStaticFiles();
 
             app.UseAuthorization();

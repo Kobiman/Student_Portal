@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="26.0.1" />
     <PackageReference Include="KMapper" Version="1.0.9" />
   </ItemGroup>
 

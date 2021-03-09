@@ -16,4 +16,8 @@
     <ProjectReference Include="..\SP.Services\SP.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Data\" />
+  </ItemGroup>
+
 </Project>

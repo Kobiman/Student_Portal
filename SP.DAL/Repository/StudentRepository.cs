@@ -24,7 +24,7 @@ namespace SP.DAL.Repository
         {
             var student = request.Map<Student, AddStudentRequest>();
             Collection.Add(student);
-            DataWriter.WriterData(student, nameof(Student));
+            DataWriter.Add(student, nameof(Student));
             return true;
         }
 
@@ -67,7 +67,7 @@ namespace SP.DAL.Repository
             originalStudent.Surname.Span[result.Index] = student.Surname;
             originalStudent.Title.Span[result.Index] = student.Title;
             originalStudent.UniversityEmail.Span[result.Index] = student.UniversityEmail;
-            DataWriter.WriterData(result.Value, nameof(Student));
+            DataWriter.Add(result.Value, nameof(Student));
             return true;
         }
 
@@ -86,8 +86,8 @@ namespace SP.DAL.Repository
             foreach (var student in students)
             {
                 Collection.Add(student);
+                DataWriter.Add(students, nameof(Student));
             }
-            DataWriter.WriterData(students, nameof(Student));
             return true;
         }
 

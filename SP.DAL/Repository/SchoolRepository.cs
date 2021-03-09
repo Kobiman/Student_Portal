@@ -17,7 +17,7 @@ namespace SP.DAL.Repository
         public bool AddSchool(School school)
         {
             Collection.Add(school);
-            DataWriter.WriterData(school, nameof(School));
+            DataWriter.Add(school, nameof(School));
             return true;
         }
         public School GetSchool(string schoolId)
@@ -33,7 +33,7 @@ namespace SP.DAL.Repository
             var originalSchool = Collection.FirstOrDefault(x => x.SchoolId == school.SchoolId);
             if (originalSchool == null) return false;
             school.Map(originalSchool);
-            DataWriter.WriterData(originalSchool, nameof(School));
+            DataWriter.Add(originalSchool, nameof(School));
             return true;
         }
     }

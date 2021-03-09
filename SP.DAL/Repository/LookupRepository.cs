@@ -18,7 +18,7 @@ namespace SP.DAL.Repository
         public bool AddLookup(Lookup lookup)
         {
             Collection.Add(lookup);
-            DataWriter.WriterData(lookup, nameof(Lookup));
+            DataWriter.Add(lookup, nameof(Lookup));
             return true;
         }
 
@@ -43,7 +43,7 @@ namespace SP.DAL.Repository
             if (originalLookup == null) return false;
             lookup.Map(originalLookup);
 
-            DataWriter.WriterData(originalLookup, nameof(Lookup));
+            DataWriter.Add(originalLookup, nameof(Lookup));
             return true;
         }
 

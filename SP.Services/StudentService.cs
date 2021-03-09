@@ -89,8 +89,8 @@ namespace SP.Services
 
         public IResult GetStudents()
         {
-            return new Result<IEnumerable<GetStudentsResponse>>(true, 
-                _uow.Students.GetStudents().Select(x=>x.Map<GetStudentsResponse, Student>()).ToList(), "");
+            return new Result<IEnumerable<Student>>(true, 
+                _uow.Students.GetStudents(), "");//.Select(x=>x.Map<GetStudentsResponse, Student>()).ToList()
         }
     }
 }

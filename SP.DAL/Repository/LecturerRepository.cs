@@ -21,7 +21,7 @@ namespace SP.DAL.Repository
         public bool AddLecturer(Lecturer lecturer)
         {
             Collection.Add(lecturer);
-            DataWriter.WriterData(lecturer, nameof(Lecturer));
+            DataWriter.Add(lecturer, nameof(Lecturer));
             return true;
         }
 
@@ -48,7 +48,7 @@ namespace SP.DAL.Repository
             var originalCourse = CreateLecturer(result);
             if (originalCourse == null) return false;
 
-            DataWriter.WriterData(originalCourse, nameof(Lecturer));
+            DataWriter.Add(originalCourse, nameof(Lecturer));
             return true;
         }
 

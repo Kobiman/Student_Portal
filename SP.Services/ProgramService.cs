@@ -25,7 +25,6 @@ namespace SP.Services
             ICollection<ValidationResult> results = new List<ValidationResult>();
             if (!request.Validate(out results)) return new Result(false, results.First().ErrorMessage);
             _uow.Programs.AddProgram(request);
-            _uow.SaveChanges();
             return new Result(true, "Program Added Successfully");
         }
 
@@ -56,7 +55,6 @@ namespace SP.Services
             ICollection<ValidationResult> results = new List<ValidationResult>();
             if (!request.Validate(out results)) return new Result(false, results.First().ErrorMessage);
             if (!_uow.Programs.UpdateProgram(request)) return new Result(false, "Could Not Update Program");
-            _uow.SaveChanges();
             return new Result(true, "Program Updated Successfully");
         }
     }

@@ -22,6 +22,10 @@ namespace SP.DAL
         private ILookupRepository _lookups;
         private ILecturerRepository _lecturers;
 
+        public UnitOfWork()
+        {
+            DataWriter.Start(10);
+        }
         public IStudentRepository Students => _students ??= new StudentRepository(LoadStudents());
 
         public IInstitutionRepository Institutions => _institutions ??= new InstitutionRepository(DataReader.ReadData<Institution>(nameof(Institution)));
@@ -41,17 +45,17 @@ namespace SP.DAL
         private Students LoadStudents()
         {
             var registeredCourses = DataReader
-                .ReadData<RegisteredCourse>(nameof(RegisteredCourse));
+                .ReadCsv<RegisteredCourse>(nameof(RegisteredCourse));
 
             var studentResults = DataReader
-                .ReadData<StudentResult>(nameof(StudentResult));
+                .ReadCsv<StudentResult>(nameof(StudentResult));
 
             var emergencyContact = DataReader
-                .ReadData<EmergencyContact>(nameof(EmergencyContact));
+                .ReadCsv<EmergencyContact>(nameof(EmergencyContact));
 
             var studentsList = DataReader
-                .ReadData<Student>(nameof(Student))
-                .Distinct(x => x.StudentId, x => x.State).ToList();
+                .ReadCsv<Student>(nameof(Student)).ToList();
+                //.Distinct(x => x.StudentId, x => x.State)
 
             var students = new Students(100);
             foreach (var student in studentsList)
@@ -67,11 +71,11 @@ namespace SP.DAL
         private Programs LoadPrograms()
         {
             var _programs =
-                 DataReader.ReadData<Program>(nameof(Program));
+                 DataReader.ReadCsv<Program>(nameof(Program));
             var mountedCourses =
-                DataReader.ReadData<MountedCourse>(nameof(MountedCourse));
+                DataReader.ReadCsv<MountedCourse>(nameof(MountedCourse));
             var specialization =
-                DataReader.ReadData<Specialization>(nameof(Specialization));
+                DataReader.ReadCsv<Specialization>(nameof(Specialization));
             var programs = new Programs(10);
             foreach (var program in _programs)
             {
@@ -84,7 +88,7 @@ namespace SP.DAL
 
         private Courses LoadCourses()
         {
-            var _courses = DataReader.ReadData<Course>(nameof(Course))
+            var _courses = DataReader.ReadCsv<Course>(nameof(Course))
                .Distinct(x => x.CourseId, x => x.State).ToList();
             var courses = new Courses(5);
             foreach(var c in _courses)
@@ -96,7 +100,7 @@ namespace SP.DAL
 
         private Lecturers LoadLectures()
         {
-            var _lecturers = DataReader.ReadData<Lecturer>(nameof(Lecturer))
+            var _lecturers = DataReader.ReadCsv<Lecturer>(nameof(Lecturer))
                .Distinct(x => x.LecturerId, x => x.State).ToList();
             var lecturers = new Lecturers(5);
             foreach (var c in _lecturers)
@@ -108,7 +112,7 @@ namespace SP.DAL
 
         private Departments LoadDepartments()
         {
-            var _departments = DataReader.ReadData<Department>(nameof(Department))
+            var _departments = DataReader.ReadCsv<Department>(nameof(Department))
                .Distinct(x => x.DepartmentId, x => x.State).ToList();
             var departments = new Departments(5);
             foreach (var c in _departments)
@@ -120,7 +124,7 @@ namespace SP.DAL
 
         public void SaveChanges<T>(T data, string table)
         {
-            DataWriter.WriterData(data, table);
+            DataWriter.Add(data, table);
         }
 
         public void SaveChanges()

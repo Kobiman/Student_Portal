@@ -20,7 +20,7 @@ namespace SP.DAL.Repository
         public bool AddInstitution(Institution institution)
         {
             Collection.Add(institution);
-            DataWriter.WriterData(institution, nameof(Institution));
+            DataWriter.Add(institution, nameof(Institution));
             return true;
         }
 
@@ -39,7 +39,7 @@ namespace SP.DAL.Repository
             var originalInstitution = Collection.FirstOrDefault(x => x.InstitutionId == institution.InstitutionId);
             if (originalInstitution == null) return false;
             institution.Map(originalInstitution);
-            DataWriter.WriterData(originalInstitution, nameof(Institution));
+            DataWriter.Add(originalInstitution, nameof(Institution));
             return true;
         }
     }

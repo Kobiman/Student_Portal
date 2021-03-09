@@ -23,7 +23,7 @@ namespace SP.DAL.Repository
         {
             var program = request.Map<Program, AddProgramRequest>();
             Collection.Add(program);
-            DataWriter.WriterData(program, nameof(Program));
+            DataWriter.Add(program, nameof(Program));
             return true;
         }
 
@@ -51,7 +51,7 @@ namespace SP.DAL.Repository
             if (originalProgram == null) return false;
             request.Map(originalProgram);
 
-            DataWriter.WriterData(originalProgram, nameof(Program));
+            DataWriter.Add(originalProgram, nameof(Program));
             return true;
         }
 

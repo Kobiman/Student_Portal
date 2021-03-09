@@ -25,7 +25,6 @@ namespace SP.Services
             ICollection<ValidationResult> results = new List<ValidationResult>();
             if (!request.Validate(out results)) return new Result(false, results.First().ErrorMessage);
             _uow.Departments.AddDepartment(request);
-            _uow.SaveChanges();
             return new Result(true, "Student Added Successfully");
         }
 

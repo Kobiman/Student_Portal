@@ -22,7 +22,6 @@ namespace SP.Services
             ICollection<ValidationResult> results = new List<ValidationResult>();
             if (!lecturer.Validate(out results)) return new Result(false, results.First().ErrorMessage);
             _uow.Lecturers.AddLecturer(lecturer);
-            _uow.SaveChanges();
             return new Result(true, Message.AddedSuccessfully(nameof(Lecturer)));
         }
 
