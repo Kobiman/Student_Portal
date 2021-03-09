@@ -1,5 +1,6 @@
 ﻿using KMapper;
 using SP.DAL;
+using SP.DAL.Models;
 using SP.DAL.Repository;
 using SP.Models;
 using SP.Services.Interfaces.Repository;
@@ -11,10 +12,12 @@ using System.Text;
 
 namespace SP.DAL.Repository
 {
-    public class InstitutionRepository : Repository<Institution>, IInstitutionRepository
+    public class InstitutionRepository : IInstitutionRepository
     {
-        public InstitutionRepository(ConcurrentBag<Institution> collection) : base(collection)
+        private Institutions Collection;
+        public InstitutionRepository(Institutions collection) //: base(collection)
         {
+            Collection = collection;
         }
 
         public bool AddInstitution(Institution institution)
@@ -26,21 +29,45 @@ namespace SP.DAL.Repository
 
         public Institution GetInstitution(string institutionId)
         {
-            return Collection.FirstOrDefault(x=>x.InstitutionId == institutionId);
+            var result = Collection.Next.Find((x,y) => x.InstitutionId.Span[y] == institutionId);
+            return CreateInstitution(result);
         }
 
         public IEnumerable<Institution> GetInstitutions()
         {
-            return Collection.ToList();
+            return Collection.Next.Select((x,y)=> CreateInstitution(x,y));
         }
 
         public bool UpdateInstitution(Institution institution)
         {
-            var originalInstitution = Collection.FirstOrDefault(x => x.InstitutionId == institution.InstitutionId);
+            var result = Collection.Next.Find((x, y) => x.InstitutionId.Span[y] == institution.InstitutionId);
+            var originalInstitution = CreateInstitution(result);
             if (originalInstitution == null) return false;
             institution.Map(originalInstitution);
             DataWriter.Add(originalInstitution, nameof(Institution));
             return true;
+        }
+
+        private Institution CreateInstitution(InstitutionDM Value, int Index)
+        {
+            return new Institution
+            {
+                City = Value.City.Span[Index],
+                Code = Value.Code.Span[Index],
+                Country = Value.Country.Span[Index],
+                DateCreated = Value.DateCreated.Span[Index],
+                Email = Value.Email.Span[Index],
+                InstitutionId = Value.InstitutionId.Span[Index],
+                Logo = Value.Logo.Span[Index],
+                Name = Value.Name.Span[Index],
+                PostalAddress = Value.PostalAddress.Span[Index],
+                Telephone = Value.Telephone.Span[Index]
+            };
+        }
+        private Institution CreateInstitution((InstitutionDM Value, int Index, bool success) result)
+        {
+            if (!result.success) return null;
+            return CreateInstitution(result.Value, result.Index);
         }
     }
 }

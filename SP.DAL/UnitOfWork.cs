@@ -28,7 +28,7 @@ namespace SP.DAL
         }
         public IStudentRepository Students => _students ??= new StudentRepository(LoadStudents());
 
-        public IInstitutionRepository Institutions => _institutions ??= new InstitutionRepository(DataReader.ReadData<Institution>(nameof(Institution)));
+        public IInstitutionRepository Institutions => _institutions ??= new InstitutionRepository(LoadInstitutions());
 
         public ISchoolRepository Schools => _schools ??= new SchoolRepository(DataReader.ReadData<School>(nameof(School)));
 
@@ -54,8 +54,9 @@ namespace SP.DAL
                 .ReadCsv<EmergencyContact>(nameof(EmergencyContact));
 
             var studentsList = DataReader
-                .ReadCsv<Student>(nameof(Student)).ToList();
-                //.Distinct(x => x.StudentId, x => x.State)
+                .ReadCsv<Student>(nameof(Student))
+                .Distinct(x => x.StudentId, x => x.State)
+                .ToList();
 
             var students = new Students(100);
             foreach (var student in studentsList)
@@ -68,6 +69,17 @@ namespace SP.DAL
             return students;
         }
 
+        private Institutions LoadInstitutions()
+        {
+            var _institutions = DataReader.ReadCsv<Institution>(nameof(Institution)).Distinct(x => x.InstitutionId, x => x.State);
+            var institutions = new Institutions(1);
+            foreach (var student in _institutions)
+            {
+                institutions.Add(student);
+            }
+            return institutions;
+        }
+
         private Programs LoadPrograms()
         {
             var _programs =
@@ -76,7 +88,7 @@ namespace SP.DAL
                 DataReader.ReadCsv<MountedCourse>(nameof(MountedCourse));
             var specialization =
                 DataReader.ReadCsv<Specialization>(nameof(Specialization));
-            var programs = new Programs(10);
+            var programs = new Programs(5);
             foreach (var program in _programs)
             {
                 program.MountCourses(mountedCourses.Where(x => x.ProgramId == program.ProgramId));
