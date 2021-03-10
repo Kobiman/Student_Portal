@@ -31,7 +31,7 @@ namespace SP.DAL.Models
                 }
                 else
                 {
-                    Next.Span[Heigth] = new DepartmentDM(1000);
+                    Next.Span[Heigth] = new DepartmentDM(5);
                     Next.Span[index].Add(student);
                     Heigth++;
                 }
@@ -56,7 +56,7 @@ namespace SP.DAL.Models
             {
                 if (Count == DepartmentId.Length)
                 {
-                    var newLength = DepartmentId.Length + 1000;
+                    var newLength = DepartmentId.Length + 5;
                     var _DepartmentId = new string[newLength];
                     DepartmentId.CopyTo(_DepartmentId);
                     DepartmentId = _DepartmentId;

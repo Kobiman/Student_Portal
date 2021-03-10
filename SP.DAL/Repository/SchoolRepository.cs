@@ -1,4 +1,5 @@
 ﻿using KMapper;
+using SP.DAL.Models;
 using SP.Models;
 using SP.Services.Interfaces.Repository;
 using System;
@@ -9,10 +10,12 @@ using System.Text;
 
 namespace SP.DAL.Repository
 {
-    public class SchoolRepository : Repository<School>, ISchoolRepository
+    public class SchoolRepository : ISchoolRepository
     {
-        public SchoolRepository(ConcurrentBag<School> collection) : base(collection)
+        private Schools Collection;
+        public SchoolRepository(Schools collection)
         {
+            Collection = collection;
         }
         public bool AddSchool(School school)
         {
@@ -22,19 +25,41 @@ namespace SP.DAL.Repository
         }
         public School GetSchool(string schoolId)
         {
-            return Collection.FirstOrDefault(x => x.SchoolId == schoolId);
+            var result = Collection.Next.Find((x,y) => x.SchoolId.Span[y] == schoolId);
+            return CreateSchool(result);
         }
+
         public IEnumerable<School> GetSchools()
         {
-            return Collection.ToList();
+            return Collection.Next.Select((x,y)=> CreateSchool(x,y));
         }
         public bool UpdateSchool(School school)
         {
-            var originalSchool = Collection.FirstOrDefault(x => x.SchoolId == school.SchoolId);
+            var result = Collection.Next.Find((x,y) => x.SchoolId.Span[y] == school.SchoolId);
+            var originalSchool = CreateSchool(result);
             if (originalSchool == null) return false;
             school.Map(originalSchool);
             DataWriter.Add(originalSchool, nameof(School));
             return true;
+        }
+
+        private School CreateSchool(SchoolDM Value, int Index)
+        {
+            return new School
+            {
+                AcademicYear = Value.AcademicYear.Span[Index],
+                InstitutionId = Value.InstitutionId.Span[Index],
+                Name = Value.Name.Span[Index],
+                RegistrationActivated = Value.RegistrationActivated.Span[Index],
+                ResultUploaded = Value.ResultUploaded.Span[Index],
+                SchoolId = Value.SchoolId.Span[Index]
+            };
+        }
+
+        private School CreateSchool((SchoolDM Value, int Index, bool success) result)
+        {
+            if (!result.success) return null;
+            return CreateSchool(result.Value, result.Index);
         }
     }
 }

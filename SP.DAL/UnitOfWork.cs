@@ -30,7 +30,7 @@ namespace SP.DAL
 
         public IInstitutionRepository Institutions => _institutions ??= new InstitutionRepository(LoadInstitutions());
 
-        public ISchoolRepository Schools => _schools ??= new SchoolRepository(DataReader.ReadData<School>(nameof(School)));
+        public ISchoolRepository Schools => _schools ??= new SchoolRepository(LoadSchools());
 
         public IDepartmentRepository Departments => _departments ??= new DepartmentRepository(LoadDepartments());
 
@@ -38,9 +38,9 @@ namespace SP.DAL
 
         public ICourseRepository Courses => _courses ??= new CourseRepository(LoadCourses());
 
-        public ILookupRepository Lookups => _lookups ??= new LookupRepository(DataReader.ReadData<Lookup>(nameof(Lookup))); 
+        public ILookupRepository Lookups => _lookups ??= new LookupRepository(LoadLookups());
 
-         public ILecturerRepository Lecturers => _lecturers ??= new LecturerRepository(LoadLectures());
+        public ILecturerRepository Lecturers => _lecturers ??= new LecturerRepository(LoadLectures());
 
         private Students LoadStudents()
         {
@@ -80,6 +80,18 @@ namespace SP.DAL
             return institutions;
         }
 
+        private Lookups LoadLookups()
+        {
+           var _lookups = DataReader.ReadData<Lookup>(nameof(Lookup))
+                .Distinct(x => x.LookupId, x => x.State).ToList();
+            var lookups = new Lookups(5);
+            foreach (var s in _lookups)
+            {
+                lookups.Add(s);
+            }
+            return lookups;
+        }
+
         private Programs LoadPrograms()
         {
             var _programs =
@@ -96,6 +108,18 @@ namespace SP.DAL
                 programs.Add(program);
             }
             return programs;
+        }
+
+        private Schools LoadSchools()
+        {
+            var _schools = DataReader.ReadCsv<School>(nameof(School))
+                .Distinct(x => x.SchoolId, x => x.State).ToList();
+            var schools = new Schools(5);
+            foreach (var s in _schools)
+            {
+                schools.Add(s);
+            }
+            return schools;
         }
 
         private Courses LoadCourses()

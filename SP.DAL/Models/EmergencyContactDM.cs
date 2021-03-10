@@ -27,7 +27,7 @@ namespace SP.DAL.Models
             {
                 if (Count == Id.Length)
                 {
-                    var newLength = Id.Length + 1000;
+                    var newLength = Id.Length + 5;
                     var _ParentId = new string[newLength];
                     Id.CopyTo(_ParentId);
                     Id = _ParentId;

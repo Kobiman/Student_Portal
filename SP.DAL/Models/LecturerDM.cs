@@ -60,7 +60,7 @@ namespace SP.DAL.Models
             {
                 if (Count == LecturerId.Length)
                 {
-                    var newLength = LecturerId.Length + 1000;
+                    var newLength = LecturerId.Length + 5;
                     var _LecturerId = new string[newLength];
                     LecturerId.CopyTo(_LecturerId);
                     LecturerId = _LecturerId;

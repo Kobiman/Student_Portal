@@ -60,7 +60,7 @@ namespace SP.DAL.Models
             {
                 if (Count == InstitutionId.Length)
                 {
-                    var newLength = InstitutionId.Length + 1000;
+                    var newLength = InstitutionId.Length + 2;
                     var _InstitutionId = new string[newLength];
                     InstitutionId.CopyTo(_InstitutionId);
                     InstitutionId = _InstitutionId;

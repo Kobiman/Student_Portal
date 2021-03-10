@@ -25,6 +25,7 @@ namespace SP.Models
 
         //Foreign Key
         public string InstitutionId { get; set; }
+        public int State { get; set; }
 
 
         /// <summary>

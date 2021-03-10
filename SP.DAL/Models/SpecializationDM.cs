@@ -22,7 +22,7 @@ namespace SP.DAL.Models
             {
                 if (Count == SpecializationId.Length)
                 {
-                    var newLength = SpecializationId.Length + 1000;
+                    var newLength = SpecializationId.Length + 100;
                     var _SpecializationId = new string[newLength];
                     SpecializationId.CopyTo(_SpecializationId);
                     SpecializationId = _SpecializationId;

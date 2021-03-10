@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SP.Services.Interfaces.Repository
 {
-    public interface ILookupRepository : IRepository<Lookup>
+    public interface ILookupRepository
     {
         bool AddLookup(Lookup request);
         Lookup GetLookup(string lookupId);
