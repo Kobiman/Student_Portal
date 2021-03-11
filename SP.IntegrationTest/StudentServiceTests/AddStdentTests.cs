@@ -53,7 +53,7 @@ namespace SP.IntegrationTest.StudentServiceTests
                 StudentType = "Undergraduate",
                 EnrolmentOption = "Regular",
                 ResidentialStatus = "Resident",
-                ProgramOfStudy = "BSc. Computer Science",
+                ProgramId = "BSc. Computer Science",
                 Specialization = "Software Engineering",
                 ProgramStatus = "Inprogress",
                 UniversityEmail = "kobina.lawson@uenr.edu.gh",
@@ -63,6 +63,8 @@ namespace SP.IntegrationTest.StudentServiceTests
             };
 
             _programService.AddProgram(new AddProgramRequest { DepartmentId = "xdssd", Name = "BSc. Computer Science" });
+            var program = _programService.GetProgramByName("BSc. Computer Science") as Result<Program>;
+            request.ProgramId = program.Value.ProgramId;
 
             var result =  _studentService.AddStudent(request);
             result.IsSucessful.ShouldBe(true);
@@ -91,7 +93,7 @@ namespace SP.IntegrationTest.StudentServiceTests
                 StudentType = "Undergraduate",
                 EnrolmentOption = "Regular",
                 ResidentialStatus = "Resident",
-                ProgramOfStudy = "BSc. Computer Science",
+                ProgramId = "BSc. Computer Science",
                 Specialization = "Software Engineering",
                 ProgramStatus = "Inprogress",
                 UniversityEmail = "kobina.lawson@uenr.edu.gh",
@@ -101,6 +103,8 @@ namespace SP.IntegrationTest.StudentServiceTests
             };
 
             _programService.AddProgram(new AddProgramRequest { DepartmentId = "xdssd", Name = "BSc. Computer Science" });
+            var program = _programService.GetProgramByName("BSc. Computer Science") as Result<Program>;
+            request.ProgramId = program.Value.ProgramId;
 
             var result = _studentService.AddStudent(request);
             result.IsSucessful.ShouldBe(false);

@@ -16,7 +16,7 @@ namespace SP.IntegrationTest.UploadExamResultsTests
             {
               new StudentResult
               {
-                IndexNumber = "UE20027814",
+                StudentId = "UE20027814",
                 AcademicYear = "2019/2020",
                 Semester = "1",
                 RegisteredCourseId="65757575",
@@ -26,7 +26,7 @@ namespace SP.IntegrationTest.UploadExamResultsTests
 
               new StudentResult
               {
-                IndexNumber = "UE20027714",
+                StudentId = "UE20027714",
                 AcademicYear = "2019/2020",
                 Semester = "1",
                 RegisteredCourseId="65757575",
@@ -35,7 +35,7 @@ namespace SP.IntegrationTest.UploadExamResultsTests
 
               new StudentResult
               {
-                IndexNumber = "UE20027914",
+                StudentId = "UE20027914",
                 AcademicYear = "2019/2020",
                 Semester = "1",
                 RegisteredCourseId="65757575",

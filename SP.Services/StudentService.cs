@@ -23,8 +23,8 @@ namespace SP.Services
             ICollection<ValidationResult> results = new List<ValidationResult>();
             if (!request.Validate(out results)) return new Result(false, results.First().ErrorMessage);
 
-            var program = _uow.Programs.GetprogramByName(request.ProgramOfStudy);
-            if(program is null) return new Result(false, $"Can not find program {request.ProgramOfStudy}");
+            var program = _uow.Programs.GetProgram(request.ProgramId);
+            if(program is null) return new Result(false, $"Can not find program {request.ProgramId}");
             request.DepartmentId = program.DepartmentId;
             _uow.Students.AddStudent(request);
             _uow.SaveChanges();
@@ -52,7 +52,7 @@ namespace SP.Services
                 if (_uow.Students.ReferenceNumberExist(student.ReferenceNumber))
                     return new Result(false, "Reference Number Exist");
 
-                var program = _uow.Programs.GetprogramByName(student.ProgramOfStudy);
+                var program = _uow.Programs.GetprogramByName(student.ProgramId);
                 student.DepartmentId = program.DepartmentId;
             }
             var students = request.Select(x=>x.Map<Student, AddStudentRequest>()).ToList();

@@ -8,6 +8,7 @@ using SP.Services.Interfaces.Commands;
 using SP.Services.Interfaces.Repository;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace SP.TestInfrastructure
@@ -35,6 +36,7 @@ namespace SP.TestInfrastructure
             services.AddSingleton<IUnitOfWork, UnitOfWork>(); 
             serviceProvider = services.BuildServiceProvider();
             scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();
+            WebRoot.WWWRoot = $"{Directory.GetCurrentDirectory()}/wwwroot";
             //tt.SetService(scope);
         }
 

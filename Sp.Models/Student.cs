@@ -41,7 +41,7 @@ namespace SP.Models
         public string ResidentialStatus { get; set; }
 
         //Academics
-        public string ProgramOfStudy { get; set; }
+        public string ProgramId { get; set; }
         public string Specialization { get; set; }
         public string ProgramStatus { get; set; }
         public string Level { get; set; }
@@ -112,7 +112,7 @@ namespace SP.Models
                                  Semester = x.Semester,
                                  Level = Level,
                                  StudentId = x.StudentId,
-                                 ProgramOfStudy = ProgramOfStudy,
+                                 ProgramOfStudy = ProgramId,
                                  StudentName = $"{Surname} {Othernames}",
                                  MountedCourseId = x.MountedCourseId
                              })
@@ -171,6 +171,7 @@ namespace SP.Models
             
         }
 
+        public string ProgramOfStudy(Program program) => program.Name;
         //public IEnumerable<ExamResult> CheckResult()
         //{
 

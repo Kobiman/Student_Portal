@@ -55,7 +55,7 @@ namespace SP.DAL.Repository
             originalStudent.Othernames.Span[result.Index] = student.Othernames;
             originalStudent.PamentOption.Span[result.Index] = student.PamentOption;
             originalStudent.PersonalEmail.Span[result.Index] = student.PersonalEmail;
-            originalStudent.ProgramOfStudy.Span[result.Index] = student.ProgramOfStudy;
+            originalStudent.ProgramId.Span[result.Index] = student.ProgramOfStudy;
             originalStudent.ProgramStatus.Span[result.Index] = student.ProgramStatus;
             originalStudent.ReferenceNumber.Span[result.Index] = student.ReferenceNumber;
             originalStudent.Region.Span[result.Index] = student.Region;
@@ -126,7 +126,7 @@ namespace SP.DAL.Repository
 
         public IEnumerable<Student> GetStudentsByProgram(string program)
         {
-            return Collection.Next.Select((x, y) => x.ProgramOfStudy.Span[y] == program, (x, y) =>
+            return Collection.Next.Select((x, y) => x.ProgramId.Span[y] == program, (x, y) =>
             {
                 return CreateStudent(x, y);
             });
@@ -156,7 +156,7 @@ namespace SP.DAL.Repository
                 Othernames = Value.Othernames.Span[Index],
                 PamentOption = Value.PamentOption.Span[Index],
                 PersonalEmail = Value.PersonalEmail.Span[Index],
-                ProgramOfStudy = Value.ProgramOfStudy.Span[Index],
+                ProgramId = Value.ProgramId.Span[Index],
                 ProgramStatus = Value.ProgramStatus.Span[Index],
                 ReferenceNumber = Value.ReferenceNumber.Span[Index],
                 Region = Value.Region.Span[Index],

@@ -64,7 +64,7 @@ namespace SP.DAL.Models
             PersonalEmail = new string[length];
             UniversityEmail = new string[length];
             ResidentialStatus = new string[length];
-            ProgramOfStudy = new string[length];
+            ProgramId = new string[length];
             Specialization = new string[length];
             ProgramStatus = new string[length];
             Level = new string[length];
@@ -151,8 +151,8 @@ namespace SP.DAL.Models
                     ResidentialStatus.CopyTo(_ResidentialStatus);
                     ResidentialStatus = _ResidentialStatus;
                     var _ProgramOfStudy = new string[newLength];
-                    ProgramOfStudy.CopyTo(_ProgramOfStudy);
-                    ProgramOfStudy = _ProgramOfStudy;
+                    ProgramId.CopyTo(_ProgramOfStudy);
+                    ProgramId = _ProgramOfStudy;
                     var _Specialization = new string[newLength];
                     Specialization.CopyTo(_Specialization);
                     Specialization = _Specialization;
@@ -222,7 +222,7 @@ namespace SP.DAL.Models
                 PersonalEmail.Span[Count] = student.PersonalEmail;
                 UniversityEmail.Span[Count] = student.UniversityEmail;
                 ResidentialStatus.Span[Count] = student.ResidentialStatus;
-                ProgramOfStudy.Span[Count] = student.ProgramOfStudy;
+                ProgramId.Span[Count] = student.ProgramId;
                 Specialization.Span[Count] = student.Specialization;
                 ProgramStatus.Span[Count] = student.ProgramStatus;
                 Level.Span[Count] = student.Level;
@@ -292,7 +292,7 @@ namespace SP.DAL.Models
         public Memory<string> PersonalEmail;
         public Memory<string> UniversityEmail;
         public Memory<string> ResidentialStatus;
-        public Memory<string> ProgramOfStudy;
+        public Memory<string> ProgramId;
         public Memory<string> Specialization;
         public Memory<string> ProgramStatus;
         public Memory<string> Level;
