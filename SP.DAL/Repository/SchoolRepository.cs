@@ -52,7 +52,9 @@ namespace SP.DAL.Repository
                 Name = Value.Name.Span[Index],
                 RegistrationActivated = Value.RegistrationActivated.Span[Index],
                 ResultUploaded = Value.ResultUploaded.Span[Index],
-                SchoolId = Value.SchoolId.Span[Index]
+                Semester = Value.Semester.Span[Index],
+                SchoolId = Value.SchoolId.Span[Index],
+                State = Value.State.Span[Index]
             };
         }
 

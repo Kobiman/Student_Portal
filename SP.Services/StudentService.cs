@@ -52,7 +52,7 @@ namespace SP.Services
                 if (_uow.Students.ReferenceNumberExist(student.ReferenceNumber))
                     return new Result(false, "Reference Number Exist");
 
-                var program = _uow.Programs.GetprogramByName(student.ProgramId);
+                var program = _uow.Programs.GetProgram(student.ProgramId);
                 student.DepartmentId = program.DepartmentId;
             }
             var students = request.Select(x=>x.Map<Student, AddStudentRequest>()).ToList();

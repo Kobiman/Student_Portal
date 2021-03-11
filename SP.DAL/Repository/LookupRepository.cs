@@ -55,7 +55,7 @@ namespace SP.DAL.Repository
 
         public bool Exist(Lookup lookup)
         {
-            var result = Collection.Next.Find((l,m) => l.Name.Span[m].Equals(lookup.Name) && l.Type.Span[m].Equals(lookup.Type));
+            var result = Collection.Next.Find((l,m) => l.Name.Span[m] == (lookup.Name) && l.Type.Span[m] == (lookup.Type));
             var existingLookup = CreateLookup(result);
             if (existingLookup == null) return false;
             return true;

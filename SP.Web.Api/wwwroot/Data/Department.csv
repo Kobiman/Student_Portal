@@ -1,0 +1,3 @@
+DepartmentId,Name,Code,CourseMounting,State,SchoolId
+b4c6d3e8-cbd3-4c46-ab4d-b8e034c3eca5,COMPUTER SCIENCE DEPARTMENT,CSC,False,0,4531babd-fd77-4951-b581-d63a1fe24eca
+fe56503d-70f5-4114-b56b-5262ecdecad9,MATHEMATICS DEPARTMENT,MATH,False,0,4531babd-fd77-4951-b581-d63a1fe24eca

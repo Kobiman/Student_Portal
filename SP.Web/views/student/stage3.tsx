@@ -19,8 +19,8 @@ export class Stage3 implements IView {
             <div class="left">
               <p>
                 <label>Program Of Study</label>
-                <input type="text" binding="Student.ProgramOfStudy" value={this._vm.student.ProgramOfStudy} />
-                <div errors="ProgramOfStudy"></div>
+                <input type="text" binding="Student.ProgramId" value={this._vm.student.ProgramId} />
+                <div errors="ProgramId"></div>
               </p>
               <p>
                 <label>Specialization</label>

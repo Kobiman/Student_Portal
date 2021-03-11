@@ -1065,11 +1065,11 @@ class Student {
     set ResidentialStatus(v) {
         this.residentialStatus = v;
     }
-    get ProgramOfStudy() {
-        return this.programOfStudy;
+    get ProgramId() {
+        return this.programId;
     }
-    set ProgramOfStudy(v) {
-        this.programOfStudy = v;
+    set ProgramId(v) {
+        this.programId = v;
     }
     get Specialization() {
         return this.specialization;
@@ -1683,7 +1683,7 @@ class AddStudentVm {
     }
     stage3_rules() {
         return [
-            new _validator__WEBPACK_IMPORTED_MODULE_2__["Rules"]("ProgramOfStudy", [new _validator__WEBPACK_IMPORTED_MODULE_2__["Required"](this.student.ProgramOfStudy), new _validator__WEBPACK_IMPORTED_MODULE_2__["MinLength"](this.student.ProgramOfStudy, 5)]),
+            new _validator__WEBPACK_IMPORTED_MODULE_2__["Rules"]("ProgramId", [new _validator__WEBPACK_IMPORTED_MODULE_2__["Required"](this.student.ProgramId), new _validator__WEBPACK_IMPORTED_MODULE_2__["MinLength"](this.student.ProgramId, 5)]),
             new _validator__WEBPACK_IMPORTED_MODULE_2__["Rules"]("ProgramStatus", [new _validator__WEBPACK_IMPORTED_MODULE_2__["Required"](this.student.ProgramStatus), new _validator__WEBPACK_IMPORTED_MODULE_2__["MinLength"](this.student.ProgramStatus, 2)]),
             new _validator__WEBPACK_IMPORTED_MODULE_2__["Rules"]("Level", [new _validator__WEBPACK_IMPORTED_MODULE_2__["Required"](this.student.Level), new _validator__WEBPACK_IMPORTED_MODULE_2__["MinLength"](this.student.Level, 3)]),
             new _validator__WEBPACK_IMPORTED_MODULE_2__["Rules"]("StudentType", [new _validator__WEBPACK_IMPORTED_MODULE_2__["Required"](this.student.StudentType), new _validator__WEBPACK_IMPORTED_MODULE_2__["MinLength"](this.student.StudentType, 3)]),
@@ -1925,7 +1925,7 @@ class CourseVm {
     }
     setupRules() {
         return [
-            new _validator__WEBPACK_IMPORTED_MODULE_2__["Rules"]("name", [new _validator__WEBPACK_IMPORTED_MODULE_2__["Required"](this.course.name), new _validator__WEBPACK_IMPORTED_MODULE_2__["MinLength"](this.course.name, 2)]),
+            new _validator__WEBPACK_IMPORTED_MODULE_2__["Rules"]("name", [new _validator__WEBPACK_IMPORTED_MODULE_2__["Required"](this.course.courseName), new _validator__WEBPACK_IMPORTED_MODULE_2__["MinLength"](this.course.courseName, 2)]),
             //new Rules("category", [new Required(this.course.category)]),
             new _validator__WEBPACK_IMPORTED_MODULE_2__["Rules"]("code", [new _validator__WEBPACK_IMPORTED_MODULE_2__["Required"](this.course.code)]),
             new _validator__WEBPACK_IMPORTED_MODULE_2__["Rules"]("credit", [new _validator__WEBPACK_IMPORTED_MODULE_2__["Required"](this.course.credit)]),
@@ -2394,8 +2394,8 @@ class MountCourseViewModel {
                 let selectedCourse = {
                     enrollmentOption: this.mountedCourse.enrollmentOption,
                     course: course,
-                    courseCode: this.courses.find((x) => x.name === course).code,
-                    credit: this.courses.find((x) => x.name === course).credit,
+                    courseCode: this.courses.find((x) => x.courseName === course).code,
+                    credit: this.courses.find((x) => x.courseName === course).credit,
                     specialization: this.mountedCourse.specialization,
                     category: this.getSpecialization(this.mountedCourse.level, this.mountedCourse.specialization).type,
                     level: this.mountedCourse.level,
@@ -3210,7 +3210,7 @@ class CourseModal {
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { errors: "department" })),
                             Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null,
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", null, "Name"),
-                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", { binding: "Course.name", type: "text", value: this._vm.course.name }),
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", { binding: "Course.courseName", type: "text", value: this._vm.course.courseName }),
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { errors: "name" })),
                             Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null,
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", null, "Code"),
@@ -4615,9 +4615,9 @@ class SelectedCourseView {
     constructor() { }
     render(x) {
         return (Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("tr", null,
-            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("td", { binding: true }, x.name),
+            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("td", { binding: true }, x.courseName),
             Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("td", null,
-                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", { class: "sp-btn sp-btn-default btn-small", click: x.name, binding: x.name, value: x.name }, "Add"))));
+                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", { class: "sp-btn sp-btn-default btn-small", click: x.courseName, binding: x.courseName, value: x.courseName }, "Add"))));
     }
 }
 //# sourceMappingURL=selectedCourse.js.map
@@ -5279,8 +5279,8 @@ class Stage3 {
                         Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "left" },
                             Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null,
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", null, "Program Of Study"),
-                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", { type: "text", binding: "Student.ProgramOfStudy", value: this._vm.student.ProgramOfStudy }),
-                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { errors: "ProgramOfStudy" })),
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", { type: "text", binding: "Student.ProgramId", value: this._vm.student.ProgramId }),
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { errors: "ProgramId" })),
                             Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null,
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", null, "Specialization"),
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", { type: "text", binding: "Student.Specialization", value: this._vm.student.Specialization }),

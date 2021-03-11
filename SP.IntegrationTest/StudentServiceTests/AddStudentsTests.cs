@@ -30,6 +30,12 @@ namespace SP.IntegrationTest.StudentServiceTests
             var request = StudentServiceData.GetStudents();
 
             _programService.AddProgram(new AddProgramRequest { DepartmentId = "xdssd", Name = "BSc. Computer Science" });
+            var program = _programService.GetProgramByName("BSc. Computer Science") as Result<Program>;
+            
+            foreach(var r in request)
+            {
+                r.ProgramId = program.Value.ProgramId;
+            }
 
             var result = _studentService.AddStudents(request);
             result.IsSucessful.ShouldBe(true);
@@ -102,6 +108,12 @@ namespace SP.IntegrationTest.StudentServiceTests
             };
 
             _programService.AddProgram(new AddProgramRequest { DepartmentId = "xdssd", Name = "BSc. Computer Science" });
+            var program = _programService.GetProgramByName("BSc. Computer Science") as Result<Program>;
+
+            foreach (var r in request)
+            {
+                r.ProgramId = program.Value.ProgramId;
+            }
 
             var result = _studentService.AddStudents(request);
             result.IsSucessful.ShouldBe(false);

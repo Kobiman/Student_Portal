@@ -22,7 +22,7 @@ export class CourseModal implements IView {
                 </p>
                 <p>
                   <label>Name</label>
-                  <input binding="Course.name" type="text" value={this._vm.course.name} />
+                  <input binding="Course.courseName" type="text" value={this._vm.course.courseName} />
                   <div errors="name"></div>
                 </p>
                 <p>

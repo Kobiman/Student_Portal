@@ -81,8 +81,8 @@ export class MountCourseViewModel {
       let selectedCourse: SelectedCourse = {
         enrollmentOption: this.mountedCourse.enrollmentOption,
         course: course,
-        courseCode: this.courses.find((x) => x.name === course).code,
-        credit: this.courses.find((x) => x.name === course).credit,
+        courseCode: this.courses.find((x) => x.courseName === course).code,
+        credit: this.courses.find((x) => x.courseName === course).credit,
         specialization: this.mountedCourse.specialization,
         category: this.getSpecialization(this.mountedCourse.level, this.mountedCourse.specialization).type,
         level: this.mountedCourse.level,

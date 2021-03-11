@@ -24,11 +24,11 @@ namespace SP.Commands
         }
         public IResult Execute(IRequest request)
         {
-            if (request is CheckResultRequest getStudentRequest) 
+            if (request is CheckResultRequest checkResultRequest) 
             {
-              if (!getStudentRequest.Validate(out ICollection<ValidationResult>  validationResults)) 
+              if (!checkResultRequest.Validate(out ICollection<ValidationResult>  validationResults)) 
                     return new Result(false, validationResults.First().ErrorMessage);
-                var student = _uow.Students.GetStudent(getStudentRequest.IndexNumber);
+                var student = _uow.Students.GetStudent(checkResultRequest.IndexNumber);
                 if(student == null) return new Result(false, "Sorry, No Record Found");
                 var program = _uow.Programs.GetProgram(student.ProgramId);
                 if(program == null) return new Result(false, "Sorry, No Record Found");

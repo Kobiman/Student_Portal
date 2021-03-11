@@ -1,1 +1,0 @@
-{"SchoolId":"b2e4626d-b73b-4041-ad8d-801f7599e16d","Name":"SCHOOL OF SCIENCE","AcademicYear":"2020/2021","Semester":"1","RegistrationStatus":false,"ResultUpload":false,"InstitutionId":"98210e59-e4b0-424d-b816-170d3e14c50b"},

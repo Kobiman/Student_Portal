@@ -3,9 +3,9 @@ export class SelectedCourseView {
     constructor() { }
     render(x) {
         return (createElement("tr", null,
-            createElement("td", { binding: true }, x.name),
+            createElement("td", { binding: true }, x.courseName),
             createElement("td", null,
-                createElement("button", { class: "sp-btn sp-btn-default btn-small", click: x.name, binding: x.name, value: x.name }, "Add"))));
+                createElement("button", { class: "sp-btn sp-btn-default btn-small", click: x.courseName, binding: x.courseName, value: x.courseName }, "Add"))));
     }
 }
 //# sourceMappingURL=selectedCourse.js.map

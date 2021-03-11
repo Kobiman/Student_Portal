@@ -60,7 +60,7 @@ export class AddStudentVm {
     }
     stage3_rules() {
         return [
-            new Rules("ProgramOfStudy", [new Required(this.student.ProgramOfStudy), new MinLength(this.student.ProgramOfStudy, 5)]),
+            new Rules("ProgramId", [new Required(this.student.ProgramId), new MinLength(this.student.ProgramId, 5)]),
             new Rules("ProgramStatus", [new Required(this.student.ProgramStatus), new MinLength(this.student.ProgramStatus, 2)]),
             new Rules("Level", [new Required(this.student.Level), new MinLength(this.student.Level, 3)]),
             new Rules("StudentType", [new Required(this.student.StudentType), new MinLength(this.student.StudentType, 3)]),

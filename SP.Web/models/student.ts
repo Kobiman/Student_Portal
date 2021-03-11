@@ -143,12 +143,12 @@ export class Student {
     this.residentialStatus = v;
   }
 
-  private programOfStudy: string;
-  public get ProgramOfStudy(): string {
-    return this.programOfStudy;
+  private programId: string;
+  public get ProgramId(): string {
+    return this.programId;
   }
-  public set ProgramOfStudy(v: string) {
-    this.programOfStudy = v;
+  public set ProgramId(v: string) {
+    this.programId = v;
   }
 
   private specialization: string;
