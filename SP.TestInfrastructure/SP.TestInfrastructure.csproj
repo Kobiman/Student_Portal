@@ -1,18 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CsvHelper" Version="26.0.1" />
-    <PackageReference Include="KMapper" Version="1.0.9" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Sp.Commands\Sp.Commands.csproj" />
+    <ProjectReference Include="..\SP.DAL\SP.DAL.csproj" />
     <ProjectReference Include="..\Sp.Models\Sp.Models.csproj" />
     <ProjectReference Include="..\SP.Services.Interfaces\SP.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\SP.Services\SP.Services.csproj" />
   </ItemGroup>
 
 </Project>
