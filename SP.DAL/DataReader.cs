@@ -16,35 +16,35 @@ namespace SP.DAL
 {
     public static class DataReader
     {
-        public static ConcurrentBag<T> ReadData<T>(string table)
-        {
-            try
-            {
-                string json = string.Empty;
-                var applicationPath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/{table}.txt");
-                if (!File.Exists(applicationPath))
-                {
-                    using FileStream fs = File.Create(applicationPath);
-                }
+        //public static ConcurrentBag<T> ReadData<T>(string table)
+        //{
+        //    try
+        //    {
+        //        string json = string.Empty;
+        //        var applicationPath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/{table}.txt");
+        //        if (!File.Exists(applicationPath))
+        //        {
+        //            using FileStream fs = File.Create(applicationPath);
+        //        }
 
 
-                using FileStream fileStream = new FileStream(applicationPath, FileMode.Open, FileAccess.Read);
-                lock (fileStream)
-                {
-                    using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
-                    {
-                        json = "[" + streamReader.ReadToEnd() + "]";
-                    }
+        //        using FileStream fileStream = new FileStream(applicationPath, FileMode.Open, FileAccess.Read);
+        //        lock (fileStream)
+        //        {
+        //            using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
+        //            {
+        //                json = "[" + streamReader.ReadToEnd() + "]";
+        //            }
 
-                }
-                var data = JsonSerializer.Deserialize<IList<T>>(json, new JsonSerializerOptions { AllowTrailingCommas = true });
-                var bag = new ConcurrentBag<T>();
-                Parallel.ForEach(data, x => { bag.Add(x); });
+        //        }
+        //        var data = JsonSerializer.Deserialize<IList<T>>(json, new JsonSerializerOptions { AllowTrailingCommas = true });
+        //        var bag = new ConcurrentBag<T>();
+        //        Parallel.ForEach(data, x => { bag.Add(x); });
 
-                return bag ?? new ConcurrentBag<T>();
-            }
-            catch (Exception ex) { return new ConcurrentBag<T>(); }
-        }
+        //        return bag ?? new ConcurrentBag<T>();
+        //    }
+        //    catch (Exception ex) { return new ConcurrentBag<T>(); }
+        //}
 
         public static IEnumerable<T> ReadCsv<T>(string table) where T : new()
         {

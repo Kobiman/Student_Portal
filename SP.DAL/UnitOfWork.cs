@@ -82,7 +82,7 @@ namespace SP.DAL
 
         private Lookups LoadLookups()
         {
-           var _lookups = DataReader.ReadData<Lookup>(nameof(Lookup))
+           var _lookups = DataReader.ReadCsv<Lookup>(nameof(Lookup))
                 .Distinct(x => x.LookupId, x => x.State).ToList();
             var lookups = new Lookups(5);
             foreach (var s in _lookups)
