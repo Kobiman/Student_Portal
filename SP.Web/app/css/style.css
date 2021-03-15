@@ -415,6 +415,13 @@ article:nth-child(2n + 2) {
   row-gap: 5px;
 }
 
+.sp-row-col-3-5 {
+  display: grid;
+  grid-template-columns: 1.5fr 1.5fr 1.5fr 0.7fr ;
+  column-gap: 10px;
+  row-gap: 5px;
+}
+
 .sp-row-col-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -888,4 +895,33 @@ footer p {
 /* Screen with >= 586 */
 @media screen and (min-width: 586) {
   /* .open-slide{display: none;} */
+}
+
+/*results view filter css*/
+.container {
+
+  padding: 25px;
+
+  border: grey solid 0px;
+
+  box-shadow: 10px 20px 20px grey;
+
+  width: 300px;
+
+  height: 150px;
+
+  border-radius: 15px;
+
+  background-color: skyblue;
+
+}
+
+.center {
+
+  margin: auto;
+
+  width: 50%;
+
+  padding: 50px;
+
 }

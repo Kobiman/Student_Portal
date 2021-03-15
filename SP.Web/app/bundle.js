@@ -532,7 +532,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _viewModels_registeredCoursesVm__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./viewModels/registeredCoursesVm */ "./out/viewModels/registeredCoursesVm.js");
 /* harmony import */ var _views_registration_registerCourseView__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./views/registration/registerCourseView */ "./out/views/registration/registerCourseView.js");
 /* harmony import */ var _viewModels_registerCourseVm__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./viewModels/registerCourseVm */ "./out/viewModels/registerCourseVm.js");
-/* harmony import */ var _views_uploadResultView__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./views/uploadResultView */ "./out/views/uploadResultView.js");
+/* harmony import */ var _views_studentResultsView__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./views/studentResultsView */ "./out/views/studentResultsView.js");
+/* harmony import */ var _viewModels_StudentResultsVm__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./viewModels/StudentResultsVm */ "./out/viewModels/StudentResultsVm.js");
+
 
 
 
@@ -642,7 +644,7 @@ App.routes = {
     //"/app/#courseRegistration": () => new CourseRegistrationView(new CourseRegistrationVm()),
     "/app/#registeredCourses": () => new _views_registration_registeredCoursesView__WEBPACK_IMPORTED_MODULE_30__["RegisteredCoursesView"](new _viewModels_registeredCoursesVm__WEBPACK_IMPORTED_MODULE_32__["RegisteredCoursesVm"](App.courseRegistrationService)),
     "/app/#registerCourses": () => new _views_registration_registerCourseView__WEBPACK_IMPORTED_MODULE_33__["RegisterCourseView"](new _viewModels_registerCourseVm__WEBPACK_IMPORTED_MODULE_34__["RegisterCourseVm"](App.courseRegistrationService)),
-    "/app/#uploadResults": () => new _views_uploadResultView__WEBPACK_IMPORTED_MODULE_35__["UploadResultView"]()
+    "/app/#StudentResultsView": () => new _views_studentResultsView__WEBPACK_IMPORTED_MODULE_35__["StudentResultsView"](new _viewModels_StudentResultsVm__WEBPACK_IMPORTED_MODULE_36__["StudentResultsVm"](App.commonService)),
 };
 App.register();
 App.navigate("/app/#frontPage");
@@ -1848,6 +1850,78 @@ class StudentListVm {
     }
 }
 //# sourceMappingURL=StudentListVm.js.map
+
+/***/ }),
+
+/***/ "./out/viewModels/StudentResultsVm.js":
+/*!********************************************!*\
+  !*** ./out/viewModels/StudentResultsVm.js ***!
+  \********************************************/
+/*! exports provided: StudentResultsVm */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StudentResultsVm", function() { return StudentResultsVm; });
+/* harmony import */ var _BindingList2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../BindingList2 */ "./out/BindingList2.js");
+/* harmony import */ var _viewModelHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../viewModelHelper */ "./out/viewModelHelper.js");
+/* harmony import */ var _loader_ballLoader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../loader/ballLoader */ "./out/loader/ballLoader.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app */ "./out/app.js");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+
+class StudentResultsVm {
+    constructor(commonService) {
+        this.commonService = commonService;
+        this.lookups = [];
+        this.academicYears = [];
+        this.semesters = [];
+        this.programs = [];
+        this.levels = [];
+        this.filter = {};
+        this.querys = [];
+        this.getStudentResults = () => __awaiter(this, void 0, void 0, function* () {
+            try {
+                _loader_ballLoader__WEBPACK_IMPORTED_MODULE_2__["BallLoader"].show();
+                const res = yield fetch(`${_app__WEBPACK_IMPORTED_MODULE_3__["App"].baseUri}/api/Student/GetStudents`);
+                if (!res.ok) {
+                }
+                const data = yield res.json();
+                this.results = data.value;
+                new _BindingList2__WEBPACK_IMPORTED_MODULE_0__["BindingList2"]().bindCollection(this);
+            }
+            catch (error) {
+            }
+        });
+        this.getPrograms = () => {
+            this.programs = this.commonService.programs;
+        };
+        this.getLookups = () => {
+            this.academicYears = this.commonService.lookups.filter((x) => x.type === "ACADEMIC YEAR");
+            // this.semesters.unshift({ name: "Please Select Academic Year" });
+            this.semesters = this.commonService.lookups.filter((x) => x.type === "SEMESTER");
+            // this.semesters.unshift({ name: "Please Select Semester" });
+            this.levels = this.commonService.lookups.filter((x) => x.type === "LEVEL");
+            // this.levels.unshift({ name: "Please Select Level" });
+        };
+        this.viewModelHelper = new _viewModelHelper__WEBPACK_IMPORTED_MODULE_1__["ViewModelHelper"]();
+        this.getLookups();
+        this.getPrograms();
+        this.request = {};
+        this.getStudentResults();
+    }
+}
+//# sourceMappingURL=StudentResultsVm.js.map
 
 /***/ }),
 
@@ -3574,7 +3648,7 @@ class HeaderView {
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("header", null, "USP "),
                                 Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("ul", null,
                                     Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", null,
-                                        Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", { href: "#" }, "Item 1")),
+                                        Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", { route: "/app/#StudentResultsView" }, "Check Results")),
                                     Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", null,
                                         Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", { href: "#" }, "Item 2")),
                                     Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", null,
@@ -5385,29 +5459,63 @@ class StudentListView {
 
 /***/ }),
 
-/***/ "./out/views/uploadResultView.js":
-/*!***************************************!*\
-  !*** ./out/views/uploadResultView.js ***!
-  \***************************************/
-/*! exports provided: UploadResultView */
+/***/ "./out/views/studentResultsView.js":
+/*!*****************************************!*\
+  !*** ./out/views/studentResultsView.js ***!
+  \*****************************************/
+/*! exports provided: StudentResultsView */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UploadResultView", function() { return UploadResultView; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StudentResultsView", function() { return StudentResultsView; });
 /* harmony import */ var tsx_create_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tsx-create-element */ "./node_modules/tsx-create-element/dist/es6/index.js");
 
-class UploadResultView {
-    constructor() {
-        this.render = (elementId) => {
-            let temp = (Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h1", null, "hello world"));
-            var doc = document.getElementById(elementId);
-            doc.textContent = "";
-            doc.appendChild(temp);
-        };
+class StudentResultsView {
+    constructor(_vm) {
+        this._vm = _vm;
+    }
+    render(elementId) {
+        var temp = (Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "sp-box" },
+            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "mc-row" },
+                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h1", null, "Students Results "),
+                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "mountcourses-form" },
+                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "sp-row-col-3-5" },
+                        Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("select", { id: "academicYears", binding: "Object.academicYear" },
+                            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", null, "Please Select Academic Year"),
+                            this._vm.academicYears.map((x) => (Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", { value: x.name }, x.name)))),
+                        Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("select", { id: "levels", binding: "Object.level" },
+                            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", null, "Please Select Level"),
+                            this._vm.levels.map((x) => (Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", { value: x.name }, x.name))),
+                            " "),
+                        Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("select", { id: "semester", binding: "Object.semester" },
+                            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", null, "Please Select Semester"),
+                            this._vm.semesters.map((x) => (Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", { value: x.name }, x.name))),
+                            " "),
+                        Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "sp-btn-row" },
+                            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", { class: "sp-btn sp-btn-primary btn-small", id: "submit" }, "Submit"),
+                            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", { class: "sp-btn sp-btn-default btn-small", id: "showFilters" }, "Show All"))),
+                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { class: "horizontal" },
+                        Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("table", { class: "table striped strech" },
+                            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("thead", { class: "table" },
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("th", null, "CourseCode"),
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("th", null, "CourseTitle"),
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("th", null, "Credit"),
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("th", null, "Total"),
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("th", null, "Grade")),
+                            Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("tbody", { id: "results", "data-repeat": "results" },
+                                Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("tr", null,
+                                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("td", { binding: "CourseCode" }),
+                                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("td", { binding: "CourseTitle" }),
+                                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("td", { binding: "Credit" }),
+                                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("td", { binding: "Total" }),
+                                    Object(tsx_create_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("td", { binding: "Grade" })))))))));
+        const doc = document.getElementById(elementId);
+        doc.textContent = "";
+        doc.appendChild(temp);
     }
 }
-//# sourceMappingURL=uploadResultView.js.map
+//# sourceMappingURL=studentResultsView.js.map
 
 /***/ })
 

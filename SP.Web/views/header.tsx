@@ -131,7 +131,7 @@ export class HeaderView implements IView {
                 <header>USP </header>
                 <ul>
                   <li>
-                    <a href="#">Item 1</a>
+                    <a route="/app/#StudentResultsView">Check Results</a>
                   </li>
                   <li>
                     <a href="#">Item 2</a>
