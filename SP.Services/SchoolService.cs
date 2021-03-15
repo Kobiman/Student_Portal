@@ -23,7 +23,6 @@ namespace SP.Services
             ICollection<ValidationResult> results = new List<ValidationResult>();
             if (!school.Validate(out results)) return new Result(false, results.First().ErrorMessage);
             _uow.Schools.AddSchool(school);
-            _uow.SaveChanges();
             return new Result(true, "School Added Successfully");
         }
 
@@ -46,7 +45,6 @@ namespace SP.Services
             ICollection<ValidationResult> results = new List<ValidationResult>();
             if (!school.Validate(out results)) return new Result(false, results.First().ErrorMessage);
             if (!_uow.Schools.UpdateSchool(school)) return new Result(false, "Could Not Update School");
-            _uow.SaveChanges();
             return new Result(true, "School Updated Successfully");
         }
     }

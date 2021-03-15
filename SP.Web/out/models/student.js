@@ -107,11 +107,11 @@ export class Student {
     set ResidentialStatus(v) {
         this.residentialStatus = v;
     }
-    get ProgramOfStudy() {
-        return this.programOfStudy;
+    get ProgramId() {
+        return this.programId;
     }
-    set ProgramOfStudy(v) {
-        this.programOfStudy = v;
+    set ProgramId(v) {
+        this.programId = v;
     }
     get Specialization() {
         return this.specialization;

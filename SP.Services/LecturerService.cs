@@ -22,7 +22,6 @@ namespace SP.Services
             ICollection<ValidationResult> results = new List<ValidationResult>();
             if (!lecturer.Validate(out results)) return new Result(false, results.First().ErrorMessage);
             _uow.Lecturers.AddLecturer(lecturer);
-            _uow.SaveChanges();
             return new Result(true, Message.AddedSuccessfully(nameof(Lecturer)));
         }
 
@@ -37,9 +36,9 @@ namespace SP.Services
         public IResult GetLecturerByStaffId(string staffId)
         {
             if (string.IsNullOrWhiteSpace(staffId)) return new Result(false, Message.CannotBeNull(staffId));
-            var lecturer = _uow.Lecturers.GetAll().FirstOrDefault(x => x.StaffId == staffId);
+            var lecturer = _uow.Lecturers.GetLecturer(staffId);
             if (lecturer == null) return new Result(false, Message.NotFound(nameof(Lecturer)));
-            return new Result<Lecturer>(true, lecturer, "");
+            return new Result<Lecturer>(true, lecturer, Message.OperationFailed);
         }
 
         public IResult GetLecturers()

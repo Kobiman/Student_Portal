@@ -7,11 +7,12 @@ namespace SP.Models
 {
     public class Program
     {
+        private Dictionary<string, MountedCourse> mountedCourses { get; set; } = new Dictionary<string, MountedCourse>();
         public Program()
         {
             ProgramId = ProgramId ?? Guid.NewGuid().ToString();
         }
-        public string ProgramId { get; set; }  
+        public string ProgramId { get; set; }
         public string Name { get; set; }
         //public string Code { get; set; }
         public string Duration { get; set; }
@@ -25,7 +26,13 @@ namespace SP.Models
             foreach (var mountedCoure in mountedCoures)
             {
                 MountedCourses.Add(mountedCoure);
+                mountedCourses.TryAdd(mountedCoure.MountedCoureId, mountedCoure);
             }
+        }
+
+        public Dictionary<string, MountedCourse> GetMountedCourses()
+        {
+            return mountedCourses;
         }
 
         public IEnumerable<GetMountedCoursesResponse> GetMountedCourses(string academicYear)

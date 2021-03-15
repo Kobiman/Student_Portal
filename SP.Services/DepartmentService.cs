@@ -25,7 +25,6 @@ namespace SP.Services
             ICollection<ValidationResult> results = new List<ValidationResult>();
             if (!request.Validate(out results)) return new Result(false, results.First().ErrorMessage);
             _uow.Departments.AddDepartment(request);
-            _uow.SaveChanges();
             return new Result(true, "Student Added Successfully");
         }
 
@@ -48,7 +47,7 @@ namespace SP.Services
         public IResult GetDepartments()
         {
             return new Result<IEnumerable<GetDepartmentsResponse>>(true,
-                _uow.Departments.GetAll().Select(x => x.Map<GetDepartmentsResponse, Department>()).ToList(), "");
+                _uow.Departments.GetDepartments().Select(x => x.Map<GetDepartmentsResponse, Department>()).ToList(), "");
         }
 
         public IResult UpdateDepartment(UpdateDepartmentRequest request)

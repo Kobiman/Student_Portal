@@ -28,7 +28,6 @@ namespace SP.Services
             if (_uow.Lookups.Exist(lookup)) return new Result(false, Message.OperationFailed);
 
             _uow.Lookups.AddLookup(lookup);
-            _uow.SaveChanges();
 
             return new Result(true, Message.OperationCompletedSuccesfully);
         }
@@ -53,7 +52,6 @@ namespace SP.Services
             if (!lookup.Validate(out results)) return new Result(false, results.First().ErrorMessage);
             if (!_uow.Lookups.UpdateLookup(lookup))
                 return new Result(false, Message.CouldNotUpdate(nameof(Lookup)));
-            _uow.SaveChanges();
             return new Result(true, "Course Updated Successfully");
         }
     }

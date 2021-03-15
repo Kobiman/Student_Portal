@@ -32,6 +32,7 @@ namespace SP.Models
         public string Region { get; set; }
         public string HomeTown { get; set; }
         public string Address1 { get; set; }
+
         public string Address2 { get; set; }
         public string Contact1 { get; set; }
         public string Contact2 { get; set; }
@@ -40,7 +41,7 @@ namespace SP.Models
         public string ResidentialStatus { get; set; }
 
         //Academics
-        public string ProgramOfStudy { get; set; }
+        public string ProgramId { get; set; }
         public string Specialization { get; set; }
         public string ProgramStatus { get; set; }
         public string Level { get; set; }
@@ -111,7 +112,7 @@ namespace SP.Models
                                  Semester = x.Semester,
                                  Level = Level,
                                  StudentId = x.StudentId,
-                                 ProgramOfStudy = ProgramOfStudy,
+                                 ProgramOfStudy = ProgramId,
                                  StudentName = $"{Surname} {Othernames}",
                                  MountedCourseId = x.MountedCourseId
                              })
@@ -146,6 +147,31 @@ namespace SP.Models
                 );
         }
 
+        public IEnumerable<ExamResultsDto> GetResult(Dictionary<string, MountedCourse> mountedCourses)
+        {
+            var registeredCourses = RegisteredCourses.ToDictionary(x => x.RegisteredCourseId, x => x);
+            return from result in Results
+                    let registeredCourse = registeredCourses[result.RegisteredCourseId]
+                    let mountedCourse = mountedCourses[registeredCourse.MountedCourseId]
+                    select new ExamResultsDto
+                    {
+                        AcademicYear = result.AcademicYear,
+                        CourseName = mountedCourse.CourseName,
+                        CourseCode = mountedCourse.CourseCode,
+                        ClassMark = result.ClassMark,
+                        Credit = result.Credit,
+                        ExamMark = result.ExamMark,
+                        Grade = result.Grade,
+                        GradePoint = result.GradePoint,
+                        Level = result.Level,
+                        Scoring = result.Scoring,
+                        Semster = result.Semester,
+                        TotalMark = result.TotalMark
+                    };
+            
+        }
+
+        public string ProgramOfStudy(Program program) => program.Name;
         //public IEnumerable<ExamResult> CheckResult()
         //{
 

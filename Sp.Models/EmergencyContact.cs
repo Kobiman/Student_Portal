@@ -6,7 +6,7 @@ namespace SP.Models
 {
     public class EmergencyContact
     {
-        public string ParentId { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Occupation { get; set; }
         public string Address { get; set; }

@@ -1,3 +1,0 @@
-{"CourseId":"88aa9b6a-8773-4e98-91b9-0bcacdd7a9c0","Code":"INTRO 01","Name":"INTRODUCTION TO COMPUTER SCIENCE","Credit":0,"DepartmentId":"6e4bd71d-db9d-450d-a72c-719e1c06a612"},
-{"CourseId":"c0512875-aa22-404a-b337-499e72395c39","Code":"INTROCAL01","Name":"INTRODUCTION TO CALCULUS","Credit":0,"DepartmentId":"6e4bd71d-db9d-450d-a72c-719e1c06a612"},
-{"CourseId":"732e8a90-dbc0-42d9-8b13-fd49fe4503f1","Code":"CAL 02","Name":"INTRODUCTION TO CALCULUS II","Credit":3,"DepartmentId":"6e4bd71d-db9d-450d-a72c-719e1c06a612"},

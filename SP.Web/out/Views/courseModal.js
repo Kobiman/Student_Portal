@@ -26,7 +26,7 @@ export class CourseModal {
                                 createElement("div", { errors: "department" })),
                             createElement("p", null,
                                 createElement("label", null, "Name"),
-                                createElement("input", { binding: "Course.name", type: "text", value: this._vm.course.name }),
+                                createElement("input", { binding: "Course.courseName", type: "text", value: this._vm.course.courseName }),
                                 createElement("div", { errors: "name" })),
                             createElement("p", null,
                                 createElement("label", null, "Code"),

@@ -23,7 +23,6 @@ namespace SP.Services
             ICollection<ValidationResult> results = new List<ValidationResult>();
             if (!institution.Validate(out results)) return new Result(false, results.First().ErrorMessage);
             _uow.Institutions.AddInstitution(institution);
-            _uow.SaveChanges();
             return new Result(true, "Institution Added Successfully");
         }
 
@@ -32,7 +31,6 @@ namespace SP.Services
             ICollection<ValidationResult> results = new List<ValidationResult>();
             if (!institution.Validate(out results)) return new Result(false, results.First().ErrorMessage);
             if (!_uow.Institutions.UpdateInstitution(institution)) return new Result(false, "Could Not Update Institution");
-            _uow.SaveChanges();
             return new Result(true, "Institution Updated Successfully");
         }
 

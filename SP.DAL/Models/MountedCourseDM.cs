@@ -31,7 +31,7 @@ namespace SP.DAL.Models
                 }
                 else
                 {
-                    Next.Span[Heigth] = new MountedCourseDM(1000);
+                    Next.Span[Heigth] = new MountedCourseDM(100);
                     Next.Span[index].Add(student);
                     Heigth++;
                 }
@@ -68,7 +68,7 @@ namespace SP.DAL.Models
             {
                 if (Count == MountedCoureId.Length)
                 {
-                    var newLength = MountedCoureId.Length + 1000;
+                    var newLength = MountedCoureId.Length + 10;
                     var _MountedCoureId = new string[newLength];
                     MountedCoureId.CopyTo(_MountedCoureId);
                     MountedCoureId = _MountedCoureId;

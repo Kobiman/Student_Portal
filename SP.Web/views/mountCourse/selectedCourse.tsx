@@ -6,9 +6,9 @@ export class SelectedCourseView{
   render(x: Course) {
     return (
       <tr>
-        <td binding>{x.name}</td>
+        <td binding>{x.courseName}</td>
         <td>
-          <button class="sp-btn sp-btn-default btn-small" click={x.name} binding={x.name} value={x.name}>
+          <button class="sp-btn sp-btn-default btn-small" click={x.courseName} binding={x.courseName} value={x.courseName}>
             Add
           </button>
         </td>

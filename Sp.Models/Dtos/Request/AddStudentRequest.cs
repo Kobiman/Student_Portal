@@ -44,7 +44,7 @@ namespace SP.Models.Dtos
         [Required]
         public string ResidentialStatus { get; set; }
         [Required]
-        public string ProgramOfStudy { get; set; }
+        public string ProgramId { get; set; }
         [Required]
         public string Specialization { get; set; }
         [Required]

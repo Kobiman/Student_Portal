@@ -16,6 +16,7 @@ namespace SP.Models
         [MatchCustomProperty("Cred")]
         public int Credit { get; set; }
         public string DepartmentId { get; set; }
+        public int State { get; set; }
 
         /// <summary>
         /// Edit a course 

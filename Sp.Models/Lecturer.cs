@@ -17,5 +17,6 @@ namespace SP.Models
         public string Email { get; set; }
         public string Address { get; set; }
         public string DepartmentId { get; set; }
+        public int State { get; set; }
     }
 }

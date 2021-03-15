@@ -27,7 +27,7 @@ export class CourseView implements IView {
                   </thead>
                   <tbody id="courses" data-repeat="courses">
                     <tr>
-                      <td binding="name"></td>
+                      <td binding="courseName"></td>
                       <td binding="code"></td>
                       <td binding="credit"></td>
                     </tr>

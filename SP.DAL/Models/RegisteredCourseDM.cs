@@ -20,7 +20,6 @@ namespace SP.DAL.Models
         }
         public void Add(RegisteredCourse type)
         {
-
             lock (type)
             {
                 if (Count == RegisteredCourseId.Length)

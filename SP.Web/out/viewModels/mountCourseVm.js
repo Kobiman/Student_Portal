@@ -13,6 +13,7 @@ import { BindingList2 } from "../BindingList2";
 import { Rules, Required, Validator } from "../validator";
 import { _ } from "../group";
 import { Toast } from "../toast/toast";
+import { App } from "../app";
 export class MountCourseViewModel {
     constructor(commonService) {
         this.commonService = commonService;
@@ -45,8 +46,8 @@ export class MountCourseViewModel {
                 let selectedCourse = {
                     enrollmentOption: this.mountedCourse.enrollmentOption,
                     course: course,
-                    courseCode: this.courses.find((x) => x.name === course).code,
-                    credit: this.courses.find((x) => x.name === course).credit,
+                    courseCode: this.courses.find((x) => x.courseName === course).code,
+                    credit: this.courses.find((x) => x.courseName === course).credit,
                     specialization: this.mountedCourse.specialization,
                     category: this.getSpecialization(this.mountedCourse.level, this.mountedCourse.specialization).type,
                     level: this.mountedCourse.level,
@@ -145,7 +146,7 @@ export class MountCourseViewModel {
                     Accept: "*/*",
                 },
             };
-            fetch("https://localhost:44359/api/Department/MountCourse", options)
+            fetch(`${App.baseUri}/api/Department/MountCourse`, options)
                 .then((res) => res.json())
                 .then((res) => {
                 this.selectedCourses = [];

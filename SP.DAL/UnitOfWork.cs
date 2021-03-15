@@ -22,36 +22,41 @@ namespace SP.DAL
         private ILookupRepository _lookups;
         private ILecturerRepository _lecturers;
 
+        public UnitOfWork()
+        {
+            DataWriter.Start(10);
+        }
         public IStudentRepository Students => _students ??= new StudentRepository(LoadStudents());
 
-        public IInstitutionRepository Institutions => _institutions ??= new InstitutionRepository(DataReader.ReadData<Institution>(nameof(Institution)));
+        public IInstitutionRepository Institutions => _institutions ??= new InstitutionRepository(LoadInstitutions());
 
-        public ISchoolRepository Schools => _schools ??= new SchoolRepository(DataReader.ReadData<School>(nameof(School)));
+        public ISchoolRepository Schools => _schools ??= new SchoolRepository(LoadSchools());
 
-        public IDepartmentRepository Departments => _departments ??= new DepartmentRepository(DataReader.ReadData<Department>(nameof(Department)));
+        public IDepartmentRepository Departments => _departments ??= new DepartmentRepository(LoadDepartments());
 
         public IProgramRepository Programs => _programs ??= new ProgramRepository(LoadPrograms());
 
-        public ICourseRepository Courses => _courses ??= new CourseRepository(DataReader.ReadData<Course>(nameof(Course)));
+        public ICourseRepository Courses => _courses ??= new CourseRepository(LoadCourses());
 
-        public ILookupRepository Lookups => _lookups ??= new LookupRepository(DataReader.ReadData<Lookup>(nameof(Lookup))); 
+        public ILookupRepository Lookups => _lookups ??= new LookupRepository(LoadLookups());
 
-         public ILecturerRepository Lecturers => _lecturers ??= new LecturerRepository(DataReader.ReadData<Lecturer>(nameof(Lecturer)));
+        public ILecturerRepository Lecturers => _lecturers ??= new LecturerRepository(LoadLectures());
 
         private Students LoadStudents()
         {
             var registeredCourses = DataReader
-                .ReadData<RegisteredCourse>(nameof(RegisteredCourse));
+                .ReadCsv<RegisteredCourse>(nameof(RegisteredCourse));
 
             var studentResults = DataReader
-                .ReadData<StudentResult>(nameof(StudentResult));
+                .ReadCsv<StudentResult>(nameof(StudentResult));
 
             var emergencyContact = DataReader
-                .ReadData<EmergencyContact>(nameof(EmergencyContact));
+                .ReadCsv<EmergencyContact>(nameof(EmergencyContact));
 
             var studentsList = DataReader
-                .ReadData<Student>(nameof(Student))
-                .Distinct(x => x.IndexNumber, x => x.State).ToList();
+                .ReadCsv<Student>(nameof(Student))
+                .Distinct(x => x.StudentId, x => x.State)
+                .ToList();
 
             var students = new Students(100);
             foreach (var student in studentsList)
@@ -64,15 +69,38 @@ namespace SP.DAL
             return students;
         }
 
+        private Institutions LoadInstitutions()
+        {
+            var _institutions = DataReader.ReadCsv<Institution>(nameof(Institution)).Distinct(x => x.InstitutionId, x => x.State);
+            var institutions = new Institutions(1);
+            foreach (var student in _institutions)
+            {
+                institutions.Add(student);
+            }
+            return institutions;
+        }
+
+        private Lookups LoadLookups()
+        {
+           var _lookups = DataReader.ReadCsv<Lookup>(nameof(Lookup))
+                .Distinct(x => x.LookupId, x => x.State).ToList();
+            var lookups = new Lookups(5);
+            foreach (var s in _lookups)
+            {
+                lookups.Add(s);
+            }
+            return lookups;
+        }
+
         private Programs LoadPrograms()
         {
             var _programs =
-                 DataReader.ReadData<Program>(nameof(Program));
+                 DataReader.ReadCsv<Program>(nameof(Program));
             var mountedCourses =
-                DataReader.ReadData<MountedCourse>(nameof(MountedCourse));
+                DataReader.ReadCsv<MountedCourse>(nameof(MountedCourse));
             var specialization =
-                DataReader.ReadData<Specialization>(nameof(Specialization));
-            var programs = new Programs(10);
+                DataReader.ReadCsv<Specialization>(nameof(Specialization));
+            var programs = new Programs(5);
             foreach (var program in _programs)
             {
                 program.MountCourses(mountedCourses.Where(x => x.ProgramId == program.ProgramId));
@@ -82,9 +110,57 @@ namespace SP.DAL
             return programs;
         }
 
+        private Schools LoadSchools()
+        {
+            var _schools = DataReader.ReadCsv<School>(nameof(School))
+                .Distinct(x => x.SchoolId, x => x.State).ToList();
+            var schools = new Schools(5);
+            foreach (var s in _schools)
+            {
+                schools.Add(s);
+            }
+            return schools;
+        }
+
+        private Courses LoadCourses()
+        {
+            var _courses = DataReader.ReadCsv<Course>(nameof(Course))
+               .Distinct(x => x.CourseId, x => x.State).ToList();
+            var courses = new Courses(5);
+            foreach(var c in _courses)
+            {
+                courses.Add(c);
+            }
+            return courses;
+        }
+
+        private Lecturers LoadLectures()
+        {
+            var _lecturers = DataReader.ReadCsv<Lecturer>(nameof(Lecturer))
+               .Distinct(x => x.LecturerId, x => x.State).ToList();
+            var lecturers = new Lecturers(5);
+            foreach (var c in _lecturers)
+            {
+                lecturers.Add(c);
+            }
+            return lecturers;
+        }
+
+        private Departments LoadDepartments()
+        {
+            var _departments = DataReader.ReadCsv<Department>(nameof(Department))
+               .Distinct(x => x.DepartmentId, x => x.State).ToList();
+            var departments = new Departments(5);
+            foreach (var c in _departments)
+            {
+                departments.Add(c);
+            }
+            return departments;
+        }
+
         public void SaveChanges<T>(T data, string table)
         {
-            DataWriter.WriterData(data, table);
+            DataWriter.Add(data, table);
         }
 
         public void SaveChanges()

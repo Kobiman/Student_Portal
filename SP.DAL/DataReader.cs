@@ -1,7 +1,9 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -14,33 +16,50 @@ namespace SP.DAL
 {
     public static class DataReader
     {
-        public static ConcurrentBag<T> ReadData<T>(string table)
+        //public static ConcurrentBag<T> ReadData<T>(string table)
+        //{
+        //    try
+        //    {
+        //        string json = string.Empty;
+        //        var applicationPath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/{table}.txt");
+        //        if (!File.Exists(applicationPath))
+        //        {
+        //            using FileStream fs = File.Create(applicationPath);
+        //        }
+
+
+        //        using FileStream fileStream = new FileStream(applicationPath, FileMode.Open, FileAccess.Read);
+        //        lock (fileStream)
+        //        {
+        //            using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
+        //            {
+        //                json = "[" + streamReader.ReadToEnd() + "]";
+        //            }
+
+        //        }
+        //        var data = JsonSerializer.Deserialize<IList<T>>(json, new JsonSerializerOptions { AllowTrailingCommas = true });
+        //        var bag = new ConcurrentBag<T>();
+        //        Parallel.ForEach(data, x => { bag.Add(x); });
+
+        //        return bag ?? new ConcurrentBag<T>();
+        //    }
+        //    catch (Exception ex) { return new ConcurrentBag<T>(); }
+        //}
+
+        public static IEnumerable<T> ReadCsv<T>(string table) where T : new()
         {
-            try { 
-            string json = string.Empty;
-            var applicationPath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/{table}.txt");
+            var applicationPath = Path.Combine(WebRoot.WWWRoot, $"Data/{table}.csv");
             if (!File.Exists(applicationPath))
             {
-                using FileStream fs = File.Create(applicationPath);
+                yield return new T();
             }
-
-            
-            using FileStream fileStream = new FileStream(applicationPath, FileMode.Open, FileAccess.Read);
-            lock (fileStream)
+            else
             {
-                using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
-                {
-                    json = "[" + streamReader.ReadToEnd() + "]";
-                }
-
+                var fileName = Path.Combine(WebRoot.WWWRoot, $"Data/{table}.csv");
+                using var reader = new StreamReader(fileName);
+                using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+                foreach (var r in csv.GetRecords<T>()) { yield return r; }
             }
-            var data = JsonSerializer.Deserialize<IList<T>>(json, new JsonSerializerOptions { AllowTrailingCommas = true });
-            var bag = new ConcurrentBag<T>();
-            Parallel.ForEach(data, x => { bag.Add(x); });
-
-              return bag ?? new ConcurrentBag<T>();
-            }
-            catch (Exception ex) { return new ConcurrentBag<T>(); }
         }
 
         public static IEnumerable<T> Distinct<T>(this IEnumerable<T> arr, Func<T, dynamic> predicate1, Func<T, dynamic> predicate2)
@@ -153,18 +172,16 @@ namespace SP.DAL
 
         public static IEnumerable<T> Select<T, U>(this Memory<U> arr, Func<U, int, T> predicate)
         {
-            List<T> result = new List<T>();
-            Parallel.ForEach(arr.ToArray(), (user) =>
+            for (var p = 0; p < arr.Length; p++)
             {
-                if (user != null)
+                if (arr.Span[p] != null)
                 {
-                    for (var i = 0; i < ((dynamic)user).Count; i++)
+                    for (var i = 0; i < ((dynamic)arr.Span[p]).Count; i++)
                     {
-                        result.Add(predicate(user, i));
+                       yield return predicate(arr.Span[p], i);
                     }
                 }
-            });
-            return result;
+            }
         }
 
         public static IEnumerable<T> Select<T, U>(this U[] arr, Func<U, int, bool> predicate, Func<U, int, T> predicate2)
@@ -187,21 +204,19 @@ namespace SP.DAL
         }
         public static IEnumerable<T> Select<T, U>(this Memory<U> arr, Func<U, int, bool> predicate, Func<U, int, T> predicate2)
         {
-            List<T> result = new List<T>();
-            Parallel.ForEach(arr.ToArray(), (user) =>
+            for(var p = 0; p < arr.Length; p++)
             {
-                if (user != null)
+                if (arr.Span[p] != null)
                 {
-                    for (var i = 0; i < ((dynamic)user).Count; i++)
+                    for (var i = 0; i < ((dynamic)arr.Span[p]).Count; i++)
                     {
-                        if (predicate.Invoke(user, i))
+                        if (predicate.Invoke(arr.Span[p], i))
                         {
-                            result.Add(predicate2(user, i));
+                            yield return predicate2(arr.Span[p], i);
                         }
                     }
                 }
-            });
-            return result;
+            }
         }
 
         public static IEnumerable<T> SelectMany<T, U, V>(this U[] arr, Func<U, V[]> predicate, Func<V, int, bool> predicate2, Func<U, int, int, T> predicate3)

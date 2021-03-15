@@ -55,7 +55,7 @@ export class CourseVm {
     }
     setupRules() {
         return [
-            new Rules("name", [new Required(this.course.name), new MinLength(this.course.name, 2)]),
+            new Rules("name", [new Required(this.course.courseName), new MinLength(this.course.courseName, 2)]),
             //new Rules("category", [new Required(this.course.category)]),
             new Rules("code", [new Required(this.course.code)]),
             new Rules("credit", [new Required(this.course.credit)]),

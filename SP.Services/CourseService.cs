@@ -24,7 +24,6 @@ namespace SP.Services
             ICollection<ValidationResult> results = new List<ValidationResult>();
             if (!request.Validate(out results)) return new Result(false, results.First().ErrorMessage);
             _uow.Courses.AddCourse(request);
-            _uow.SaveChanges();
             return new Result(true, "Course Added Successfully");
         }
 
@@ -48,7 +47,7 @@ namespace SP.Services
         public IResult GetCourseName(string name)
         {
             if (string.IsNullOrWhiteSpace(name)) return new Result(false, "Course name cannot be null");
-            var course = _uow.Courses.GetAll().FirstOrDefault(x => x.CourseName == name);
+            var course = _uow.Courses.GetCourseByName(name);
             if (course == null) return new Result(false, "Course name was not found");
             return new Result<Course>(true, course, "");
         }

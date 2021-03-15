@@ -28,6 +28,7 @@ namespace SP.Models
         //public string Semester { get; set; }
         public string Logo { get; set; }
         public DateTime DateCreated { get; set; }
+        public int State { get; set; }
 
         public Institution Edit(Institution institution)
         {
@@ -38,6 +39,7 @@ namespace SP.Models
             City = institution.City;
             Telephone = institution.Telephone;
             Logo = institution.Logo;
+            State++;
             return this;
         }
     }

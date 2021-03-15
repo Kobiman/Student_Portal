@@ -14,5 +14,6 @@ namespace SP.Models
         public string Name { get; set; }
         public string Type { get; set; }
         public string InstitutionId { get; set; }
+        public int State { get; set; }
     }
 }
